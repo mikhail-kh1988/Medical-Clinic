@@ -15,9 +15,6 @@ public class Analysis implements Serializable {
     private String describe;
     private int price;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private AnalysisResult result;
-
     public long getId() {
         return id;
     }
@@ -48,13 +45,5 @@ public class Analysis implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public AnalysisResult getResult() {
-        return result;
-    }
-
-    public void setResult(AnalysisResult result) {
-        this.result = result;
     }
 }
