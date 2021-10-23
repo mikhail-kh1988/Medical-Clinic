@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 @Entity
-@Table(name = "analysis_result")
-public class AnalysisResult implements Serializable {
+@Table(name = "analysis_service_result")
+public class AnalysisServiceResult implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,12 @@ public class AnalysisResult implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Analysis analysis;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private MedicalService service;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Department department;
 
     @Column(name = "marks")
     private String marks;
@@ -36,8 +42,19 @@ public class AnalysisResult implements Serializable {
     @Column(name = "create_date")
     private GregorianCalendar createDate;
 
+    @Column(name = "submit_date")
+    private GregorianCalendar submitDate;
+
     @OneToOne
     private Bill bill;
+
+    public MedicalService getService() {
+        return service;
+    }
+
+    public void setService(MedicalService service) {
+        this.service = service;
+    }
 
     public Bill getBill() {
         return bill;
@@ -117,5 +134,21 @@ public class AnalysisResult implements Serializable {
 
     public void setCreateDate(GregorianCalendar createDate) {
         this.createDate = createDate;
+    }
+
+    public GregorianCalendar getSubmitDate() {
+        return submitDate;
+    }
+
+    public void setSubmitDate(GregorianCalendar submitDate) {
+        this.submitDate = submitDate;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

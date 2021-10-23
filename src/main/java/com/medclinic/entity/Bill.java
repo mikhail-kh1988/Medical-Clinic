@@ -17,10 +17,10 @@ public class Bill {
     @Column(name = "sum")
     private int sum;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Client client;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Doctor doctor;
 
     @Column(name = "create_date")

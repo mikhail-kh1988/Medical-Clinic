@@ -5,9 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-
 import javax.persistence.EntityManager;
-import javax.print.Doc;
 
 public class Release {
 
@@ -18,9 +16,20 @@ public class Release {
                 .build();
 
         SessionFactory sessionFactory = new MetadataSources(serviceRegistry)
-                .addAnnotatedClass(Complaint.class)
-                .addAnnotatedClass(ComplaintTherapyUser.class)
-                .addAnnotatedClass(ComplaintTherapyUserId.class)
+                .addAnnotatedClass(Analysis.class)
+                .addAnnotatedClass(AnalysisServiceResult.class)
+                .addAnnotatedClass(Bill.class)
+                .addAnnotatedClass(Client.class)
+                .addAnnotatedClass(Comment.class)
+                .addAnnotatedClass(Department.class)
+                .addAnnotatedClass(Disease.class)
+                .addAnnotatedClass(Doctor.class)
+                .addAnnotatedClass(Drugs.class)
+                .addAnnotatedClass(MedicalCardClient.class)
+                .addAnnotatedClass(MedicalService.class)
+                .addAnnotatedClass(Therapy.class)
+                .addAnnotatedClass(User.class)
+                .addAnnotatedClass(WorkFlow.class)
                 //.addPackage("com.medclinic.entity")
                 .buildMetadata()
                 .buildSessionFactory();

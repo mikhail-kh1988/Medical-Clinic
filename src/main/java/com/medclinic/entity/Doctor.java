@@ -1,9 +1,11 @@
 package com.medclinic.entity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("DOCTOR")
 public class Doctor extends User{
 
     @Column(name = "where_study")

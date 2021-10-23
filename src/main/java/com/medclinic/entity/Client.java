@@ -1,15 +1,17 @@
 package com.medclinic.entity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.GregorianCalendar;
 
 @Entity
+@DiscriminatorValue("CLIENT")
 public class Client extends User{
 
     private String about;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", length = 12)
     private String phoneNumber;
 
     @Column(name = "actual_address")

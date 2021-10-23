@@ -6,19 +6,26 @@ import java.io.Serializable;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE_USER")
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "login", length = 32)
     private String login;
+
+    @Column(name = "password", length = 128)
     private String password;
+
+    @Column(name = "email", length = 64)
     private String email;
+
     private Integer age;
     private boolean online;
 
-    @Column(name = "status_user")
+    @Column(name = "status_user", length = 16)
     @Enumerated(EnumType.STRING)
     private StatusUser status;
 

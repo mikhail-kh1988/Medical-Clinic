@@ -26,7 +26,8 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="8291ef78-885c-47cb-bcb5-a007c0a3bdfa">
-        <schema name="public" object-types="table, view, sequence, function" />
+        <schema name="pg_catalog" object-types="function" />
+        <schema name="public" object-types="table, view, sequence, function, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
@@ -40,6 +41,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="8291ef78-885c-47cb-bcb5-a007c0a3bdfa" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="8291ef78-885c-47cb-bcb5-a007c0a3bdfa" dataset="public.address" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
