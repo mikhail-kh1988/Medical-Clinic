@@ -30,6 +30,8 @@ public class Release {
                 .addAnnotatedClass(Therapy.class)
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(WorkFlow.class)
+                .addAnnotatedClass(WorkFlowPK.class)
+                .addAnnotatedClass(WorkFlowBody.class)
                 //.addPackage("com.medclinic.entity")
                 .buildMetadata()
                 .buildSessionFactory();

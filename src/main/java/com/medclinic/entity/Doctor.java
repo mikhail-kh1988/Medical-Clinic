@@ -1,8 +1,7 @@
 package com.medclinic.entity;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @DiscriminatorValue("DOCTOR")
@@ -16,6 +15,9 @@ public class Doctor extends User{
 
     @Column(name = "certificate_number")
     private String certificateNumber;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<MedicalService> myServices;
 
     public String getWhereStudy() {
         return whereStudy;
@@ -39,5 +41,13 @@ public class Doctor extends User{
 
     public void setCertificateNumber(String certificateNumber) {
         this.certificateNumber = certificateNumber;
+    }
+
+    public Set<MedicalService> getMyServices() {
+        return myServices;
+    }
+
+    public void setMyServices(Set<MedicalService> myServices) {
+        this.myServices = myServices;
     }
 }
