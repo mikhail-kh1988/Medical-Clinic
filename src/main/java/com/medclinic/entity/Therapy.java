@@ -11,23 +11,44 @@ public class Therapy implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private boolean typical;
-
     @Column(name = "describe_complaint")
     private String describeComplaint;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Disease disease;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private List<Drugs> typicalDrugList;
+    @Column(name = "therapy")
+    private String therapy;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private List<Analysis> typicalAnalysisList;
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public String getDescribeComplaint() {
+        return describeComplaint;
+    }
 
+    public void setDescribeComplaint(String describeComplaint) {
+        this.describeComplaint = describeComplaint;
+    }
 
+    public Disease getDisease() {
+        return disease;
+    }
 
+    public void setDisease(Disease disease) {
+        this.disease = disease;
+    }
 
+    public String getTherapy() {
+        return therapy;
+    }
+
+    public void setTherapy(String therapy) {
+        this.therapy = therapy;
+    }
 }
