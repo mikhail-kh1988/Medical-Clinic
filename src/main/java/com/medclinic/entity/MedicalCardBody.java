@@ -7,10 +7,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "MEDICALCARD_BODY")
-public class MedicalCardBody implements Serializable {
+@AssociationOverrides(
+        {@AssociationOverride(name = "primaryKey.doctor", joinColumns = @JoinColumn(name = "doctor_id")),
+         @AssociationOverride(name = "primaryKey.client", joinColumns = @JoinColumn(name = "client_id"))}
+)
+public class MedicalCardBody {
 
     @EmbeddedId
-    private MedicalCardBodyPK primaryKey;
+    private MedicalCardBodyPK primaryKey = new MedicalCardBodyPK();
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Comment comment;

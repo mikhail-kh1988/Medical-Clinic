@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "medcard")
@@ -31,8 +32,9 @@ public class MedicalCardClient implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Doctor therapyDoctor;
 
-    @OneToMany
-    private List<MedicalCardBody> medicalCardBodies;
+    @OneToMany(mappedBy = "primaryKey.doctor",
+            cascade = CascadeType.ALL)
+    private Set<MedicalCardBody> medicalCardBodies;
 
     public long getId() {
         return id;
@@ -90,11 +92,11 @@ public class MedicalCardClient implements Serializable {
         this.therapyDoctor = therapyDoctor;
     }
 
-    public List<MedicalCardBody> getMedicalCardBodies() {
+    public Set<MedicalCardBody> getMedicalCardBodies() {
         return medicalCardBodies;
     }
 
-    public void setMedicalCardBodies(List<MedicalCardBody> medicalCardBodies) {
+    public void setMedicalCardBodies(Set<MedicalCardBody> medicalCardBodies) {
         this.medicalCardBodies = medicalCardBodies;
     }
 }

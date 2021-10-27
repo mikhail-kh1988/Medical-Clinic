@@ -22,7 +22,8 @@ public class WorkFlow implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Doctor doctor;
 
-    @OneToMany
+    @OneToMany(mappedBy = "primaryKey.doctor",
+            cascade = CascadeType.ALL)
     private Set<WorkFlowBody> bodySet;
 
     private boolean worked;
