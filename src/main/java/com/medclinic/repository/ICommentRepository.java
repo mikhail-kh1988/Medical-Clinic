@@ -4,6 +4,6 @@ import com.medclinic.hibernate.GenericDAO;
 import java.util.List;
 
 
-public interface CommentRepository<T, ID> extends GenericDAO {
+public interface ICommentRepository<T, ID> extends GenericDAO {
     List<T> findByUserID(long id);
 }

@@ -12,11 +12,7 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final Class<T> entityClass;
-
-    public GenericDAOImpl(Class<T> entityClass) {
-        this.entityClass = entityClass;
-    }
+    private Class<T> entityClass;
 
     @Override
     public Object findByID(long id) {
@@ -48,5 +44,9 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
     @Override
     public void delete(Object entity) {
         entityManager.remove(entity);
+    }
+
+    public void setEntityClass(Class<T> tClass){
+        this.entityClass = tClass;
     }
 }

@@ -3,7 +3,7 @@ package com.medclinic.repository;
 import com.medclinic.hibernate.GenericDAO;
 import java.util.List;
 
-public interface DoctorRepository<T, ID> extends GenericDAO {
+public interface IDoctorRepository<T, ID> extends GenericDAO {
     List<T> findByFullName(String fullName);
     T findByLogin(String login);
     List<T> findByFamily(String family);
