@@ -9,4 +9,5 @@ public interface AnalysisServiceResultRepository<T, ID> extends GenericDAO {
     List<T> findByDoctorID(long id);
     List<T> findByClientID(long id);
     T findByBillID(long id);
+    List<T> findByNotPaidResults();
 }

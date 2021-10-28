@@ -1,7 +1,6 @@
 package com.medclinic.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.List;
 

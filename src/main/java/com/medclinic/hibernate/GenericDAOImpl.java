@@ -39,7 +39,10 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
 
     @Override
     public Object save(Object entity) {
-        return entityManager.merge(entity);
+        entityManager.getTransaction().begin();
+        entityManager.merge(entity);
+        entityManager.getTransaction().commit();
+        return entity;
     }
 
     @Override

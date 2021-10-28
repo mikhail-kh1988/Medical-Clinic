@@ -32,7 +32,7 @@ public class MedicalCardClient implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Doctor therapyDoctor;
 
-    @OneToMany(mappedBy = "primaryKey.doctor",
+    @OneToMany(mappedBy = "primaryKey.client",
             cascade = CascadeType.ALL)
     private Set<MedicalCardBody> medicalCardBodies;
 
