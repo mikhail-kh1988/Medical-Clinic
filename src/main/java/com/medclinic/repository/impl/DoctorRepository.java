@@ -1,5 +1,6 @@
 package com.medclinic.repository.impl;
 
+import com.medclinic.entity.Doctor;
 import com.medclinic.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IDoctorRepository;
 import org.springframework.stereotype.Repository;
@@ -9,7 +10,7 @@ import java.util.List;
 @Repository
 public class DoctorRepository extends GenericDAOImpl implements IDoctorRepository {
     public DoctorRepository() {
-        this.setEntityClass(this.getClass());
+        this.setEntityClass(Doctor.class);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.medclinic.repository.impl;
 
+import com.medclinic.entity.MedicalCardClient;
 import com.medclinic.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IMedicalCardClientRepository;
 import org.springframework.stereotype.Repository;
@@ -9,7 +10,7 @@ import java.util.List;
 @Repository
 public class MedicalCardClientRepository extends GenericDAOImpl implements IMedicalCardClientRepository {
     public MedicalCardClientRepository() {
-        this.setEntityClass(this.getClass());
+        this.setEntityClass(MedicalCardClient.class);
     }
 
     @Override

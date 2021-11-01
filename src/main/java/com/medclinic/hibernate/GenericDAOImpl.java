@@ -49,4 +49,12 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
     public void setEntityClass(Class<T> tClass){
         this.entityClass = tClass;
     }
+
+    public EntityManager getEntityManager(){
+        return this.entityManager;
+    }
+
+    public void setEntityManager(EntityManager em){
+        this.entityManager = em;
+    }
 }

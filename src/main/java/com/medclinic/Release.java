@@ -1,13 +1,13 @@
 package com.medclinic;
 
 import com.medclinic.entity.*;
+import com.medclinic.repository.impl.AnalysisRepository;
+import com.medclinic.repository.impl.AnalysisServiceResultRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.sql.Time;
 import java.util.*;
 
 public class Release {
@@ -42,6 +42,24 @@ public class Release {
                 .buildSessionFactory();
 
         EntityManager em = sessionFactory.createEntityManager();
+
+        Analysis analysisOfBlood = new Analysis();
+        analysisOfBlood.setName("Public analysisOfBlood of blood");
+        analysisOfBlood.setDescribe("This analysisOfBlood get know state of organize man.");
+        analysisOfBlood.setPrice(150);
+
+        /*em.getTransaction().begin();
+        em.merge(analysisOfBlood);
+        em.getTransaction().commit();*/
+
+        Analysis analysisOfUrine = new Analysis();
+        analysisOfUrine.setName("Analysis of urine");
+        analysisOfUrine.setDescribe("Analysis of urine");
+        analysisOfUrine.setPrice(100);
+
+        /*em.getTransaction().begin();
+        em.merge(analysisOfUrine);
+        em.getTransaction().commit();*/
 
         Doctor doctor = new Doctor();
         doctor.setFullName("Ivanov Ivan Invanovich");
@@ -92,10 +110,96 @@ public class Release {
         em.merge(doctor);
         em.getTransaction().commit();
 
+        // --------------------------------------------
+
+        Bill oneBill = new Bill();
+        oneBill.setClient(client);
+        oneBill.setDoctor(doctor);
+        oneBill.setPaid(false);
+        oneBill.setSum(1000);
+        em.getTransaction().begin();
+        em.persist(oneBill);
+        em.getTransaction().commit();
+
+        Bill twoBill = new Bill();
+        twoBill.setClient(client);
+        twoBill.setDoctor(doctor);
+        twoBill.setPaid(false);
+        twoBill.setSum(2000);
+        em.getTransaction().begin();
+        em.persist(twoBill);
+        em.getTransaction().commit();
+
+        Bill threeBill = new Bill();
+        threeBill.setClient(client);
+        threeBill.setDoctor(doctor);
+        threeBill.setPaid(false);
+        threeBill.setSum(3000);
+        em.getTransaction().begin();
+        em.persist(threeBill);
+        em.getTransaction().commit();
+
+        Bill fourBill = new Bill();
+        fourBill.setClient(client);
+        fourBill.setDoctor(doctor);
+        fourBill.setPaid(true);
+        fourBill.setSum(4000);
+        em.getTransaction().begin();
+        em.persist(fourBill);
+        em.getTransaction().commit();
+
+        AnalysisServiceResult resultOne = new AnalysisServiceResult();
+        resultOne.setService(service);
+        resultOne.setBill(oneBill);
+
+        AnalysisServiceResult resultTwo = new AnalysisServiceResult();
+        resultTwo.setService(service);
+        resultTwo.setBill(twoBill);
+
+        AnalysisServiceResult resultThree = new AnalysisServiceResult();
+        resultThree.setService(service);
+        resultThree.setBill(threeBill);
+
+        AnalysisServiceResult resultFour = new AnalysisServiceResult();
+        resultFour.setService(service);
+        resultFour.setBill(fourBill);
+
+        // -----------------------------------------
+
         Doctor doctor1 = em.find(Doctor.class, 1l);
 
         System.out.println(doctor1.getId()+" "+doctor1.getAge()+" "+doctor1.getFullName());
 
+        AnalysisRepository repository = new AnalysisRepository();
+        repository.setEntityManager(em);
+
+        AnalysisServiceResultRepository resultRepository = new AnalysisServiceResultRepository();
+        resultRepository.setEntityManager(em);
+        resultRepository.save(resultOne);
+        resultRepository.save(resultTwo);
+        resultRepository.save(resultThree);
+        resultRepository.save(resultFour);
+        
+        repository.save(analysisOfBlood);
+        repository.save(analysisOfUrine);
+
+        List<Analysis> list = repository.findByPrice(100);
+
+        for (Analysis analysis: list) {
+            System.out.println(+analysis.getId()+"| Analysis name: "+analysis.getName()+" || price:"+analysis.getPrice());
+        }
+
+        System.out.println("=====================");
+
+        System.out.println(resultRepository.findByBillID(4));
+
+        System.out.println("========NOT PAID RESULT============");
+
+        List<AnalysisServiceResult> results = resultRepository.getTestList();
+
+        for (AnalysisServiceResult result: results) {
+            System.out.println(result.getId());
+        }
 
     }
 }
