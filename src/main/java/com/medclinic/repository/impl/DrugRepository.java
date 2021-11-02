@@ -5,6 +5,9 @@ import com.medclinic.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IDrugRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -15,11 +18,19 @@ public class DrugRepository extends GenericDAOImpl implements IDrugRepository {
 
     @Override
     public Object findByName(String name) {
-        return null;
+        CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery criteria = builder.createQuery();
+        Root<Drugs> root = criteria.from(Drugs.class);
+        criteria.select(root).where(builder.equal(root.get("name"), name));
+        return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
     @Override
     public List findByActiveElement(String element) {
-        return null;
+        CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery criteria = builder.createQuery();
+        Root<Drugs> root = criteria.from(Drugs.class);
+        criteria.select(root).where(builder.equal(root.get("activeElement"), element));
+        return this.getEntityManager().createQuery(criteria).getResultList();
     }
 }

@@ -5,6 +5,10 @@ import com.medclinic.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IWorkFlowRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -13,13 +17,22 @@ public class WorkFlowRepository extends GenericDAOImpl implements IWorkFlowRepos
         this.setEntityClass(WorkFlow.class);
     }
 
+    //TODO Необходимо описать критерию для вывода только не отработавших графиков.
     @Override
     public List findByDoctorId(long id) {
-        return null;
+        CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery criteria = builder.createQuery();
+        Root<WorkFlow> root = criteria.from(WorkFlow.class);
+        criteria.select(root).where(builder.equal(root.get("doctor"), id));
+        return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
     public List findByServiceId(long id) {
-        return null;
+        CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery criteria = builder.createQuery();
+        Root<WorkFlow> root = criteria.from(WorkFlow.class);
+        criteria.select(root).where(builder.equal(root.get("service"), id));
+        return this.getEntityManager().createQuery(criteria).getResultList();
     }
 }

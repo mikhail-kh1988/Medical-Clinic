@@ -3,6 +3,8 @@ package com.medclinic;
 import com.medclinic.entity.*;
 import com.medclinic.repository.impl.AnalysisRepository;
 import com.medclinic.repository.impl.AnalysisServiceResultRepository;
+import com.medclinic.repository.impl.BillRepository;
+import com.medclinic.repository.impl.ClientRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -91,6 +93,20 @@ public class Release {
         em.persist(client);
         em.getTransaction().commit();
 
+        Client ivanov = new Client();
+        ivanov.setFullName("Petrov Petr");
+        ivanov.setAge(25);
+        ivanov.setEmail("petrov@mail.ru");
+        ivanov.setFirstSymbolName('P');
+        ivanov.setPhoneNumber("8971845555");
+        ivanov.setActualAddress("Orel");
+        ivanov.setLogin("petr");
+        ivanov.setFamilyName("Petrov");
+        GregorianCalendar birthdayIvanov = new GregorianCalendar();
+        birthdayIvanov.setTimeZone(TimeZone.getDefault());
+        birthdayIvanov.set(1998, Calendar.FEBRUARY, 12);
+        ivanov.setBirthDay(birthdayIvanov);
+
         MedicalService service = new MedicalService();
         service.setActive(true);
         service.setName("MED OSMOTR");
@@ -124,7 +140,7 @@ public class Release {
         Bill twoBill = new Bill();
         twoBill.setClient(client);
         twoBill.setDoctor(doctor);
-        twoBill.setPaid(false);
+        twoBill.setPaid(true);
         twoBill.setSum(2000);
         em.getTransaction().begin();
         em.persist(twoBill);
@@ -195,10 +211,32 @@ public class Release {
 
         System.out.println("========NOT PAID RESULT============");
 
-        List<AnalysisServiceResult> results = resultRepository.getTestList();
+        List<AnalysisServiceResult> results = resultRepository.findByNotPaidResults();
 
         for (AnalysisServiceResult result: results) {
             System.out.println(result.getId());
+        }
+
+        System.out.println("============= TRY BILLS ====================");
+
+        BillRepository billRepository = new BillRepository();
+        billRepository.setEntityClass(Bill.class);
+        billRepository.setEntityManager(em);
+
+        List<Bill> billList = billRepository.findByPaid();
+        for (Bill bill: billList) {
+            System.out.println(bill.getId()+" "+bill.getSum()+" "+bill.getClient().getFullName());
+        }
+
+
+        System.out.println("================ TRY CLIENT REPOSITORY ============");
+        ClientRepository clientRepository = new ClientRepository();
+        clientRepository.setEntityManager(em);
+        clientRepository.save(ivanov);
+
+        List<Client> clients = clientRepository.findByFamily("Petrov");
+        for (Client c : clients) {
+            System.out.println(c.getId()+" "+c.getFullName()+" "+c.getBirthDay().getTime());
         }
 
     }

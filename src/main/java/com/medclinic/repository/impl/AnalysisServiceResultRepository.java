@@ -5,8 +5,6 @@ import com.medclinic.entity.Bill;
 import com.medclinic.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IAnalysisServiceResultRepository;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.Query;
 import javax.persistence.criteria.*;
 import java.util.List;
 
@@ -64,25 +62,15 @@ public class AnalysisServiceResultRepository extends GenericDAOImpl implements I
 
     @Override
     public List findByNotPaidResults() {
-
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery criteria = builder.createQuery();
         Root<AnalysisServiceResult> root = criteria.from(AnalysisServiceResult.class);
-        Subquery<Long> sq = criteria.subquery(Long.class);
+        Subquery<Bill> sq = criteria.subquery(Bill.class);
         Root<Bill> billRoot = sq.from(Bill.class);
-        sq.select().where(builder.equal(billRoot.get("paid"), false));
+        sq.select(billRoot).where(builder.equal(billRoot.get("paid"), false));
         criteria.select(root);
-        criteria.where(builder.greaterThan(sq, ))
-
+        criteria.where(builder.in(root.get("bill")).value(sq));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
-    public List getTestList(){
-        this.setEntityClass(Bill.class);
-        CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery(Bill.class);
-        Root<Bill> root = criteria.from(Bill.class);
-        criteria.select(root).where(builder.equal(root.get("paid"), false));
-        return this.getEntityManager().createQuery(criteria).getResultList();
-    }
 }

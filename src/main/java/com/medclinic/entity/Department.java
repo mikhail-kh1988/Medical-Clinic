@@ -13,7 +13,7 @@ public class Department implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "dep_name")
+    @Column(name = "dep_name", unique = true)
     private String departmentName;
 
     @OneToMany(cascade = CascadeType.ALL)
