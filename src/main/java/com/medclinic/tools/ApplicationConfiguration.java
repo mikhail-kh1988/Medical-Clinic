@@ -7,4 +7,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Configuration
 @ComponentScan(basePackages = "com.medclinic")
 public class ApplicationConfiguration extends WebMvcConfigurationSupport {
+
+
 }
