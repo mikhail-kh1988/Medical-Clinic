@@ -1,5 +1,7 @@
 package com.medclinic.service;
 
+import com.medclinic.dto.ClientUpdateDTO;
+import com.medclinic.dto.ClientWorkFlowDTO;
 import com.medclinic.dto.CreateClientDTO;
 import com.medclinic.dto.ServicesClientDTO;
 import com.medclinic.entity.Analysis;
@@ -8,7 +10,6 @@ import com.medclinic.entity.Client;
 import java.util.List;
 
 public interface IClientService {
-
     Client createClient(CreateClientDTO dto);
     void deleteClient(long clientID);
     List<AnalysisServiceResult> getAnalysisResult(ServicesClientDTO dto);
@@ -17,5 +18,7 @@ public interface IClientService {
     List<Client> findByFullName(String fullName);
     Client findByPhoneNumber(String number);
     Client findById(long id);
-    void update(Client client, CreateClientDTO dto);
+    Client findByLogin(String login);
+    void update(Client client, ClientUpdateDTO dto);
+    void setRecipeToDoctor(ClientWorkFlowDTO dto);
 }
