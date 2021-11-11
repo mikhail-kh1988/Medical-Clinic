@@ -3,7 +3,9 @@ package com.medclinic.hibernate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -34,10 +36,11 @@ public class HibernateConfiguration {
         return dataSource;
     }
 
-    public final Properties hibernateProperties(){
+    @Bean
+    public Properties hibernateProperties(){
         properties.setProperty("hibernate.connection.autocommit", "false");
-        properties.setProperty("hibernate.hbm2ddl.create_namespaces", "true");
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        //properties.setProperty("hibernate.hbm2ddl.create_namespaces", "true");
+        //properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty("hibernate.connection.url","jdbc:postgresql://localhost:5432/med_clinic");
         properties.setProperty("hibernate.connection.username", "admin");
         properties.setProperty("hibernate.connection.password", "admin");
@@ -45,6 +48,13 @@ public class HibernateConfiguration {
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL10Dialect");
         properties.setProperty("hibernate.show_sql", "true");
         return properties;
+    }
+
+    @Bean
+    public PlatformTransactionManager hibernateTransactionManager() {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory().getObject());
+        return transactionManager;
     }
 
 }
