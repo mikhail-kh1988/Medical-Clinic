@@ -1,14 +1,19 @@
 package com.medclinic;
 
+import com.medclinic.dto.DescribeAnalysisDTO;
 import com.medclinic.entity.*;
 import com.medclinic.repository.impl.AnalysisRepository;
 import com.medclinic.repository.impl.AnalysisServiceResultRepository;
 import com.medclinic.repository.impl.BillRepository;
 import com.medclinic.repository.impl.ClientRepository;
+import com.medclinic.service.IAnalysisService;
+import com.medclinic.service.impl.AnalysisService;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.EntityManager;
 import java.util.*;
 
@@ -207,7 +212,7 @@ public class Release {
 
         System.out.println("=====================");
 
-        System.out.println(resultRepository.findByBillID(4));
+        System.out.println(resultRepository.findByBillID(3));
 
         System.out.println("========NOT PAID RESULT============");
 
@@ -238,6 +243,19 @@ public class Release {
         for (Client c : clients) {
             System.out.println(c.getId()+" "+c.getFullName()+" "+c.getBirthDay().getTime());
         }
+
+        System.out.println("============== Test analysis service =================");
+        DescribeAnalysisDTO dto = new DescribeAnalysisDTO();
+        dto.setDescribe("DSCR FFFFFFF");
+        dto.setName("FFFFFF");
+        dto.setPrice(999);
+
+        AnalysisService analysisService = new AnalysisService();
+        analysisService.setAnalysisRepository(repository);
+
+        long analId = analysisService.createAnalysis(dto).getId();
+
+        System.out.println("Analysis id from service: "+analId);
 
     }
 }
