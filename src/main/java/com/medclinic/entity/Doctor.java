@@ -16,7 +16,7 @@ public class Doctor extends User{
     @Column(name = "certificate_number")
     private String certificateNumber;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<MedicalService> myServices;
 
     public String getWhereStudy() {

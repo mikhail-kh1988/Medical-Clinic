@@ -14,6 +14,6 @@ public interface IAnalysisSvcResultService {
     List <AnalysisServiceResult> findByAnalysis(long analysisID);
     List <AnalysisServiceResult> findByService(long serviceID);
     AnalysisServiceResult findById(long id);
-    void remove(AnalysisServiceResult result);
-    void update(AnalysisServiceResult result, DescribeUpdateAnalysisSvcResult describeUpdate);
+    void remove(long resultID);
+    void update(long result, DescribeUpdateAnalysisSvcResult describeUpdate);
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -64,7 +63,7 @@ public class AnalysisService implements IAnalysisService {
         return (Analysis) analysisRepository.findByID(id);
     }
 
-    @Transactional()
+    @Transactional
     @Override
     public AnalysisServiceResult createResultByAnalysis(ResultByAnalysisDTO dto) {
         Client client = (Client) clientRepository.findByID(dto.getClientID());
@@ -87,19 +86,29 @@ public class AnalysisService implements IAnalysisService {
         result.setBill(updBill);
         result.setAnalysis(analysis);
         result.setCreateDate(GregorianCalendar.from(ZonedDateTime.now()));
-        result.setTitle("an-"+analysis.getId()+"-"+result.getId());
         resultRepository.save(result);
 
-        return result;
+        AnalysisServiceResult newResult = (AnalysisServiceResult) resultRepository.findByID(result.getId());
+        newResult.setTitle("an-"+analysis.getId()+"-"+result.getId());
+        analysisRepository.save(newResult);
+        return newResult;
     }
 
+    @Transactional
     @Override
     public Analysis updateAnalysis(DescribeAnalysisDTO dto, long analysisID) {
-        return null;
+        Analysis analysis = (Analysis) analysisRepository.findByID(analysisID);
+        analysis.setPrice(dto.getPrice());
+        analysis.setName(dto.getName());
+        analysis.setDescribe(dto.getDescribe());
+        analysisRepository.save(analysis);
+        return analysis;
     }
 
+    @Transactional
     @Override
-    public void deleteAnalysis(Analysis analysis) {
-
+    public void deleteAnalysis(long analysisID) {
+        Analysis analysis = (Analysis) analysisRepository.findByID(analysisID);
+        analysisRepository.delete(analysis);
     }
 }

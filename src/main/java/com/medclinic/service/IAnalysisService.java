@@ -17,5 +17,5 @@ public interface IAnalysisService {
     Analysis findAnalysisByID(long id);
     AnalysisServiceResult createResultByAnalysis(ResultByAnalysisDTO dto);
     Analysis updateAnalysis(DescribeAnalysisDTO dto, long analysisID);
-    void deleteAnalysis(Analysis analysis);
+    void deleteAnalysis(long id);
 }

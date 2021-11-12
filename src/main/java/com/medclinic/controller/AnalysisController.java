@@ -20,8 +20,7 @@ public class AnalysisController {
 
     @PostMapping("/create")
     public ResponseEntity<String> createNewAnalysis(@RequestBody DescribeAnalysisDTO dto){
-        analysisService.createAnalysis(dto);
-        return new ResponseEntity<>("success!", HttpStatus.OK);
+        return new ResponseEntity<>("success! id:"+analysisService.createAnalysis(dto).getId(), HttpStatus.OK);
     }
 
     @GetMapping("/getAll")
@@ -34,5 +33,29 @@ public class AnalysisController {
     public ResponseEntity<String> createResultByAnalysis(@RequestBody ResultByAnalysisDTO dto){
         analysisService.createResultByAnalysis(dto);
         return new ResponseEntity<>("success!", HttpStatus.OK);
+    }
+
+    @PostMapping("/updateAnalysis/{id}")
+    public ResponseEntity<String> updateAnalysis(@RequestBody DescribeAnalysisDTO dto, @PathVariable long id) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return new ResponseEntity<String>(mapper.writeValueAsString(analysisService.updateAnalysis(dto, id)), HttpStatus.OK);
+    }
+
+    @GetMapping("/deleteAnalysis/{id}")
+    public ResponseEntity<String> deleteAnalysis(@PathVariable long id){
+        analysisService.deleteAnalysis(id);
+        return new ResponseEntity<>("success!", HttpStatus.OK);
+    }
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<String> findAnalysisByID(@PathVariable long id) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return new ResponseEntity<>(mapper.writeValueAsString(analysisService.findAnalysisByID(id)), HttpStatus.OK);
+    }
+
+    @GetMapping("/getByName/{name}")
+    public ResponseEntity<String> findAnalysisByName(@PathVariable String name) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return new ResponseEntity<String>(mapper.writeValueAsString(analysisService.findByAnalysisByName(name)), HttpStatus.OK);
     }
 }
