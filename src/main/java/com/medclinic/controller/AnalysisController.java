@@ -31,8 +31,7 @@ public class AnalysisController {
 
     @PostMapping("/createResult")
     public ResponseEntity<String> createResultByAnalysis(@RequestBody ResultByAnalysisDTO dto){
-        analysisService.createResultByAnalysis(dto);
-        return new ResponseEntity<>("success!", HttpStatus.OK);
+        return new ResponseEntity<>(analysisService.createResultByAnalysis(dto).getTitle(), HttpStatus.OK);
     }
 
     @PostMapping("/updateAnalysis/{id}")

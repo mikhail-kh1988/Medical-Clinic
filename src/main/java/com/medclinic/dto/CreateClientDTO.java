@@ -5,6 +5,7 @@ public class CreateClientDTO {
     private String password;
     private String fullName;
     private String familyName;
+    private String email;
     private int age;
     private String about;
     private String actualAddress;
@@ -12,11 +13,12 @@ public class CreateClientDTO {
     private String birthDay;
 
     public CreateClientDTO(String login, String password, String fullName, String familyName, int age,
-                           String about, String actualAddress, String phoneNumber, String birthDay) {
+                           String about, String actualAddress, String phoneNumber, String birthDay, String email) {
         this.login = login;
         this.password = password;
         this.fullName = fullName;
         this.familyName = familyName;
+        this.email = email;
         this.age = age;
         this.about = about;
         this.actualAddress = actualAddress;
@@ -56,6 +58,14 @@ public class CreateClientDTO {
 
     public void setFamilyName(String familyName) {
         this.familyName = familyName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getAge() {
