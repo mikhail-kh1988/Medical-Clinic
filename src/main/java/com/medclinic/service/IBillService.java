@@ -8,4 +8,6 @@ public interface IBillService {
     Bill findById(long id);
     List<Bill> findByDoctorID(long id);
     List<Bill> findByClientID(long id);
+    long getCountBill();
+    void toPaid(long id);
 }

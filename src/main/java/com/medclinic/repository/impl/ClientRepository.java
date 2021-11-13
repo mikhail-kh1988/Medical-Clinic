@@ -35,6 +35,15 @@ public class ClientRepository extends GenericDAOImpl implements IClientRepositor
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
+    @Override
+    public Object findByLogin(String login) {
+        CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery criteria = builder.createQuery();
+        Root<Client> root = criteria.from(Client.class);
+        criteria.select(root).where(builder.equal(root.get("login"), login));
+        return this.getEntityManager().createQuery(criteria).getSingleResult();
+    }
+
     //TODO Дописать потом уже уникальную критерию с выборкой данных их медкарты клиента.
     // Связывая медкарту клиента по id клиента.
     @Override
