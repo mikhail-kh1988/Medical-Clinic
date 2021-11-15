@@ -1,40 +1,17 @@
 package com.medclinic.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class DescribeUpdateAnalysisSvcResult {
 
     private String result;
     private String marks;
     private long whoCheckedID;
-
-    public DescribeUpdateAnalysisSvcResult(String result, String marks, long whoCheckedID) {
-        this.result = result;
-        this.marks = marks;
-        this.whoCheckedID = whoCheckedID;
-    }
-
-    public DescribeUpdateAnalysisSvcResult(){}
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
-    public String getMarks() {
-        return marks;
-    }
-
-    public void setMarks(String marks) {
-        this.marks = marks;
-    }
-
-    public long getWhoCheckedID() {
-        return whoCheckedID;
-    }
-
-    public void setWhoCheckedID(long whoCheckedID) {
-        this.whoCheckedID = whoCheckedID;
-    }
 }
