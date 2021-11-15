@@ -11,11 +11,13 @@ import com.medclinic.entity.StatusUser;
 import com.medclinic.repository.IClientRepository;
 import com.medclinic.service.IAnalysisSvcResultService;
 import com.medclinic.service.IClientService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
+@Slf4j
 @Service
 public class ClientService implements IClientService {
 

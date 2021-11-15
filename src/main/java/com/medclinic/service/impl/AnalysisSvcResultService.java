@@ -5,6 +5,7 @@ import com.medclinic.dto.DescribeUpdateAnalysisSvcResult;
 import com.medclinic.entity.*;
 import com.medclinic.repository.*;
 import com.medclinic.service.IAnalysisSvcResultService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,8 @@ import java.time.ZonedDateTime;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+
+@Slf4j
 @Service
 public class AnalysisSvcResultService implements IAnalysisSvcResultService {
 
