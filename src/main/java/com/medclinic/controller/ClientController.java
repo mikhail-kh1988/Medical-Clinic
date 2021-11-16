@@ -3,6 +3,7 @@ package com.medclinic.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.medclinic.dto.CreateClientDTO;
+import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.*;
 public class ClientController {
 
     @Autowired
+    private ObjectMapper mapper;
+
+    @Autowired
     private IClientService clientService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerClient(@RequestBody CreateClientDTO dto) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
+    public ResponseEntity<String> registerClient(@RequestBody CreateClientDTO dto) throws JsonProcessingException, NotUniqueUserRegistrationException {
         return new ResponseEntity<>(mapper.writeValueAsString(clientService.createClient(dto).getId()), HttpStatus.OK);
     }
 
@@ -30,7 +33,6 @@ public class ClientController {
 
     @GetMapping("/getClientByLogin/{login}")
     public ResponseEntity<String> getClientByLogin(@PathVariable String login) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         return new ResponseEntity<>(mapper.writeValueAsString(clientService.findByLogin(login)), HttpStatus.OK);
     }
 }
