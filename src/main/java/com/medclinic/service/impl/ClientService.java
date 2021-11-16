@@ -8,6 +8,7 @@ import com.medclinic.entity.Analysis;
 import com.medclinic.entity.AnalysisServiceResult;
 import com.medclinic.entity.Client;
 import com.medclinic.entity.StatusUser;
+import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.repository.IClientRepository;
 import com.medclinic.service.IAnalysisSvcResultService;
 import com.medclinic.service.IClientService;
@@ -29,22 +30,31 @@ public class ClientService implements IClientService {
 
     @Transactional
     @Override
-    public Client createClient(CreateClientDTO dto) {
+    public Client createClient(CreateClientDTO dto) throws NotUniqueUserRegistrationException {
+        Client currentClient = (Client) clientRepository.findByLogin(dto.getLogin());
         Client client = new Client();
-        client.setLogin(dto.getLogin());
-        client.setPassword(dto.getPassword());
-        client.setFullName(dto.getFullName());
-        client.setFamilyName(dto.getFamilyName());
-        client.setFirstSymbolName(dto.getFamilyName().charAt(0));
-        client.setEmail(dto.getEmail());
-        client.setAge(dto.getAge());
-        client.setActualAddress(dto.getActualAddress());
-        client.setPhoneNumber(dto.getPhoneNumber());
-        client.setAbout(dto.getAbout());
-        //client.setBirthDay(GregorianCalendar.from(ZonedDateTime.now()));
-        client.setStatus(StatusUser.ACTIVE);
-        clientRepository.save(client);
-        return client;
+        if (currentClient.getLogin().equals(dto.getLogin()) | currentClient.getEmail().equals(dto.getEmail()) |
+                currentClient.getPhoneNumber().equals(dto.getPhoneNumber())){
+            Exception exception =  new NotUniqueUserRegistrationException("Login or email or phone already registered!");
+            log.warn(exception.getMessage());
+
+        }else {
+            client.setLogin(dto.getLogin());
+            client.setPassword(dto.getPassword());
+            client.setFullName(dto.getFullName());
+            client.setFamilyName(dto.getFamilyName());
+            client.setFirstSymbolName(dto.getFamilyName().charAt(0));
+            client.setEmail(dto.getEmail());
+            client.setAge(dto.getAge());
+            client.setActualAddress(dto.getActualAddress());
+            client.setPhoneNumber(dto.getPhoneNumber());
+            client.setAbout(dto.getAbout());
+            //client.setBirthDay(GregorianCalendar.from(ZonedDateTime.now()));
+            client.setStatus(StatusUser.ACTIVE);
+            clientRepository.save(client);
+            return client;
+        }
+        return currentClient;
     }
 
     @Transactional

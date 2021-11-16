@@ -17,35 +17,33 @@ import org.springframework.web.bind.annotation.RestController;
 public class BillController {
 
     @Autowired
+    private ObjectMapper mapper;
+
+    @Autowired
     private IBillService billService;
 
     @GetMapping("/paid")
     public ResponseEntity<String> getPaidBill() throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         return new ResponseEntity<>(mapper.writeValueAsString(billService.findByPaid()), HttpStatus.OK);
     }
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<String> getBillById(@PathVariable long id) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         return new ResponseEntity<>(mapper.writeValueAsString(billService.findById(id)), HttpStatus.OK);
     }
 
     @GetMapping("/getByDoctorId/{id}")
     public ResponseEntity<String> getBillByDoctor(@PathVariable long id) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         return new ResponseEntity<>(mapper.writeValueAsString(billService.findByDoctorID(id)), HttpStatus.OK);
     }
 
     @GetMapping("/getByClientId/{id}")
     public ResponseEntity<String> getBillByClient(@PathVariable long id) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         return new ResponseEntity<>(mapper.writeValueAsString(billService.findByClientID(id)), HttpStatus.OK);
     }
 
     @GetMapping("/getCountBill")
     public ResponseEntity<String> getCountBill() throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         return new ResponseEntity<>(mapper.writeValueAsString(billService.getCountBill()), HttpStatus.OK);
     }
 

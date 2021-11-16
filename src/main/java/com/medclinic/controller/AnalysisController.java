@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 public class AnalysisController {
 
     @Autowired
+    private ObjectMapper mapper;
+
+    @Autowired
     private IAnalysisService analysisService;
 
     @PostMapping("/create")
@@ -25,7 +28,6 @@ public class AnalysisController {
 
     @GetMapping("/getAll")
     public ResponseEntity<String> getAllAnalysis() throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         return new ResponseEntity<>(mapper.writeValueAsString(analysisService.findAllAnalysis()), HttpStatus.OK);
     }
 
@@ -36,7 +38,6 @@ public class AnalysisController {
 
     @PostMapping("/updateAnalysis/{id}")
     public ResponseEntity<String> updateAnalysis(@RequestBody DescribeAnalysisDTO dto, @PathVariable long id) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         return new ResponseEntity<String>(mapper.writeValueAsString(analysisService.updateAnalysis(dto, id)), HttpStatus.OK);
     }
 
@@ -48,13 +49,11 @@ public class AnalysisController {
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<String> findAnalysisByID(@PathVariable long id) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         return new ResponseEntity<>(mapper.writeValueAsString(analysisService.findAnalysisByID(id)), HttpStatus.OK);
     }
 
     @GetMapping("/getByName/{name}")
     public ResponseEntity<String> findAnalysisByName(@PathVariable String name) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         return new ResponseEntity<String>(mapper.writeValueAsString(analysisService.findByAnalysisByName(name)), HttpStatus.OK);
     }
 }

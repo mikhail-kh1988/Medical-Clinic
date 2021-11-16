@@ -7,10 +7,12 @@ import com.medclinic.dto.ServicesClientDTO;
 import com.medclinic.entity.Analysis;
 import com.medclinic.entity.AnalysisServiceResult;
 import com.medclinic.entity.Client;
+import com.medclinic.exception.NotUniqueUserRegistrationException;
+
 import java.util.List;
 
 public interface IClientService {
-    Client createClient(CreateClientDTO dto);
+    Client createClient(CreateClientDTO dto) throws NotUniqueUserRegistrationException;
     void deleteClient(long clientID);
     List<AnalysisServiceResult> getAnalysisResult(ServicesClientDTO dto);
     List<Analysis> getListAnalysisFromDoctor(ServicesClientDTO dto);

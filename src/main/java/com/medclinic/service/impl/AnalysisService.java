@@ -46,6 +46,8 @@ public class AnalysisService implements IAnalysisService {
         analysis.setDescribe(dto.getDescribe());
         analysis.setPrice(dto.getPrice());
 
+        log.info("Created new analysis on name: "+analysis.getName());
+
         analysisRepository.save(analysis);
         return  analysis;
     }
