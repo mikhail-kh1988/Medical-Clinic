@@ -9,15 +9,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateClientDTO {
+public class DoctorDto {
     private String login;
     private String password;
+    private String email;
+    private Integer age;
     private String fullName;
     private String familyName;
-    private String email;
-    private int age;
-    private String about;
-    private String actualAddress;
-    private String phoneNumber;
-    private String birthDay;
+    private String whereStudy;
+    private String specializationName;
+    private String certificateNumber;
+
 }

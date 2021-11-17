@@ -9,10 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateCommentDTO {
+public class ClientUpdateDto {
 
-    private long createBy;
-    private String description;
-    private String createDate;
-
+    private String phoneNumber;
+    private String about;
+    private String actualAddress;
 }

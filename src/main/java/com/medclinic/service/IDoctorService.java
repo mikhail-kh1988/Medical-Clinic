@@ -1,9 +1,9 @@
 package com.medclinic.service;
 
-import com.medclinic.dto.DoctorDTO;
-import com.medclinic.dto.DoctorWorkFlowDTO;
-import com.medclinic.dto.MedicalCardBodyDTO;
-import com.medclinic.dto.MedicalCardDTO;
+import com.medclinic.dto.DoctorDto;
+import com.medclinic.dto.DoctorWorkFlowDto;
+import com.medclinic.dto.MedicalCardBodyDto;
+import com.medclinic.dto.MedicalCardDto;
 import com.medclinic.entity.Client;
 import com.medclinic.entity.Doctor;
 import com.medclinic.entity.MedicalCardClient;
@@ -14,10 +14,10 @@ import java.util.List;
 
 public interface IDoctorService {
 
-    Doctor createNewDoctor(DoctorDTO dto);
-    void setWorkFlow(DoctorWorkFlowDTO dto);
+    Doctor createNewDoctor(DoctorDto dto);
+    void setWorkFlow(DoctorWorkFlowDto dto);
     void deleteDoctor(long id);
-    void updateDoctor(long id, DoctorDTO dto);
+    void updateDoctor(long id, DoctorDto dto);
     void addNewService(long serviceID);
     List<Doctor> findByFullName(String fullName);
     Doctor findByLogin(String login);
@@ -29,6 +29,6 @@ public interface IDoctorService {
     List<Client> getListMyClients(long doctorID);
     WorkFlow getMyWorkFlow(GregorianCalendar currentDate, long doctorID);
     MedicalCardClient getMedicalCard(long clientID);
-    MedicalCardClient createMedicalCard(MedicalCardDTO dto);
-    void addNewRecordInMedicalCardClient(MedicalCardBodyDTO dto, long medCardID);
+    MedicalCardClient createMedicalCard(MedicalCardDto dto);
+    void addNewRecordInMedicalCardClient(MedicalCardBodyDto dto, long medCardID);
 }

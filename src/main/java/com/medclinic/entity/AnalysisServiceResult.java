@@ -2,6 +2,7 @@ package com.medclinic.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 @Entity
@@ -40,10 +41,10 @@ public class AnalysisServiceResult implements Serializable {
     private Doctor whoMakeCheck;
 
     @Column(name = "create_date")
-    private GregorianCalendar createDate;
+    private LocalDate createDate;
 
     @Column(name = "submit_date")
-    private GregorianCalendar submitDate;
+    private LocalDate submitDate;
 
     @OneToOne
     private Bill bill;
@@ -128,19 +129,19 @@ public class AnalysisServiceResult implements Serializable {
         this.whoMakeCheck = whoMakeCheck;
     }
 
-    public GregorianCalendar getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(GregorianCalendar createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 
-    public GregorianCalendar getSubmitDate() {
+    public LocalDate getSubmitDate() {
         return submitDate;
     }
 
-    public void setSubmitDate(GregorianCalendar submitDate) {
+    public void setSubmitDate(LocalDate submitDate) {
         this.submitDate = submitDate;
     }
 

@@ -9,11 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DoctorWorkFlowDTO {
+public class ResultByAnalysisDto {
 
-    private String loginDoctor;
-    private String startDateWorkFlow;
-    private String endDateWorkFlow;
-    private long serviceId;
+    private long clientID;
+    private long doctorID;
+    private long analysisID;
 
 }

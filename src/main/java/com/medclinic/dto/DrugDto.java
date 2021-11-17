@@ -5,13 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientUpdateDTO {
+public class DrugDto {
 
-    private String phoneNumber;
-    private String about;
-    private String actualAddress;
+    private String name;
+    private String activeElement;
+    private String composition;
+    private String dosage;
+    
 }

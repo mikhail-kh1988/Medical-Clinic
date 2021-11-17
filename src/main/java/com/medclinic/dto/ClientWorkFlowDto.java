@@ -5,14 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.GregorianCalendar;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResultByAnalysisDTO {
+public class ClientWorkFlowDto {
 
     private long clientID;
     private long doctorID;
-    private long analysisID;
-
+    private GregorianCalendar recipeDate;
+    private long serviceID;
 }

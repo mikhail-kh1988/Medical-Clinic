@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DescribeAnalysisDTO {
+public class DescribeAnalysisDto {
 
     private String name;
     private int price;

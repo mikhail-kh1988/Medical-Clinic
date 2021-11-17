@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -49,7 +50,7 @@ public class BillService implements IBillService {
     public void toPaid(long id) {
         Bill bill = (Bill) billRepository.findByID(id);
         bill.setPaid(true);
-        bill.setPaidDate(GregorianCalendar.from(ZonedDateTime.now()));
+        bill.setPaidDate(LocalDate.now());
         billRepository.save(bill);
     }
 }

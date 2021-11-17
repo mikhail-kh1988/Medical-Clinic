@@ -5,17 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DrugDTO {
+public class DoctorWorkFlowDto {
 
-    private String name;
-    private String activeElement;
-    private String composition;
-    private String dosage;
-    
+    private String loginDoctor;
+    private String startDateWorkFlow;
+    private String endDateWorkFlow;
+    private long serviceId;
+
 }

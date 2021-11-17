@@ -1,20 +1,19 @@
 package com.medclinic;
 
-import com.medclinic.dto.DescribeAnalysisDTO;
+import com.medclinic.dto.DescribeAnalysisDto;
 import com.medclinic.entity.*;
 import com.medclinic.repository.impl.AnalysisRepository;
 import com.medclinic.repository.impl.AnalysisServiceResultRepository;
 import com.medclinic.repository.impl.BillRepository;
 import com.medclinic.repository.impl.ClientRepository;
-import com.medclinic.service.IAnalysisService;
 import com.medclinic.service.impl.AnalysisService;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Release {
@@ -89,10 +88,7 @@ public class Release {
         client.setPhoneNumber("8971845555");
         client.setActualAddress("Orel");
         client.setLogin("client");
-        GregorianCalendar birthday = new GregorianCalendar();
-        birthday.setTimeZone(TimeZone.getDefault());
-        birthday.set(1988, Calendar.APRIL, 18);
-        client.setBirthDay(birthday);
+        client.setBirthDay(LocalDate.of(1988, 04, 18));
 
         em.getTransaction().begin();
         em.persist(client);
@@ -107,10 +103,7 @@ public class Release {
         ivanov.setActualAddress("Orel");
         ivanov.setLogin("petr");
         ivanov.setFamilyName("Petrov");
-        GregorianCalendar birthdayIvanov = new GregorianCalendar();
-        birthdayIvanov.setTimeZone(TimeZone.getDefault());
-        birthdayIvanov.set(1998, Calendar.FEBRUARY, 12);
-        ivanov.setBirthDay(birthdayIvanov);
+        ivanov.setBirthDay(LocalDate.of(1988, 02, 12));
 
         MedicalService service = new MedicalService();
         service.setActive(true);
@@ -241,11 +234,11 @@ public class Release {
 
         List<Client> clients = clientRepository.findByFamily("Petrov");
         for (Client c : clients) {
-            System.out.println(c.getId()+" "+c.getFullName()+" "+c.getBirthDay().getTime());
+            System.out.println(c.getId()+" "+c.getFullName()+" "+c.getBirthDay().getYear());
         }
 
         System.out.println("============== Test analysis service =================");
-        DescribeAnalysisDTO dto = new DescribeAnalysisDTO();
+        DescribeAnalysisDto dto = new DescribeAnalysisDto();
         dto.setDescribe("DSCR FFFFFFF");
         dto.setName("FFFFFF");
         dto.setPrice(999);

@@ -4,6 +4,6 @@ import com.medclinic.entity.Department;
 
 public interface IDepartmentService {
     Department createNewDepartment(String nameDepth);
-    void updateDepartment(Department department, String newNameDep);
-    void deleteDepartment(Department department);
+    void updateDepartment(String department, String newNameDep);
+    void deleteDepartment(String department);
 }

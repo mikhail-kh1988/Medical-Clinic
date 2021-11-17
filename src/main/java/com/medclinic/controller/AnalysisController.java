@@ -3,8 +3,8 @@ package com.medclinic.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.medclinic.dto.DescribeAnalysisDTO;
-import com.medclinic.dto.ResultByAnalysisDTO;
+import com.medclinic.dto.DescribeAnalysisDto;
+import com.medclinic.dto.ResultByAnalysisDto;
 import com.medclinic.service.IAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class AnalysisController {
     private IAnalysisService analysisService;
 
     @PostMapping("/create")
-    public ResponseEntity<String> createNewAnalysis(@RequestBody DescribeAnalysisDTO dto){
+    public ResponseEntity<String> createNewAnalysis(@RequestBody DescribeAnalysisDto dto){
         return new ResponseEntity<>("success! id:"+analysisService.createAnalysis(dto).getId(), HttpStatus.OK);
     }
 
@@ -32,12 +32,12 @@ public class AnalysisController {
     }
 
     @PostMapping("/createResult")
-    public ResponseEntity<String> createResultByAnalysis(@RequestBody ResultByAnalysisDTO dto){
+    public ResponseEntity<String> createResultByAnalysis(@RequestBody ResultByAnalysisDto dto){
         return new ResponseEntity<>(analysisService.createResultByAnalysis(dto).getTitle(), HttpStatus.OK);
     }
 
     @PostMapping("/updateAnalysis/{id}")
-    public ResponseEntity<String> updateAnalysis(@RequestBody DescribeAnalysisDTO dto, @PathVariable long id) throws JsonProcessingException {
+    public ResponseEntity<String> updateAnalysis(@RequestBody DescribeAnalysisDto dto, @PathVariable long id) throws JsonProcessingException {
         return new ResponseEntity<String>(mapper.writeValueAsString(analysisService.updateAnalysis(dto, id)), HttpStatus.OK);
     }
 

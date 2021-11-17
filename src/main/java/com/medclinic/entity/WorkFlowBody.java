@@ -1,6 +1,7 @@
 package com.medclinic.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 @Entity
@@ -18,10 +19,10 @@ public class WorkFlowBody {
     private WorkFlow workFlow;
 
     @Column(name = "create_date")
-    private GregorianCalendar createDate;
+    private LocalDate createDate;
 
     @Column(name = "receipt_date")
-    private GregorianCalendar receiptOfDate;
+    private LocalDate receiptOfDate;
 
     @Column(name = "describe_complaint")
     private String describeComplain;
@@ -66,19 +67,19 @@ public class WorkFlowBody {
         this.workFlow = workFlow;
     }
 
-    public GregorianCalendar getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(GregorianCalendar createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 
-    public GregorianCalendar getReceiptOfDate() {
+    public LocalDate getReceiptOfDate() {
         return receiptOfDate;
     }
 
-    public void setReceiptOfDate(GregorianCalendar receiptOfDate) {
+    public void setReceiptOfDate(LocalDate receiptOfDate) {
         this.receiptOfDate = receiptOfDate;
     }
 

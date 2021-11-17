@@ -1,9 +1,9 @@
 package com.medclinic.service.impl;
 
-import com.medclinic.dto.ClientUpdateDTO;
-import com.medclinic.dto.ClientWorkFlowDTO;
-import com.medclinic.dto.CreateClientDTO;
-import com.medclinic.dto.ServicesClientDTO;
+import com.medclinic.dto.ClientUpdateDto;
+import com.medclinic.dto.ClientWorkFlowDto;
+import com.medclinic.dto.CreateClientDto;
+import com.medclinic.dto.ServicesClientDto;
 import com.medclinic.entity.Analysis;
 import com.medclinic.entity.AnalysisServiceResult;
 import com.medclinic.entity.Client;
@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Slf4j
@@ -30,7 +31,7 @@ public class ClientService implements IClientService {
 
     @Transactional
     @Override
-    public Client createClient(CreateClientDTO dto) throws NotUniqueUserRegistrationException {
+    public Client createClient(CreateClientDto dto) throws NotUniqueUserRegistrationException {
         Client currentClient = (Client) clientRepository.findByLogin(dto.getLogin());
         Client client = new Client();
         if (currentClient.getLogin().equals(dto.getLogin()) | currentClient.getEmail().equals(dto.getEmail()) |
@@ -49,7 +50,7 @@ public class ClientService implements IClientService {
             client.setActualAddress(dto.getActualAddress());
             client.setPhoneNumber(dto.getPhoneNumber());
             client.setAbout(dto.getAbout());
-            //client.setBirthDay(GregorianCalendar.from(ZonedDateTime.now()));
+            //client.setBirthDay(LocalDate.now());
             client.setStatus(StatusUser.ACTIVE);
             clientRepository.save(client);
             return client;
@@ -65,12 +66,12 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public List<AnalysisServiceResult> getAnalysisResult(ServicesClientDTO dto) {
+    public List<AnalysisServiceResult> getAnalysisResult(ServicesClientDto dto) {
         return resultService.findByClient(dto.getClientID());
     }
 
     @Override
-    public List<Analysis> getListAnalysisFromDoctor(ServicesClientDTO dto) {
+    public List<Analysis> getListAnalysisFromDoctor(ServicesClientDto dto) {
         return null;
     }
 
@@ -100,12 +101,12 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public void update(Client client, ClientUpdateDTO dto) {
+    public void update(Client client, ClientUpdateDto dto) {
 
     }
 
     @Override
-    public void setRecipeToDoctor(ClientWorkFlowDTO dto) {
+    public void setRecipeToDoctor(ClientWorkFlowDto dto) {
 
     }
 }

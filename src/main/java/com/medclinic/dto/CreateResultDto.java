@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateResultDTO {
+public class CreateResultDto {
 
     public long analysisID;
     public long serviceID;

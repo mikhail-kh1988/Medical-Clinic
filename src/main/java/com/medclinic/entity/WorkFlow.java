@@ -2,6 +2,7 @@ package com.medclinic.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.Set;
 
@@ -14,10 +15,10 @@ public class WorkFlow implements Serializable {
     private long id;
 
     @Column(name = "start_date")
-    private GregorianCalendar startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    private GregorianCalendar endDate;
+    private LocalDate endDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Doctor doctor;
@@ -50,19 +51,19 @@ public class WorkFlow implements Serializable {
         this.id = id;
     }
 
-    public GregorianCalendar getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(GregorianCalendar startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public GregorianCalendar getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(GregorianCalendar endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

@@ -1,7 +1,7 @@
 package com.medclinic.service.impl;
 
-import com.medclinic.dto.DescribeAnalysisDTO;
-import com.medclinic.dto.ResultByAnalysisDTO;
+import com.medclinic.dto.DescribeAnalysisDto;
+import com.medclinic.dto.ResultByAnalysisDto;
 import com.medclinic.entity.*;
 import com.medclinic.repository.*;
 import com.medclinic.service.IAnalysisService;
@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -40,7 +39,7 @@ public class AnalysisService implements IAnalysisService {
 
     @Transactional
     @Override
-    public Analysis createAnalysis(DescribeAnalysisDTO dto) {
+    public Analysis createAnalysis(DescribeAnalysisDto dto) {
         Analysis analysis = new Analysis();
         analysis.setName(dto.getName());
         analysis.setDescribe(dto.getDescribe());
@@ -69,7 +68,7 @@ public class AnalysisService implements IAnalysisService {
 
     @Transactional
     @Override
-    public AnalysisServiceResult createResultByAnalysis(ResultByAnalysisDTO dto) {
+    public AnalysisServiceResult createResultByAnalysis(ResultByAnalysisDto dto) {
         Client client = (Client) clientRepository.findByID(dto.getClientID());
         Doctor doctor = (Doctor) doctorRepository.findByID(dto.getDoctorID());
         Analysis analysis = (Analysis) analysisRepository.findByID(dto.getAnalysisID());
@@ -79,7 +78,7 @@ public class AnalysisService implements IAnalysisService {
         bill.setPaid(false);
         bill.setDoctor(doctor);
         bill.setClient(client);
-        bill.setCreateDate(GregorianCalendar.from(ZonedDateTime.now()));
+        bill.setCreateDate(LocalDate.now());
         billRepository.save(bill);
         long tempID = bill.getId();
         Bill updBill = (Bill) billRepository.findByID(tempID);
@@ -89,7 +88,7 @@ public class AnalysisService implements IAnalysisService {
         result.setWhoSender(doctor);
         result.setBill(updBill);
         result.setAnalysis(analysis);
-        result.setCreateDate(GregorianCalendar.from(ZonedDateTime.now()));
+        result.setCreateDate(LocalDate.now());
         resultRepository.save(result);
 
         AnalysisServiceResult newResult = (AnalysisServiceResult) resultRepository.findByID(result.getId());
@@ -100,7 +99,7 @@ public class AnalysisService implements IAnalysisService {
 
     @Transactional
     @Override
-    public Analysis updateAnalysis(DescribeAnalysisDTO dto, long analysisID) {
+    public Analysis updateAnalysis(DescribeAnalysisDto dto, long analysisID) {
         Analysis analysis = (Analysis) analysisRepository.findByID(analysisID);
         analysis.setPrice(dto.getPrice());
         analysis.setName(dto.getName());

@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MedicalCardBodyDTO {
+public class MedicalCardBodyDto {
 
     private String comment;
     private long doctorID;

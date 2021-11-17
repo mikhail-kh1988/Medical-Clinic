@@ -1,6 +1,7 @@
 package com.medclinic.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 @Entity
@@ -24,10 +25,10 @@ public class Bill {
     private Doctor doctor;
 
     @Column(name = "create_date")
-    private GregorianCalendar createDate;
+    private LocalDate createDate;
 
     @Column(name = "paid_date")
-    private GregorianCalendar paidDate;
+    private LocalDate paidDate;
 
     public long getId() {
         return id;
@@ -69,19 +70,19 @@ public class Bill {
         this.doctor = doctor;
     }
 
-    public GregorianCalendar getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(GregorianCalendar createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 
-    public GregorianCalendar getPaidDate() {
+    public LocalDate getPaidDate() {
         return paidDate;
     }
 
-    public void setPaidDate(GregorianCalendar paidDate) {
+    public void setPaidDate(LocalDate paidDate) {
         this.paidDate = paidDate;
     }
 }

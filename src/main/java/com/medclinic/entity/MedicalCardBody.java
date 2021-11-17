@@ -1,6 +1,7 @@
 package com.medclinic.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class MedicalCardBody {
     private Disease disease;
 
     @Column(name = "future_date_recipient")
-    private GregorianCalendar futureDateRecipient;
+    private LocalDate futureDateRecipient;
 
     @Column(name = "therapy_closed")
     private boolean therapyClosed;
@@ -135,11 +136,11 @@ public class MedicalCardBody {
         this.analysisList = analysisList;
     }
 
-    public GregorianCalendar getFutureDateRecipient() {
+    public LocalDate getFutureDateRecipient() {
         return futureDateRecipient;
     }
 
-    public void setFutureDateRecipient(GregorianCalendar futureDateRecipient) {
+    public void setFutureDateRecipient(LocalDate futureDateRecipient) {
         this.futureDateRecipient = futureDateRecipient;
     }
 
