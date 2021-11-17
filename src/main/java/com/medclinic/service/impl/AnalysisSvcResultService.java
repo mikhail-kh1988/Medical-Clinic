@@ -1,6 +1,6 @@
 package com.medclinic.service.impl;
 
-import com.medclinic.dto.CreateResultDTO;
+import com.medclinic.dto.CreateResultDto;
 import com.medclinic.dto.DescribeUpdateAnalysisSvcResult;
 import com.medclinic.entity.*;
 import com.medclinic.repository.*;
@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -39,7 +38,7 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
 
     @Transactional
     @Override
-    public AnalysisServiceResult createResultByAnalysis(CreateResultDTO dto) {
+    public AnalysisServiceResult createResultByAnalysis(CreateResultDto dto) {
 
         Analysis analysis = (Analysis) analysisRepository.findByID(dto.getAnalysisID());
         Client client = (Client) clientRepository.findByID(dto.getClientID());
@@ -47,7 +46,7 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
 
         Bill bill = new Bill();
         bill.setSum(analysis.getPrice());
-        bill.setCreateDate(GregorianCalendar.from(ZonedDateTime.now()));
+        bill.setCreateDate(LocalDate.now());
         bill.setPaid(false);
         bill.setClient(client);
         bill.setDoctor(doctor);
@@ -61,7 +60,7 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
         result.setClient(client);
         result.setWhoSender(doctor);
         result.setBill(billForAnalysisResult);
-        result.setCreateDate(GregorianCalendar.from(ZonedDateTime.now()));
+        result.setCreateDate(LocalDate.now());
         resultRepository.save(result);
         long tempResultID = result.getId();
 
@@ -74,14 +73,14 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
 
     @Transactional
     @Override
-    public AnalysisServiceResult createResultByMedService(CreateResultDTO dto) {
+    public AnalysisServiceResult createResultByMedService(CreateResultDto dto) {
         Client client = (Client) clientRepository.findByID(dto.getClientID());
         Doctor doctor = (Doctor) doctorRepository.findByID(dto.getDoctorID());
         MedicalService service = (MedicalService) serviceRepository.findByID(dto.getServiceID());
 
         Bill bill = new Bill();
         bill.setSum(service.getPrice());
-        bill.setCreateDate(GregorianCalendar.from(ZonedDateTime.now()));
+        bill.setCreateDate(LocalDate.now());
         bill.setPaid(false);
         bill.setClient(client);
         bill.setDoctor(doctor);
@@ -95,7 +94,7 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
         result.setClient(client);
         result.setWhoSender(doctor);
         result.setBill(billForAnalysisResult);
-        result.setCreateDate(GregorianCalendar.from(ZonedDateTime.now()));
+        result.setCreateDate(LocalDate.now());
         resultRepository.save(result);
         long tempResultID = result.getId();
 
@@ -152,7 +151,7 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
         result.setResult(describeUpdate.getResult());
         result.setMarks(describeUpdate.getMarks());
         result.setWhoMakeCheck(doctorChecked);
-        result.setSubmitDate(GregorianCalendar.from(ZonedDateTime.now()));
+        result.setSubmitDate(LocalDate.now());
 
         resultRepository.save(result);
     }

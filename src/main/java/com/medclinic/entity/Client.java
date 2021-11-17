@@ -3,6 +3,7 @@ package com.medclinic.entity;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 @Entity
@@ -18,13 +19,13 @@ public class Client extends User{
     private String actualAddress;
 
     @Column(name = "birth_day")
-    private GregorianCalendar birthDay;
+    private LocalDate birthDay;
 
-    public GregorianCalendar getBirthDay() {
+    public LocalDate getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(GregorianCalendar birthDay) {
+    public void setBirthDay(LocalDate birthDay) {
         this.birthDay = birthDay;
     }
 

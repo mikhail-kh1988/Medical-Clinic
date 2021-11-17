@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MedicalCardDTO {
+public class MedicalCardDto {
 
     private long clientID;
     private GregorianCalendar createDate;

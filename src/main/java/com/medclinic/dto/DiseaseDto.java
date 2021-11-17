@@ -5,14 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TherapyDTO {
-
-    private String Therapy;
-    private String describeComplaint;
-    private long diseaseID;
+public class DiseaseDto {
+    private String name;
+    private String internalCode;
+    private String externalCode;
+    private String worldCode;
 
 }

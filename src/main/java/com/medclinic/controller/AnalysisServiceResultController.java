@@ -2,7 +2,7 @@ package com.medclinic.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.medclinic.dto.CreateResultDTO;
+import com.medclinic.dto.CreateResultDto;
 import com.medclinic.dto.DescribeUpdateAnalysisSvcResult;
 import com.medclinic.service.IAnalysisSvcResultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,12 @@ public class AnalysisServiceResultController {
     private IAnalysisSvcResultService resultService;
 
     @PostMapping("/createByService")
-    public ResponseEntity<String> createResultByService(@RequestBody CreateResultDTO dto) throws JsonProcessingException {
+    public ResponseEntity<String> createResultByService(@RequestBody CreateResultDto dto) throws JsonProcessingException {
         return new ResponseEntity<String>(mapper.writeValueAsString(resultService.createResultByMedService(dto).getTitle()), HttpStatus.OK);
     }
 
     @PostMapping("/createByAnalysis")
-    public ResponseEntity<String> createResultByAnalysis(@RequestBody CreateResultDTO dto) throws JsonProcessingException {
+    public ResponseEntity<String> createResultByAnalysis(@RequestBody CreateResultDto dto) throws JsonProcessingException {
         return new ResponseEntity<String>(mapper.writeValueAsString(resultService.createResultByAnalysis(dto).getTitle()), HttpStatus.OK);
     }
 

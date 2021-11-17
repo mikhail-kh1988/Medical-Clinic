@@ -2,6 +2,7 @@ package com.medclinic.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 @Entity
@@ -15,7 +16,7 @@ public class Comment implements Serializable {
     private String description;
 
     @Column(name = "create_date")
-    private GregorianCalendar createDate;
+    private LocalDate createDate;
 
     @ManyToOne
     private User createUser;
@@ -36,11 +37,11 @@ public class Comment implements Serializable {
         this.description = description;
     }
 
-    public GregorianCalendar getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(GregorianCalendar createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 

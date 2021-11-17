@@ -2,6 +2,7 @@ package com.medclinic.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class MedicalCardClient implements Serializable {
     private Client client;
 
     @Column(name = "create_date")
-    private GregorianCalendar createDate;
+    private LocalDate createDate;
 
     @Column(name = "describe")
     private String describe;
@@ -52,11 +53,11 @@ public class MedicalCardClient implements Serializable {
         this.client = client;
     }
 
-    public GregorianCalendar getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(GregorianCalendar createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 

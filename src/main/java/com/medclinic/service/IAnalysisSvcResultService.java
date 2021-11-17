@@ -1,13 +1,13 @@
 package com.medclinic.service;
 
-import com.medclinic.dto.CreateResultDTO;
+import com.medclinic.dto.CreateResultDto;
 import com.medclinic.dto.DescribeUpdateAnalysisSvcResult;
 import com.medclinic.entity.*;
 import java.util.List;
 
 public interface IAnalysisSvcResultService {
-    AnalysisServiceResult createResultByAnalysis(CreateResultDTO dto);
-    AnalysisServiceResult createResultByMedService(CreateResultDTO dto);
+    AnalysisServiceResult createResultByAnalysis(CreateResultDto dto);
+    AnalysisServiceResult createResultByMedService(CreateResultDto dto);
     List <AnalysisServiceResult> findByClient(long clientID);
     List <AnalysisServiceResult> findByNotPaid();
     List <AnalysisServiceResult> findByDoctor(long doctorID);
