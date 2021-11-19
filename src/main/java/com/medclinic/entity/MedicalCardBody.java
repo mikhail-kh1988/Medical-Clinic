@@ -20,7 +20,7 @@ public class MedicalCardBody {
     private Comment comment;
 
     @Column(name = "create_date")
-    private GregorianCalendar createDate;
+    private LocalDate createDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Therapy therapy;
@@ -80,11 +80,11 @@ public class MedicalCardBody {
         this.comment = comment;
     }
 
-    public GregorianCalendar getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(GregorianCalendar createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 

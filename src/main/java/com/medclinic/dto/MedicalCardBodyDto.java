@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 @Getter
@@ -16,12 +17,13 @@ public class MedicalCardBodyDto {
     private String comment;
     private long doctorID;
     private long clientID;
-    private GregorianCalendar createDate;
+    private LocalDate createDate;
     private long diseaseID;
+    private String complaint;
     private String therapy;
     private long departmentID;
     private long medicalCardID;
-    private GregorianCalendar futureDateRecipient;
+    private LocalDate futureDateRecipient;
     private boolean therapyClosed;
 
 }

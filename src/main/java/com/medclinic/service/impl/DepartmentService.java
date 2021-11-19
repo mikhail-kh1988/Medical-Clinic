@@ -3,13 +3,27 @@ package com.medclinic.service.impl;
 import com.medclinic.entity.Department;
 import com.medclinic.repository.IDepartmentRepository;
 import com.medclinic.service.IDepartmentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Slf4j
 public class DepartmentService implements IDepartmentService {
 
     @Autowired
     private IDepartmentRepository departmentRepository;
+
+    @Override
+    public Department findDepartmentByName(String name) {
+        return (Department) departmentRepository.findByDepName(name);
+    }
+
+    @Override
+    public Department findDepartmentByID(long id) {
+        return (Department) departmentRepository.findByID(id);
+    }
 
     @Transactional
     @Override
@@ -17,6 +31,7 @@ public class DepartmentService implements IDepartmentService {
         Department department = new Department();
         department.setDepartmentName(nameDepth);
         departmentRepository.save(department);
+        log.info("Create department by name: "+department.getDepartmentName()+".");
         return department;
     }
 
@@ -26,6 +41,7 @@ public class DepartmentService implements IDepartmentService {
         Department currentDepth = (Department) departmentRepository.findByDepName(department);
         currentDepth.setDepartmentName(newNameDep);
         departmentRepository.save(currentDepth);
+        log.info("Update department name. Old name:"+department+", new name:"+newNameDep);
     }
 
     @Transactional
@@ -33,5 +49,6 @@ public class DepartmentService implements IDepartmentService {
     public void deleteDepartment(String department) {
         Department currentDepth = (Department) departmentRepository.findByDepName(department);
         departmentRepository.delete(currentDepth);
+        log.info("Delete department by name:"+department);
     }
 }

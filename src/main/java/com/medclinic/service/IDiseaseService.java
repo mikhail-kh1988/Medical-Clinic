@@ -12,5 +12,6 @@ public interface IDiseaseService {
     Disease findByInternalCode(String inCode);
     Disease findByExternalCode(String exCode);
     Disease findByWorldCode(String wlCode);
+    Disease findByID(long id);
     List<Disease> findByName(String name);
 }
