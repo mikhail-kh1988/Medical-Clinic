@@ -1,24 +1,19 @@
 package com.medclinic.dto;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.util.GregorianCalendar;
-
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MedicalCardDto {
+public class MedicalServiceDto {
 
-    private long clientID;
-    private LocalDate createDate;
+    private String name;
     private String describe;
-    private String bloodGroup;
-    private String chronicDisease;
+    private int price;
+    private boolean active;
+    private String externalCode;
 
 }

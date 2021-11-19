@@ -4,11 +4,15 @@ import com.medclinic.dto.DiseaseDto;
 import com.medclinic.entity.Disease;
 import com.medclinic.repository.IDiseaseRepository;
 import com.medclinic.service.IDiseaseService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Slf4j
 public class DiseaseService implements IDiseaseService {
 
     @Autowired
@@ -26,6 +30,7 @@ public class DiseaseService implements IDiseaseService {
 
         diseaseRepository.save(disease);
 
+        log.info("Create disease by name:"+disease.getName());
         return disease;
     }
 
@@ -39,12 +44,15 @@ public class DiseaseService implements IDiseaseService {
         currentDisease.setName(dto.getName());
 
         diseaseRepository.save(currentDisease);
+        log.info("Update disease "+disease);
     }
 
     @Transactional
     @Override
     public void deleteDisease(String diseaseInternalId) {
         Disease currentDisease = (Disease) diseaseRepository.findByInternalCode(diseaseInternalId);
+        log.info("Delete disease by name "+currentDisease.getName());
+        diseaseRepository.delete(currentDisease);
     }
 
     @Override
@@ -60,6 +68,11 @@ public class DiseaseService implements IDiseaseService {
     @Override
     public Disease findByWorldCode(String wlCode) {
         return (Disease) diseaseRepository.findByWorldCode(wlCode);
+    }
+
+    @Override
+    public Disease findByID(long id) {
+        return (Disease) diseaseRepository.findByID(id);
     }
 
     @Override

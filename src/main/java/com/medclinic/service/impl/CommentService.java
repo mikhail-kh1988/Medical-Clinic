@@ -6,12 +6,16 @@ import com.medclinic.entity.User;
 import com.medclinic.repository.ICommentRepository;
 import com.medclinic.repository.IUserRepository;
 import com.medclinic.service.ICommentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Service
+@Slf4j
 public class CommentService implements ICommentService {
 
     @Autowired
@@ -31,6 +35,7 @@ public class CommentService implements ICommentService {
         comment.setCreateDate(LocalDate.now());
 
         commentRepository.save(comment);
+        log.info("Created comment id:"+comment.getId()+" by login: "+createByUser.getLogin());
     }
 
     @Override

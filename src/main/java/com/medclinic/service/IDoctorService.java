@@ -9,7 +9,7 @@ import com.medclinic.entity.Doctor;
 import com.medclinic.entity.MedicalCardClient;
 import com.medclinic.entity.WorkFlow;
 
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IDoctorService {
@@ -18,7 +18,7 @@ public interface IDoctorService {
     void setWorkFlow(DoctorWorkFlowDto dto);
     void deleteDoctor(long id);
     void updateDoctor(long id, DoctorDto dto);
-    void addNewService(long serviceID);
+    void addNewService(long serviceID, long doctorID);
     List<Doctor> findByFullName(String fullName);
     Doctor findByLogin(String login);
     List<Doctor> findByFamily(String family);
@@ -27,8 +27,8 @@ public interface IDoctorService {
     List<Doctor> findBySpecializationName(String specName);
     List<Doctor> findByWhereStudy(String whereStudy);
     List<Client> getListMyClients(long doctorID);
-    WorkFlow getMyWorkFlow(GregorianCalendar currentDate, long doctorID);
+    WorkFlow getMyWorkFlow(LocalDate currentDate, long doctorID);
     MedicalCardClient getMedicalCard(long clientID);
-    MedicalCardClient createMedicalCard(MedicalCardDto dto);
+    MedicalCardClient createMedicalCard(MedicalCardDto dto, long doctorID);
     void addNewRecordInMedicalCardClient(MedicalCardBodyDto dto, long medCardID);
 }

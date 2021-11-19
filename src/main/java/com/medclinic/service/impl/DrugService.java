@@ -4,11 +4,15 @@ import com.medclinic.dto.DrugDto;
 import com.medclinic.entity.Drugs;
 import com.medclinic.repository.IDrugRepository;
 import com.medclinic.service.IDrugService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Slf4j
 public class DrugService implements IDrugService {
 
     @Autowired
@@ -35,6 +39,7 @@ public class DrugService implements IDrugService {
 
         drugRepository.save(drugs);
 
+        log.info("Create drug by name: "+drugs.getName());
         return drugs;
     }
 
@@ -43,6 +48,7 @@ public class DrugService implements IDrugService {
     public void deleteDrug(long drugsID) {
         Drugs currentDrugs = (Drugs) drugRepository.findByID(drugsID);
         drugRepository.delete(currentDrugs);
+        log.info("Delete drugs by name"+currentDrugs.getName()+" and id: "+drugsID);
     }
 
     @Transactional
@@ -55,5 +61,6 @@ public class DrugService implements IDrugService {
         drugs.setComposition(dto.getComposition());
 
         drugRepository.save(drugs);
+        log.info("Update drugs "+drugs.getName());
     }
 }
