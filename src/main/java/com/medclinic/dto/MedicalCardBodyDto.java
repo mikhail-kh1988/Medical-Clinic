@@ -23,7 +23,7 @@ public class MedicalCardBodyDto {
     private String therapy;
     private long departmentID;
     private long medicalCardID;
-    private LocalDate futureDateRecipient;
+    private String futureDateRecipient;
     private boolean therapyClosed;
 
 }

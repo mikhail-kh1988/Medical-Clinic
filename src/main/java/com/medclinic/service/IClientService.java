@@ -18,6 +18,7 @@ public interface IClientService {
     List<Analysis> getListAnalysisFromDoctor(ServicesClientDto dto);
     List<Client> findByFamily(String family);
     List<Client> findByFullName(String fullName);
+    List<Client> findAll();
     Client findByPhoneNumber(String number);
     Client findById(long id);
     Client findByLogin(String login);

@@ -5,13 +5,16 @@ import com.medclinic.dto.DoctorWorkFlowDto;
 import com.medclinic.dto.MedicalCardBodyDto;
 import com.medclinic.dto.MedicalCardDto;
 import com.medclinic.entity.*;
+import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.repository.IDoctorRepository;
 import com.medclinic.service.*;
+import com.medclinic.tools.DateParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.DatagramPacket;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class DoctorService implements IDoctorService {
 
     @Transactional
     @Override
-    public Doctor createNewDoctor(DoctorDto dto) {
+    public Doctor createNewDoctor(DoctorDto dto) throws NotUniqueUserRegistrationException {
         Doctor doctor =  new Doctor();
         doctor.setLogin(dto.getLogin());
         doctor.setPassword(dto.getPassword());
@@ -109,6 +112,11 @@ public class DoctorService implements IDoctorService {
     @Override
     public Doctor findByLogin(String login) {
         return (Doctor) doctorRepository.findByLogin(login);
+    }
+
+    @Override
+    public Doctor findById(long id) {
+        return (Doctor) doctorRepository.findByID(id);
     }
 
     @Override
@@ -188,7 +196,7 @@ public class DoctorService implements IDoctorService {
         comment.setCreateDate(LocalDate.now());
         comment.setCreateUser(doctor);
         comment.setDescription(dto.getComment());
-        log.debug("Create comment: "+comment.getDescription());
+        log.debug("Create component comment: "+comment.getDescription());
 
         Disease disease = diseaseService.findByID(dto.getDiseaseID());
 
@@ -207,7 +215,7 @@ public class DoctorService implements IDoctorService {
         cardBody.setComment(comment);
         cardBody.setDepartment(department);
         cardBody.setDisease(disease);
-        cardBody.setFutureDateRecipient(dto.getFutureDateRecipient());
+        cardBody.setFutureDateRecipient(DateParser.getDateByString(dto.getFutureDateRecipient()));
         cardBody.setTherapy(therapy);
         cardBody.setTherapyClosed(dto.isTherapyClosed());
 

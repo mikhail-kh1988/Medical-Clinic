@@ -25,14 +25,20 @@ public class ClientController {
         return new ResponseEntity<>(mapper.writeValueAsString(clientService.createClient(dto).getId()), HttpStatus.OK);
     }
 
-    @GetMapping("/deleteClient/{id}")
-    public ResponseEntity<String> deleteClient(@PathVariable long id) throws JsonProcessingException {
+    @GetMapping("/{login}")
+    public ResponseEntity<String> getClientByLogin(@PathVariable String login) throws JsonProcessingException {
+        return new ResponseEntity<>(mapper.writeValueAsString(clientService.findByLogin(login)), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteClientNew(@PathVariable long id){
         clientService.deleteClient(id);
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }
 
-    @GetMapping("/getClientByLogin/{login}")
-    public ResponseEntity<String> getClientByLogin(@PathVariable String login) throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(clientService.findByLogin(login)), HttpStatus.OK);
+    @GetMapping("/")
+    public ResponseEntity<String> getAllClients() throws JsonProcessingException{
+        return new ResponseEntity<>(mapper.writeValueAsString(clientService.findAll()), HttpStatus.OK);
     }
+
 }
