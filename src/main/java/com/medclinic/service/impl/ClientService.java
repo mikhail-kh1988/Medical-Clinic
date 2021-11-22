@@ -12,6 +12,7 @@ import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.repository.IClientRepository;
 import com.medclinic.service.IAnalysisSvcResultService;
 import com.medclinic.service.IClientService;
+import com.medclinic.tools.DateParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,14 +33,14 @@ public class ClientService implements IClientService {
     @Transactional
     @Override
     public Client createClient(CreateClientDto dto) throws NotUniqueUserRegistrationException {
-        Client currentClient = (Client) clientRepository.findByLogin(dto.getLogin());
+        //Client currentClient = (Client) clientRepository.findByLogin(dto.getLogin());
         Client client = new Client();
-        if (currentClient.getLogin().equals(dto.getLogin()) | currentClient.getEmail().equals(dto.getEmail()) |
+        /*if (currentClient.getLogin().equals(dto.getLogin()) | currentClient.getEmail().equals(dto.getEmail()) |
                 currentClient.getPhoneNumber().equals(dto.getPhoneNumber())){
             Exception exception =  new NotUniqueUserRegistrationException("Login or email or phone already registered!");
             log.warn(exception.getMessage());
-
-        }else {
+            return currentClient;
+        }else {*/
             client.setLogin(dto.getLogin());
             client.setPassword(dto.getPassword());
             client.setFullName(dto.getFullName());
@@ -50,12 +51,11 @@ public class ClientService implements IClientService {
             client.setActualAddress(dto.getActualAddress());
             client.setPhoneNumber(dto.getPhoneNumber());
             client.setAbout(dto.getAbout());
-            //client.setBirthDay(LocalDate.now());
+            //client.setBirthDay(DateParser.getDateByString(dto.getBirthDay()));
             client.setStatus(StatusUser.ACTIVE);
             clientRepository.save(client);
             return client;
-        }
-        return currentClient;
+        //}
     }
 
     @Transactional
@@ -83,6 +83,11 @@ public class ClientService implements IClientService {
     @Override
     public List<Client> findByFullName(String fullName) {
         return clientRepository.findByFullName(fullName);
+    }
+
+    @Override
+    public List<Client> findAll() {
+        return clientRepository.findAll();
     }
 
     @Override

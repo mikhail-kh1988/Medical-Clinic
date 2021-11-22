@@ -68,10 +68,11 @@ public class AnalysisService implements IAnalysisService {
 
     @Transactional
     @Override
-    public AnalysisServiceResult createResultByAnalysis(ResultByAnalysisDto dto) {
+    public AnalysisServiceResult createResultByAnalysis(long analysisId, ResultByAnalysisDto dto) {
         Client client = (Client) clientRepository.findByID(dto.getClientID());
         Doctor doctor = (Doctor) doctorRepository.findByID(dto.getDoctorID());
-        Analysis analysis = (Analysis) analysisRepository.findByID(dto.getAnalysisID());
+        Analysis analysis = (Analysis) analysisRepository.findByID(analysisId);
+        log.debug("Create temporal data client login="+client.getLogin()+", doctor login="+doctor.getLogin());
 
         Bill bill = new Bill();
         bill.setSum(analysis.getPrice());
@@ -82,6 +83,7 @@ public class AnalysisService implements IAnalysisService {
         billRepository.save(bill);
         long tempID = bill.getId();
         Bill updBill = (Bill) billRepository.findByID(tempID);
+        log.debug("Create bill with id:"+ tempID);
 
         AnalysisServiceResult result = new AnalysisServiceResult();
         result.setClient(client);

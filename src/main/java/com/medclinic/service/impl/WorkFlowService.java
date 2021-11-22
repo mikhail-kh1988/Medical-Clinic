@@ -4,6 +4,7 @@ import com.medclinic.dto.DoctorWorkFlowDto;
 import com.medclinic.entity.Doctor;
 import com.medclinic.entity.MedicalService;
 import com.medclinic.entity.WorkFlow;
+import com.medclinic.entity.WorkFlowBody;
 import com.medclinic.repository.IWorkFlowRepository;
 import com.medclinic.service.IDoctorService;
 import com.medclinic.service.IMedicalSvcService;
@@ -13,8 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -30,14 +29,31 @@ public class WorkFlowService implements IWorkFlowService {
     @Autowired
     private IMedicalSvcService medicalSvcService;
 
+    @Transactional
     @Override
     public void deleteWorkFlow(long id) {
-
+        WorkFlow workFlow = (WorkFlow) workFlowRepository.findByID(id);
+        workFlowRepository.delete(workFlow);
     }
 
+    @Transactional
     @Override
     public void updateWorkFlow(long id, DoctorWorkFlowDto dto) {
+        WorkFlow workFlow = (WorkFlow) workFlowRepository.findByID(id);
+        Doctor doctor = doctorService.findByLogin(dto.getLoginDoctor());
+        MedicalService service = medicalSvcService.findById(dto.getServiceId());
+        log.debug("Find data for update. Find service "+service.getName()+"(id:"+service.getId()+"). Find doctor " +
+                " "+doctor.getFullName()+"("+doctor.getLogin()+") and find workflow id="+workFlow.getId()+". " +
+                "Start date:"+workFlow.getStartDate().toString()+" - End date"+workFlow.getEndDate().toString());
 
+        workFlow.setService(service);
+        workFlow.setDoctor(doctor);
+        workFlow.setEndDate(DateParser.getDateByString(dto.getEndDateWorkFlow()));
+        workFlow.setStartDate(DateParser.getDateByString(dto.getStartDateWorkFlow()));
+
+        workFlowRepository.save(workFlow);
+        log.info("Update for doctor "+doctor.getFullName()+" workflow (id:"+workFlow.getId()+") new date between " +
+                "("+workFlow.getStartDate()+" - "+workFlow.getEndDate()+").");
     }
 
     @Transactional

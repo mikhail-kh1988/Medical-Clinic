@@ -73,10 +73,10 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
 
     @Transactional
     @Override
-    public AnalysisServiceResult createResultByMedService(CreateResultDto dto) {
+    public AnalysisServiceResult createResultByMedService(long serviceId, CreateResultDto dto) {
         Client client = (Client) clientRepository.findByID(dto.getClientID());
         Doctor doctor = (Doctor) doctorRepository.findByID(dto.getDoctorID());
-        MedicalService service = (MedicalService) serviceRepository.findByID(dto.getServiceID());
+        MedicalService service = (MedicalService) serviceRepository.findByID(serviceId);
 
         Bill bill = new Bill();
         bill.setSum(service.getPrice());

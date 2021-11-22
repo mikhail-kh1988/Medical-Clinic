@@ -12,7 +12,7 @@ public interface IAnalysisService {
     List<Analysis> findByAnalysisByName(String name);
     List<Analysis> findAllAnalysis();
     Analysis findAnalysisByID(long id);
-    AnalysisServiceResult createResultByAnalysis(ResultByAnalysisDto dto);
+    AnalysisServiceResult createResultByAnalysis(long analysisId, ResultByAnalysisDto dto);
     Analysis updateAnalysis(DescribeAnalysisDto dto, long analysisID);
     void deleteAnalysis(long id);
 }
