@@ -2,10 +2,7 @@ package com.medclinic.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.medclinic.dto.CreateResultDto;
-import com.medclinic.dto.DescribeAnalysisDto;
-import com.medclinic.dto.DescribeUpdateAnalysisSvcResult;
-import com.medclinic.dto.ResultByAnalysisDto;
+import com.medclinic.dto.*;
 import com.medclinic.service.IAnalysisService;
 import com.medclinic.service.IAnalysisSvcResultService;
 import com.medclinic.service.IMedicalSvcService;
@@ -68,12 +65,7 @@ public class ResultController {
         return new ResponseEntity<>(mapper.writeValueAsString(analysisService.findAllAnalysis()), HttpStatus.OK);
     }
 
-    @PostMapping("/service/{serviceId}/")
-    public ResponseEntity<String> createResultByService(@PathVariable long serviceId, @RequestBody CreateResultDto dto) throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(resultService.createResultByMedService(serviceId, dto).getTitle()), HttpStatus.OK);
-    }
-
-    @GetMapping("/doctor/{doctorId}")
+    @GetMapping("/res/{doctorId}")
     public ResponseEntity<String> getResultsByDoctor(@PathVariable long doctorId) throws JsonProcessingException {
         return new ResponseEntity<>(mapper.writeValueAsString(resultService.findByDoctor(doctorId)), HttpStatus.OK);
     }
@@ -93,7 +85,7 @@ public class ResultController {
         return new ResponseEntity<>(mapper.writeValueAsString(resultService.findByNotPaid()), HttpStatus.OK);
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<String> getResultById(@PathVariable long id) throws JsonProcessingException {
         return new ResponseEntity<>(mapper.writeValueAsString(resultService.findById(id)), HttpStatus.OK);
     }
@@ -102,6 +94,16 @@ public class ResultController {
     public ResponseEntity<String> updateResult(@PathVariable long resultId, DescribeUpdateAnalysisSvcResult dto){
         resultService.update(resultId, dto);
         return new ResponseEntity<>("success!", HttpStatus.OK);
+    }
+
+    @PostMapping("/{analysisId}/createByAnalysis")
+    public ResponseEntity<String> createResultByAnalysis(@PathVariable long analysisId, CreateResultDto dto) throws JsonProcessingException {
+        return new ResponseEntity<>(mapper.writeValueAsString(resultService.createResultByAnalysis(analysisId, dto).getTitle()), HttpStatus.OK);
+    }
+
+    @PostMapping("/{serviceId}/createByService")
+    public ResponseEntity<String> createResultByService(@PathVariable long serviceId, CreateResultDto dto) throws JsonProcessingException {
+        return new ResponseEntity<>(mapper.writeValueAsString(resultService.createResultByMedService(serviceId, dto).getTitle()), HttpStatus.OK);
     }
 
 }
