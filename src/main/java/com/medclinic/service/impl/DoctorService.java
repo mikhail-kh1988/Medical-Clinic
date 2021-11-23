@@ -54,6 +54,7 @@ public class DoctorService implements IDoctorService {
         doctor.setCertificateNumber(dto.getCertificateNumber());
         doctor.setWhereStudy(dto.getWhereStudy());
         doctor.setFullName(dto.getFullName());
+        doctor.setAge(dto.getAge());
         doctor.setFamilyName(dto.getFamilyName());
         doctor.setFirstSymbolName(dto.getFamilyName().charAt(0));
 

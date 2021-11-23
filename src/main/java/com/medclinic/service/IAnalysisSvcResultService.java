@@ -6,7 +6,7 @@ import com.medclinic.entity.*;
 import java.util.List;
 
 public interface IAnalysisSvcResultService {
-    AnalysisServiceResult createResultByAnalysis(CreateResultDto dto);
+    AnalysisServiceResult createResultByAnalysis(long analysisID, CreateResultDto dto);
     AnalysisServiceResult createResultByMedService(long serviceId, CreateResultDto dto);
     List <AnalysisServiceResult> findByClient(long clientID);
     List <AnalysisServiceResult> findByNotPaid();
