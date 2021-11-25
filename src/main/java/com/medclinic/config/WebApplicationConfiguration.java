@@ -1,4 +1,4 @@
-package com.medclinic.tools;
+package com.medclinic.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

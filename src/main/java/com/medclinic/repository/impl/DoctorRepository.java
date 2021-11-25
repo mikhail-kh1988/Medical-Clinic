@@ -1,8 +1,7 @@
 package com.medclinic.repository.impl;
 
-import com.medclinic.entity.Disease;
 import com.medclinic.entity.Doctor;
-import com.medclinic.hibernate.GenericDAOImpl;
+import com.medclinic.config.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IDoctorRepository;
 import org.springframework.stereotype.Repository;
 

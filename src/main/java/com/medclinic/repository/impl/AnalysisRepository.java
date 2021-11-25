@@ -1,7 +1,7 @@
 package com.medclinic.repository.impl;
 
 import com.medclinic.entity.Analysis;
-import com.medclinic.hibernate.GenericDAOImpl;
+import com.medclinic.config.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IAnalysisRepository;
 import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.CriteriaBuilder;

@@ -1,4 +1,4 @@
-package com.medclinic.tools;
+package com.medclinic.utils;
 
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package com.medclinic.hibernate;
+package com.medclinic.config.hibernate;
 
 
 import javax.persistence.EntityManager;

@@ -1,6 +1,6 @@
 package com.medclinic.repository;
 
-import com.medclinic.hibernate.GenericDAO;
+import com.medclinic.config.hibernate.GenericDAO;
 
 public interface IDepartmentRepository<T, ID> extends GenericDAO {
 

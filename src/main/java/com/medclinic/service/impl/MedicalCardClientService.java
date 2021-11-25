@@ -4,7 +4,7 @@ import com.medclinic.dto.MedicalCardBodyDto;
 import com.medclinic.entity.*;
 import com.medclinic.repository.IMedicalCardClientRepository;
 import com.medclinic.service.*;
-import com.medclinic.tools.DateParser;
+import com.medclinic.utils.DateParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

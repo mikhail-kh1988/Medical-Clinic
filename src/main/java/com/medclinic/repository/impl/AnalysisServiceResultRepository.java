@@ -2,7 +2,7 @@ package com.medclinic.repository.impl;
 
 import com.medclinic.entity.AnalysisServiceResult;
 import com.medclinic.entity.Bill;
-import com.medclinic.hibernate.GenericDAOImpl;
+import com.medclinic.config.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IAnalysisServiceResultRepository;
 import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.*;

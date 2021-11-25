@@ -1,8 +1,7 @@
 package com.medclinic.repository.impl;
 
-import com.medclinic.entity.Client;
 import com.medclinic.entity.Comment;
-import com.medclinic.hibernate.GenericDAOImpl;
+import com.medclinic.config.hibernate.GenericDAOImpl;
 import com.medclinic.repository.ICommentRepository;
 import org.springframework.stereotype.Repository;
 
