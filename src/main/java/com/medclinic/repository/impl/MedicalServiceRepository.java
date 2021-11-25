@@ -1,6 +1,6 @@
 package com.medclinic.repository.impl;
 import com.medclinic.entity.MedicalService;
-import com.medclinic.hibernate.GenericDAOImpl;
+import com.medclinic.config.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IMedicalServiceRepository;
 import org.springframework.stereotype.Repository;
 

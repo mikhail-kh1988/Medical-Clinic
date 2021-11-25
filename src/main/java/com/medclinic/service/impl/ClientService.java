@@ -12,7 +12,6 @@ import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.repository.IClientRepository;
 import com.medclinic.service.IAnalysisSvcResultService;
 import com.medclinic.service.IClientService;
-import com.medclinic.tools.DateParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

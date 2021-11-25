@@ -1,4 +1,4 @@
-package com.medclinic.tools;
+package com.medclinic.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;

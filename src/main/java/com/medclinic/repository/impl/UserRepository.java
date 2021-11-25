@@ -1,7 +1,7 @@
 package com.medclinic.repository.impl;
 
 import com.medclinic.entity.User;
-import com.medclinic.hibernate.GenericDAOImpl;
+import com.medclinic.config.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IUserRepository;
 import org.springframework.stereotype.Repository;
 

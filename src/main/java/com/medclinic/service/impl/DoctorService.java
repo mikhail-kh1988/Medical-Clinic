@@ -8,13 +8,12 @@ import com.medclinic.entity.*;
 import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.repository.IDoctorRepository;
 import com.medclinic.service.*;
-import com.medclinic.tools.DateParser;
+import com.medclinic.utils.DateParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.DatagramPacket;
 import java.time.LocalDate;
 import java.util.List;
 
