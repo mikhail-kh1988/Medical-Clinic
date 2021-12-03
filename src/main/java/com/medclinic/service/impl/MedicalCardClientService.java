@@ -99,7 +99,7 @@ public class MedicalCardClientService implements IMedicalCardClientService {
         medicalCardBody.setDoctor(doctor);
         medicalCardBody.setClient(client);
         medicalCardBody.setTherapy(therapy);
-        //medicalCardBody.setFutureDateRecipient(DateParser.getDateByString(dto.getFutureDateRecipient()));
+        medicalCardBody.setFutureDateRecipient(DateParser.getDateTimeByString(dto.getFutureDateRecipient()));
         medicalCardBody.setComment(comment);
         medicalCardBody.setDepartment(department);
         medicalCardBody.setCreateDate(LocalDate.now());

@@ -12,6 +12,7 @@ import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.repository.IClientRepository;
 import com.medclinic.service.IAnalysisSvcResultService;
 import com.medclinic.service.IClientService;
+import com.medclinic.utils.DateParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,7 @@ public class ClientService implements IClientService {
             client.setActualAddress(dto.getActualAddress());
             client.setPhoneNumber(dto.getPhoneNumber());
             client.setAbout(dto.getAbout());
-            //client.setBirthDay(DateParser.getDateByString(dto.getBirthDay()));
+            client.setBirthDay(DateParser.getDateByString(dto.getBirthDay()));
             client.setStatus(StatusUser.ACTIVE);
             clientRepository.save(client);
             return client;

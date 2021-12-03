@@ -2,7 +2,7 @@ package com.medclinic.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -35,13 +35,13 @@ public class MedicalCardBody {
     private Disease disease;
 
     @Column(name = "future_date_recipient")
-    private LocalDate futureDateRecipient;
+    private LocalDateTime futureDateRecipient;
 
     @Column(name = "therapy_closed")
     private boolean therapyClosed;
 
     @OneToMany
-    private List<Drugs> drugsList;
+    private List<Pills> pillsList;
 
     @OneToMany
     private List<Analysis> analysisList;
@@ -120,12 +120,12 @@ public class MedicalCardBody {
         this.disease = disease;
     }
 
-    public List<Drugs> getDrugsList() {
-        return drugsList;
+    public List<Pills> getDrugsList() {
+        return pillsList;
     }
 
-    public void setDrugsList(List<Drugs> drugsList) {
-        this.drugsList = drugsList;
+    public void setDrugsList(List<Pills> pillsList) {
+        this.pillsList = pillsList;
     }
 
     public List<Analysis> getAnalysisList() {
@@ -136,11 +136,11 @@ public class MedicalCardBody {
         this.analysisList = analysisList;
     }
 
-    public LocalDate getFutureDateRecipient() {
+    public LocalDateTime getFutureDateRecipient() {
         return futureDateRecipient;
     }
 
-    public void setFutureDateRecipient(LocalDate futureDateRecipient) {
+    public void setFutureDateRecipient(LocalDateTime futureDateRecipient) {
         this.futureDateRecipient = futureDateRecipient;
     }
 

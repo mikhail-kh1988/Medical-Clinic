@@ -33,7 +33,7 @@ public class Release {
                 .addAnnotatedClass(Department.class)
                 .addAnnotatedClass(Disease.class)
                 .addAnnotatedClass(Doctor.class)
-                .addAnnotatedClass(Drugs.class)
+                .addAnnotatedClass(Pills.class)
                 .addAnnotatedClass(MedicalCardClient.class)
                 .addAnnotatedClass(MedicalService.class)
                 .addAnnotatedClass(Therapy.class)
