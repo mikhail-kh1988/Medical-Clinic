@@ -2,8 +2,10 @@ package com.medclinic.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.medclinic.dto.ClientUpdateDto;
 import com.medclinic.dto.CreateClientDto;
 import com.medclinic.exception.NotUniqueUserRegistrationException;
+import com.medclinic.service.IBillService;
 import com.medclinic.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,9 @@ public class ClientController {
 
     @Autowired
     private IClientService clientService;
+
+    @Autowired
+    private IBillService billService;
 
     @PostMapping("/register")
     public ResponseEntity<String> registerClient(@RequestBody CreateClientDto dto) throws JsonProcessingException, NotUniqueUserRegistrationException {
@@ -36,9 +41,20 @@ public class ClientController {
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateClient(@PathVariable long id, @RequestBody ClientUpdateDto dto){
+        clientService.update(id, dto);
+        return new ResponseEntity<>("success!", HttpStatus.OK);
+    }
+
     @GetMapping("/")
     public ResponseEntity<String> getAllClients() throws JsonProcessingException{
         return new ResponseEntity<>(mapper.writeValueAsString(clientService.findAll()), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/bills")
+    public ResponseEntity<String> getBillsByClient(@PathVariable long id) throws JsonProcessingException {
+        return new ResponseEntity<>(mapper.writeValueAsString(billService.findByClientID(id)), HttpStatus.OK);
     }
 
 }

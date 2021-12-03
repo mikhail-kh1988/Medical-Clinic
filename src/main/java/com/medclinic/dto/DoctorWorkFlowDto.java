@@ -11,7 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DoctorWorkFlowDto {
 
-    private String loginDoctor;
     private String startDateWorkFlow;
     private String endDateWorkFlow;
     private long serviceId;

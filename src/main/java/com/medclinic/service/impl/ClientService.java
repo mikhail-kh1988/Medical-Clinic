@@ -105,8 +105,13 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public void update(Client client, ClientUpdateDto dto) {
+    public void update(long clientID, ClientUpdateDto dto) {
+        Client client = (Client) clientRepository.findByID(clientID);
+        client.setAbout(dto.getAbout());
+        client.setActualAddress(dto.getActualAddress());
+        client.setPhoneNumber(dto.getPhoneNumber());
 
+        clientRepository.save(client);
     }
 
     @Override

@@ -65,9 +65,9 @@ public class DoctorService implements IDoctorService {
 
     @Transactional
     @Override
-    public void setWorkFlow(DoctorWorkFlowDto dto) {
-        workFlowService.createWorkFlow(dto);
-        log.info("Doctor by id "+dto.getLoginDoctor()+" set workflow between "+dto.getStartDateWorkFlow()+" and "+dto.getEndDateWorkFlow());
+    public void setWorkFlow(String login, DoctorWorkFlowDto dto) {
+        workFlowService.createWorkFlow(login, dto);
+        log.info("Doctor "+login+" set workflow between "+dto.getStartDateWorkFlow()+" and "+dto.getEndDateWorkFlow());
     }
 
     @Transactional
@@ -127,6 +127,11 @@ public class DoctorService implements IDoctorService {
     @Override
     public Doctor findByEmail(String email) {
         return (Doctor) doctorRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<Doctor> findAll() {
+        return doctorRepository.findAll();
     }
 
     @Override
@@ -192,7 +197,7 @@ public class DoctorService implements IDoctorService {
         Department department = departmentService.findDepartmentByID(dto.getDepartmentID());
         log.debug("Find components: doctor = "+doctor.getId()+" client = "+client.getId()+" department = "+department.getId());
 
-        Comment comment = new Comment();
+        /*Comment comment = new Comment();
         comment.setCreateDate(LocalDate.now());
         comment.setCreateUser(doctor);
         comment.setDescription(dto.getComment());
@@ -215,11 +220,13 @@ public class DoctorService implements IDoctorService {
         cardBody.setComment(comment);
         cardBody.setDepartment(department);
         cardBody.setDisease(disease);
-        cardBody.setFutureDateRecipient(DateParser.getDateByString(dto.getFutureDateRecipient()));
+        //cardBody.setFutureDateRecipient(DateParser.getDateByString(dto.getFutureDateRecipient()));
         cardBody.setTherapy(therapy);
         cardBody.setTherapyClosed(dto.isTherapyClosed());
 
         log.info("Doctor "+doctor.getFullName()+"("+doctor.getLogin()+") add new record in medcard client of " +
                 ""+client.getFullName()+". Doctor set disease "+disease.getName()+" and assign therapy: "+therapy.getTherapy());
+*/
+        medicalCardClientService.newRecordInCard(medCardID, dto);
     }
 }

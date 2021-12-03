@@ -16,7 +16,7 @@ import java.util.List;
 public interface IDoctorService {
 
     Doctor createNewDoctor(DoctorDto dto) throws NotUniqueUserRegistrationException;
-    void setWorkFlow(DoctorWorkFlowDto dto);
+    void setWorkFlow(String login, DoctorWorkFlowDto dto);
     void deleteDoctor(long id);
     void updateDoctor(long id, DoctorDto dto);
     void addNewService(long serviceID, long doctorID);
@@ -25,6 +25,7 @@ public interface IDoctorService {
     Doctor findById(long id);
     List<Doctor> findByFamily(String family);
     Doctor findByEmail(String email);
+    List<Doctor> findAll();
     List<Doctor> findByOnline();
     List<Doctor> findBySpecializationName(String specName);
     List<Doctor> findByWhereStudy(String whereStudy);

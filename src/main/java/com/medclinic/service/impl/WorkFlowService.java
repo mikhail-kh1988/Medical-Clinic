@@ -37,9 +37,9 @@ public class WorkFlowService implements IWorkFlowService {
 
     @Transactional
     @Override
-    public void updateWorkFlow(long id, DoctorWorkFlowDto dto) {
+    public void updateWorkFlow(long id, String login, DoctorWorkFlowDto dto) {
         WorkFlow workFlow = (WorkFlow) workFlowRepository.findByID(id);
-        Doctor doctor = doctorService.findByLogin(dto.getLoginDoctor());
+        Doctor doctor = doctorService.findByLogin(login);
         MedicalService service = medicalSvcService.findById(dto.getServiceId());
         log.debug("Find data for update. Find service "+service.getName()+"(id:"+service.getId()+"). Find doctor " +
                 " "+doctor.getFullName()+"("+doctor.getLogin()+") and find workflow id="+workFlow.getId()+". " +
@@ -57,8 +57,8 @@ public class WorkFlowService implements IWorkFlowService {
 
     @Transactional
     @Override
-    public WorkFlow createWorkFlow(DoctorWorkFlowDto dto) {
-        Doctor doctor = doctorService.findByLogin(dto.getLoginDoctor());
+    public WorkFlow createWorkFlow(String login, DoctorWorkFlowDto dto) {
+        Doctor doctor = doctorService.findByLogin(login);
         MedicalService medicalService = medicalSvcService.findById(dto.getServiceId());
 
         WorkFlow workFlow = new WorkFlow();
