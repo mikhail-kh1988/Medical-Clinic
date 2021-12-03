@@ -13,6 +13,8 @@ public interface IUserService {
     User registerDoctor(DoctorDto dto) throws NotUniqueUserRegistrationException;
     User findByLogin(String login);
     User findByEmail(String email);
+    User findByID(long id);
     List<User> findByStatus(String status);
+    List<User> findAll();
 
 }

@@ -22,6 +22,6 @@ public interface IClientService {
     Client findByPhoneNumber(String number);
     Client findById(long id);
     Client findByLogin(String login);
-    void update(Client client, ClientUpdateDto dto);
+    void update(long client, ClientUpdateDto dto);
     void setRecipeToDoctor(ClientWorkFlowDto dto);
 }

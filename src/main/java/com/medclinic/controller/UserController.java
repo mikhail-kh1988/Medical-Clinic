@@ -20,17 +20,20 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserRepository repository;
-
-    @Autowired
     private IUserService userService;
 
     @Autowired
     private ObjectMapper mapper;
 
-    @GetMapping("")
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> getUserByID(@PathVariable long id) throws JsonProcessingException {
+        return new ResponseEntity<>(mapper.writeValueAsString(userService.findByID(id)), HttpStatus.OK);
+    }
+
+    @GetMapping("/")
     public ResponseEntity<String> getAllUsers() throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(repository.findAll()), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.writeValueAsString(userService.findAll()), HttpStatus.OK);
     }
 
     @PostMapping("/doctor")
@@ -38,9 +41,18 @@ public class UserController {
         return new ResponseEntity<>(mapper.writeValueAsString(userService.registerDoctor(dto).getId()), HttpStatus.OK);
     }
 
+    @GetMapping("/doctor/{login}")
+    public ResponseEntity<String> getDoctorByID(@PathVariable String login) throws JsonProcessingException {
+        return new ResponseEntity<>(mapper.writeValueAsString(userService.findByLogin(login)), HttpStatus.OK);
+    }
+
     @PostMapping("/client")
     public ResponseEntity<String> createNewClient(@RequestBody CreateClientDto dto) throws NotUniqueUserRegistrationException, JsonProcessingException {
         return new ResponseEntity<>(mapper.writeValueAsString(userService.registerClient(dto).getId()), HttpStatus.OK);
+    }
+    @GetMapping("/client/{login}")
+    public ResponseEntity<String> getClientByID(@PathVariable String login) throws JsonProcessingException {
+        return new ResponseEntity<>(mapper.writeValueAsString(userService.findByLogin(login)), HttpStatus.OK);
     }
 
 }

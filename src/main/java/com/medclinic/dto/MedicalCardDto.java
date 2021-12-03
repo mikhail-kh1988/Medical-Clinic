@@ -16,7 +16,6 @@ import java.util.GregorianCalendar;
 public class MedicalCardDto {
 
     private long clientID;
-    private LocalDate createDate;
     private String describe;
     private String bloodGroup;
     private String chronicDisease;

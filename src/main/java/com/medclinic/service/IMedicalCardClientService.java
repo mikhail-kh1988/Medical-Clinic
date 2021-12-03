@@ -11,6 +11,7 @@ public interface IMedicalCardClientService {
     MedicalCardClient findById(long id);
     List<MedicalCardClient> findByDoctorId(long id);
     List<MedicalCardClient> findByChronicDisease(String diseases);
+    List<MedicalCardClient> findAll();
     MedicalCardClient findByClientId(long id);
     void newRecordInCard(long medCardID, MedicalCardBodyDto dto);
 }

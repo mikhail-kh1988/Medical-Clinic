@@ -66,7 +66,17 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User findByID(long id) {
+        return (User) userRepository.findByID(id);
+    }
+
+    @Override
     public List<User> findByStatus(String status) {
         return userRepository.findByStatus(status);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }
