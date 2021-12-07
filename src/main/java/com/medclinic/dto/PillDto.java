@@ -5,14 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DrugDto {
+public class PillDto {
 
+    @NotBlank
+    @NotEmpty
     private String name;
     private String activeElement;
     private String composition;

@@ -37,6 +37,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     implementation 'javax.servlet:servlet-api:3.0-alpha-1'
+    implementation 'javax.validation:validation-api:2.0.1.Final'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
