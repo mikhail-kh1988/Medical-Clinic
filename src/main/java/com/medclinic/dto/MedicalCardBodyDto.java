@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Future;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
@@ -23,6 +24,8 @@ public class MedicalCardBodyDto {
     private String therapy;
     private long departmentID;
     private long medicalCardID;
+
+    @Future
     private String futureDateRecipient;
     private boolean therapyClosed;
 

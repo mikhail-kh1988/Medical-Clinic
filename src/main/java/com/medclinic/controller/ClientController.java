@@ -4,12 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.medclinic.dto.ClientUpdateDto;
 import com.medclinic.dto.CreateClientDto;
+import com.medclinic.entity.Client;
 import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.service.IBillService;
 import com.medclinic.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -47,9 +50,9 @@ public class ClientController {
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping(value = "/")
     public ResponseEntity<String> getAllClients() throws JsonProcessingException{
-        return new ResponseEntity<>(mapper.writeValueAsString(clientService.findAll()), HttpStatus.OK);
+        return new ResponseEntity<String>(mapper.writeValueAsString(clientService.findAll()), HttpStatus.OK);
     }
 
     @GetMapping("/{id}/bills")
