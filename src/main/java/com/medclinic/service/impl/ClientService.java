@@ -4,10 +4,7 @@ import com.medclinic.dto.ClientUpdateDto;
 import com.medclinic.dto.ClientWorkFlowDto;
 import com.medclinic.dto.CreateClientDto;
 import com.medclinic.dto.ServicesClientDto;
-import com.medclinic.entity.Analysis;
-import com.medclinic.entity.AnalysisServiceResult;
-import com.medclinic.entity.Client;
-import com.medclinic.entity.StatusUser;
+import com.medclinic.entity.*;
 import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.repository.IClientRepository;
 import com.medclinic.service.IAnalysisSvcResultService;
@@ -18,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -53,6 +52,11 @@ public class ClientService implements IClientService {
             client.setAbout(dto.getAbout());
             client.setBirthDay(DateParser.getDateByString(dto.getBirthDay()));
             client.setStatus(StatusUser.ACTIVE);
+
+            Set<Role> roles = new HashSet<>();
+            roles.add(Role.ROLE_CLIENT);
+
+            client.setRole(roles);
             clientRepository.save(client);
             return client;
         //}
