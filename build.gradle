@@ -13,6 +13,7 @@ repositories {
 
 def springVersion = '5.3.10'
 def hibernateVersion = '5.5.7.Final'
+def securityVersion= '5.5.1'
 
 dependencies {
     implementation 'org.hibernate:hibernate-core:'+hibernateVersion
@@ -41,6 +42,9 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    implementation 'org.springframework.security:spring-security-web:'+securityVersion
+    implementation 'org.springframework.security:spring-security-config:'+securityVersion
 }
 
 test {

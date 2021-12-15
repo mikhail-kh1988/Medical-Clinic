@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -56,6 +58,11 @@ public class DoctorService implements IDoctorService {
         doctor.setAge(dto.getAge());
         doctor.setFamilyName(dto.getFamilyName());
         doctor.setFirstSymbolName(dto.getFamilyName().charAt(0));
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(Role.ROLE_DOCTOR);
+
+        doctor.setRole(roles);
 
         doctorRepository.save(doctor);
 
