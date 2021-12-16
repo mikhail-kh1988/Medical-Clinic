@@ -54,7 +54,7 @@ public class ClientService implements IClientService {
             client.setStatus(StatusUser.ACTIVE);
 
             Set<Role> roles = new HashSet<>();
-            roles.add(Role.ROLE_CLIENT);
+            roles.add(Role.CLIENT);
 
             client.setRole(roles);
             clientRepository.save(client);

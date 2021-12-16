@@ -60,7 +60,7 @@ public class DoctorService implements IDoctorService {
         doctor.setFirstSymbolName(dto.getFamilyName().charAt(0));
 
         Set<Role> roles = new HashSet<>();
-        roles.add(Role.ROLE_DOCTOR);
+        roles.add(Role.DOCTOR);
 
         doctor.setRole(roles);
 
