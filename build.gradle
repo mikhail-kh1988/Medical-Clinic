@@ -45,6 +45,8 @@ dependencies {
 
     implementation 'org.springframework.security:spring-security-web:'+securityVersion
     implementation 'org.springframework.security:spring-security-config:'+securityVersion
+
+    implementation 'org.springframework:spring-test:5.3.14'
 }
 
 test {

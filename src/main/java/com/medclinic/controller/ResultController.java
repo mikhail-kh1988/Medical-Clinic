@@ -33,7 +33,7 @@ public class ResultController {
         return new ResponseEntity<>("success! id:"+analysisService.createAnalysis(dto).getId(), HttpStatus.OK);
     }
 
-    @PostMapping("/analysis/{id}")
+    @PutMapping("/analysis/{id}")
     public ResponseEntity<String> updateAnalysis(@PathVariable long id, @RequestBody DescribeAnalysisDto dto) throws JsonProcessingException {
         return new ResponseEntity<String>(mapper.writeValueAsString(analysisService.updateAnalysis(dto, id)), HttpStatus.OK);
     }
