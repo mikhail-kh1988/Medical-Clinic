@@ -12,6 +12,8 @@ import com.medclinic.service.IClientService;
 import com.medclinic.utils.DateParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.parsing.PassThroughSourceExtractor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +31,9 @@ public class ClientService implements IClientService {
     @Autowired
     private IAnalysisSvcResultService resultService;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Transactional
     @Override
     public Client createClient(CreateClientDto dto) throws NotUniqueUserRegistrationException {
@@ -41,7 +46,7 @@ public class ClientService implements IClientService {
             return currentClient;
         }else {*/
             client.setLogin(dto.getLogin());
-            client.setPassword(dto.getPassword());
+            client.setPassword(encoder.encode(dto.getPassword()));
             client.setFullName(dto.getFullName());
             client.setFamilyName(dto.getFamilyName());
             client.setFirstSymbolName(dto.getFamilyName().charAt(0));

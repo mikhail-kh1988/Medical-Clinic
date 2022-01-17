@@ -11,14 +11,14 @@ insert into users_roles
 	(select id from users where type_user = 'DOCTOR');
 
 update users_roles
-set role = 'ROLE_DOCTOR'
+set role = 'DOCTOR'
 where user_id in (select id from users where type_user = 'DOCTOR');
 
 insert into users_roles
 	(select id from users where type_user = 'CLIENT');
 
 update users_roles
-set role = 'ROLE_CLIENT'
+set role = 'CLIENT'
 where user_id in (select id from users where type_user = 'CLIENT');
 
 
