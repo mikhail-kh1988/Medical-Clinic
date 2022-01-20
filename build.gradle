@@ -47,6 +47,7 @@ dependencies {
     implementation 'org.springframework.security:spring-security-config:'+securityVersion
 
     implementation 'org.springframework:spring-test:5.3.14'
+    implementation 'org.hsqldb:hsqldb:2.6.1'
 }
 
 test {
