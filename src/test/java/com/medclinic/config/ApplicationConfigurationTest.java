@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.medclinic.entity.*;
 import com.medclinic.repository.*;
 import com.medclinic.repository.impl.*;
-import com.medclinic.service.IAnalysisService;
-import com.medclinic.service.IAnalysisSvcResultService;
-import com.medclinic.service.impl.AnalysisService;
-import com.medclinic.service.impl.AnalysisSvcResultService;
+import com.medclinic.service.*;
+import com.medclinic.service.impl.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 @Configuration
@@ -59,6 +59,88 @@ public class ApplicationConfigurationTest {
     }
 
     @Bean
+    public ICommentRepository getCommentRepository(){
+        CommentRepository commentRepository = new CommentRepository();
+        commentRepository.setEntityClass(Comment.class);
+        return commentRepository;
+    }
+
+    @Bean
+    public IUserRepository getUserRepository(){
+        UserRepository repository = new UserRepository();
+        repository.setEntityClass(User.class);
+        return repository;
+    }
+
+    @Bean
+    public IWorkFlowRepository getWorkFlowRepository(){
+        WorkFlowRepository repository = new WorkFlowRepository();
+        repository.setEntityClass(WorkFlow.class);
+        return repository;
+    }
+
+    @Bean
+    public WorkFlowService getWorkFlowService(){
+        return new WorkFlowService();
+    }
+
+    @Bean
+    public IUserService getUserService(){
+        return new UserService();
+    }
+
+    @Bean
+    public DoctorService getDoctorService(){
+        return new DoctorService();
+    }
+
+    @Bean
+    public IMedicalSvcService getMedicalService(){
+        return new MedicalSvcService();
+    }
+
+    @Bean
+    public IMedicalCardClientRepository getMedicalCardClientRepository(){
+        MedicalCardClientRepository cardClientRepository = new MedicalCardClientRepository();
+        cardClientRepository.setEntityClass(MedicalCardClient.class);
+        return cardClientRepository;
+    }
+
+    @Bean
+    public MedicalCardClientService getMedicalCardService(){
+        return new MedicalCardClientService();
+    }
+
+    @Bean
+    public IDiseaseRepository getDiseaseRepository(){
+        DiseaseRepository diseaseRepository = new DiseaseRepository();
+        diseaseRepository.setEntityClass(Disease.class);
+        return diseaseRepository;
+    }
+
+    @Bean
+    public IDiseaseService getDiseaseService(){
+        return new DiseaseService();
+    }
+
+    @Bean
+    public IDepartmentRepository getDepartmentRepository(){
+        DepartmentRepository departmentRepository = new DepartmentRepository();
+        departmentRepository.setEntityClass(Department.class);
+        return departmentRepository;
+    }
+
+    @Bean
+    public IDepartmentService getDepartmentService(){
+        return new DepartmentService();
+    }
+
+    @Bean
+    public ICommentService getCommentService(){
+        return new CommentService();
+    }
+
+    @Bean
     public IAnalysisSvcResultService getAnalysisServiceResult(){
         AnalysisSvcResultService resultService = new AnalysisSvcResultService();
         return resultService;
@@ -68,6 +150,22 @@ public class ApplicationConfigurationTest {
     public IAnalysisService getAnalysisService(){
         AnalysisService analysisService = new AnalysisService();
         return analysisService;
+    }
+
+    @Bean
+    public IBillService getBillService(){
+        return new BillService();
+    }
+
+    @Bean
+    public ClientService getClientService(){
+        return new ClientService();
+    }
+
+    @Bean
+    public PasswordEncoder getPasswordEncoder(){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+        return encoder;
     }
 
     @Bean
