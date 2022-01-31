@@ -53,6 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/app/doctors/**").hasAnyAuthority("DOCTOR")
                     .antMatchers("/app/medcards/**").hasAnyAuthority("DOCTOR")
                     .antMatchers("/app/users/**").hasAnyAuthority("DOCTOR")
+                    .antMatchers("/app/results/**").hasAnyAuthority("DOCTOR")
+                    .antMatchers("/app/analysis/**").hasAnyAuthority("DOCTOR")
                     .antMatchers("/app/clients/**").hasAnyAuthority("CLIENT")
                     .antMatchers("/app/results/**").hasAnyAuthority("CLIENT")
                     .antMatchers( "/app/clients/register/").anonymous()

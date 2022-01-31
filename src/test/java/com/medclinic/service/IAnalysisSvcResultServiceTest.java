@@ -137,7 +137,7 @@ class IAnalysisSvcResultServiceTest{
 
             resultDTO.setResult("TEST RESULT");
             resultDTO.setMarks("TEST MARK");
-            resultDTO.setWhoCheckedID(1);
+            resultDTO.setCheckerID(1);
 
             resultService.update(1, resultDTO);
 

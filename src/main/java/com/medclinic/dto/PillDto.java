@@ -15,10 +15,15 @@ import javax.validation.constraints.NotEmpty;
 public class PillDto {
 
     @NotBlank
-    @NotEmpty
     private String name;
+
+    @NotBlank
     private String activeElement;
+
+    @NotBlank
     private String composition;
+
+    @NotBlank
     private String dosage;
     
 }

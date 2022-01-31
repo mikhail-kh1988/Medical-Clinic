@@ -18,7 +18,6 @@ public class CreateClientDto {
     private String login;
 
     @NotBlank
-    @NotEmpty
     private String password;
 
     @NotBlank
@@ -34,8 +33,15 @@ public class CreateClientDto {
     @Positive
     private int age;
 
+    @NotBlank
     private String about;
+
+    @NotBlank
     private String actualAddress;
+
+    @NotBlank
     private String phoneNumber;
+
+    @NotBlank
     private String birthDay;
 }

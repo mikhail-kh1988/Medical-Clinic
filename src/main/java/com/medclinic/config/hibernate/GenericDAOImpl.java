@@ -7,12 +7,23 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 
-public abstract class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO{
+public abstract class GenericDAOImpl<T> implements GenericDAO, Serializable {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     private Class<T> entityClass;
+
+    public GenericDAOImpl(){
+        /*if(GenericDAOImpl.class.isAssignableFrom(GenericDAO.class)){
+            this.entityClass = (Class<T>) getClass().getSuperclass();
+        }*/
+
+        /*if(GenericDAO.class.isAssignableFrom(GenericDAOImpl.class)){
+            Class classs =  GenericDAO.class.getClass();
+            entityClass = classs.asSubclass(GenericDAOImpl.class);
+        }*/
+    }
 
     @Override
     public Object findByID(long id) {
