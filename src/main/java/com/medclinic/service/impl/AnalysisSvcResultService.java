@@ -147,7 +147,7 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
     @Override
     public void update(long resultID, DescribeUpdateAnalysisSvcResult describeUpdate) {
         AnalysisServiceResult result = (AnalysisServiceResult) resultRepository.findByID(resultID);
-        Doctor doctorChecked = (Doctor) doctorRepository.findByID(describeUpdate.getWhoCheckedID());
+        Doctor doctorChecked = (Doctor) doctorRepository.findByID(describeUpdate.getCheckerID());
 
         result.setResult(describeUpdate.getResult());
         result.setMarks(describeUpdate.getMarks());

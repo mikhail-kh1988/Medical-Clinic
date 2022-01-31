@@ -5,13 +5,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class DescribeUpdateAnalysisSvcResult {
 
+    @NotBlank
     private String result;
+
+    @NotBlank
     private String marks;
-    private long whoCheckedID;
+
+    @Positive
+    private long checkerID;
 }

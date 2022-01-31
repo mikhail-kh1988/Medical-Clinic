@@ -17,7 +17,6 @@ public class DoctorDto {
     private String login;
 
     @NotBlank
-    @NotEmpty
     private String password;
 
     @Email
@@ -33,8 +32,13 @@ public class DoctorDto {
     @NotBlank
     private String familyName;
 
+    @NotBlank
     private String whereStudy;
+
+    @NotBlank
     private String specializationName;
+
+    @NotBlank
     private String certificateNumber;
 
 }
