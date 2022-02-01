@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 
-public abstract class GenericDAOImpl<T> implements GenericDAO, Serializable {
+public abstract class GenericDAOImpl<T> implements GenericDAO {
 
     @PersistenceContext
     private EntityManager entityManager;

@@ -16,36 +16,36 @@ public class MedicalServiceRepository extends GenericDAOImpl implements IMedical
     }
 
     @Override
-    public List findByName(String name) {
+    public List<MedicalService> findByName(String name) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<MedicalService> criteria = builder.createQuery(MedicalService.class);
         Root<MedicalService> root = criteria.from(MedicalService.class);
         criteria.select(root).where(builder.equal(root.get("name"), name));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public List findByActive() {
+    public List<MedicalService> findByActive() {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<MedicalService> criteria = builder.createQuery(MedicalService.class);
         Root<MedicalService> root = criteria.from(MedicalService.class);
         criteria.select(root).where(builder.equal(root.get("active"), true));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public List findByInActive() {
+    public List<MedicalService> findByInActive() {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<MedicalService> criteria = builder.createQuery(MedicalService.class);
         Root<MedicalService> root = criteria.from(MedicalService.class);
         criteria.select(root).where(builder.equal(root.get("active"), false));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public Object findByExternalCode(String code) {
+    public MedicalService findByExternalCode(String code) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<MedicalService> criteria = builder.createQuery(MedicalService.class);
         Root<MedicalService> root = criteria.from(MedicalService.class);
         criteria.select(root).where(builder.equal(root.get("externalCode"), code));
         return this.getEntityManager().createQuery(criteria).getSingleResult();

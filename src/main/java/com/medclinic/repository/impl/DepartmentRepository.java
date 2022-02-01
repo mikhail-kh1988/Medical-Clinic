@@ -17,9 +17,9 @@ public class DepartmentRepository extends GenericDAOImpl implements IDepartmentR
     }
 
     @Override
-    public Object findByDepName(String name) {
+    public Department findByDepName(String name) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Department> criteria = builder.createQuery(Department.class);
         Root<Department> root = criteria.from(Department.class);
         criteria.select(root).where(builder.equal(root.get("departmentName"), name));
         return this.getEntityManager().createQuery(criteria).getSingleResult();

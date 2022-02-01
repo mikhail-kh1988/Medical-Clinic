@@ -17,27 +17,27 @@ public class MedicalCardClientRepository extends GenericDAOImpl implements IMedi
     }
 
     @Override
-    public List findByDoctorId(long id) {
+    public List<MedicalCardClient> findByDoctorId(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<MedicalCardClient> criteria = builder.createQuery(MedicalCardClient.class);
         Root<MedicalCardClient> root = criteria.from(MedicalCardClient.class);
         criteria.select(root).where(builder.equal(root.get("therapyDoctor"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public List findByChronicDisease(String diseases) {
+    public List<MedicalCardClient> findByChronicDisease(String diseases) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<MedicalCardClient> criteria = builder.createQuery(MedicalCardClient.class);
         Root<MedicalCardClient> root = criteria.from(MedicalCardClient.class);
         criteria.select(root).where(builder.like(root.get("chronicDisease"), "%"+diseases+"%"));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public Object findByClientId(long id) {
+    public MedicalCardClient findByClientId(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<MedicalCardClient> criteria = builder.createQuery(MedicalCardClient.class);
         Root<MedicalCardClient> root = criteria.from(MedicalCardClient.class);
         criteria.select(root).where(builder.equal(root.get("client"), id));
         return this.getEntityManager().createQuery(criteria).getSingleResult();

@@ -16,36 +16,36 @@ public class AnalysisServiceResultRepository extends GenericDAOImpl implements I
     }
 
     @Override
-    public List findByAnalysisID(long id) {
+    public List<AnalysisServiceResult> findByAnalysisID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery(AnalysisServiceResult.class);
+        CriteriaQuery<AnalysisServiceResult> criteria = builder.createQuery(AnalysisServiceResult.class);
         Root<AnalysisServiceResult> root = criteria.from(AnalysisServiceResult.class);
         criteria.select(root).where(builder.equal(root.get("analysis"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public List findByServiceID(long id) {
+    public List<AnalysisServiceResult> findByServiceID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery(AnalysisServiceResult.class);
+        CriteriaQuery<AnalysisServiceResult> criteria = builder.createQuery(AnalysisServiceResult.class);
         Root<AnalysisServiceResult> root = criteria.from(AnalysisServiceResult.class);
         criteria.select(root).where(builder.equal(root.get("service"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public List findByDoctorID(long id) {
+    public List<AnalysisServiceResult> findByDoctorID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery(AnalysisServiceResult.class);
+        CriteriaQuery<AnalysisServiceResult> criteria = builder.createQuery(AnalysisServiceResult.class);
         Root<AnalysisServiceResult> root = criteria.from(AnalysisServiceResult.class);
         criteria.select(root).where(builder.equal(root.get("doctor"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public List findByClientID(long id) {
+    public List<AnalysisServiceResult> findByClientID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery(AnalysisServiceResult.class);
+        CriteriaQuery<AnalysisServiceResult> criteria = builder.createQuery(AnalysisServiceResult.class);
         Root<AnalysisServiceResult> root = criteria.from(AnalysisServiceResult.class);
         criteria.select(root).where(builder.equal(root.get("client"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();
@@ -54,14 +54,14 @@ public class AnalysisServiceResultRepository extends GenericDAOImpl implements I
     @Override
     public Object findByBillID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery(AnalysisServiceResult.class);
+        CriteriaQuery<AnalysisServiceResult> criteria = builder.createQuery(AnalysisServiceResult.class);
         Root<AnalysisServiceResult> root = criteria.from(AnalysisServiceResult.class);
         criteria.select(root).where(builder.equal(root.get("bill"), id));
         return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
     @Override
-    public List findByNotPaidResults() {
+    public List<AnalysisServiceResult> findByNotPaidResults() {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery criteria = builder.createQuery();
         Root<AnalysisServiceResult> root = criteria.from(AnalysisServiceResult.class);

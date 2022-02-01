@@ -17,18 +17,18 @@ public class PillRepository extends GenericDAOImpl implements IPillRepository {
     }
 
     @Override
-    public Object findByName(String name) {
+    public Pills findByName(String name) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Pills> criteria = builder.createQuery(Pills.class);
         Root<Pills> root = criteria.from(Pills.class);
         criteria.select(root).where(builder.equal(root.get("name"), name));
         return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
     @Override
-    public List findByActiveElement(String element) {
+    public List<Pills> findByActiveElement(String element) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Pills> criteria = builder.createQuery(Pills.class);
         Root<Pills> root = criteria.from(Pills.class);
         criteria.select(root).where(builder.equal(root.get("activeElement"), element));
         return this.getEntityManager().createQuery(criteria).getResultList();

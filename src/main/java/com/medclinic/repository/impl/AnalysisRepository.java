@@ -17,18 +17,18 @@ public class AnalysisRepository extends GenericDAOImpl implements IAnalysisRepos
     }
 
     @Override
-    public List findByName(String name) {
+    public List<Analysis> findByName(String name) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery(Analysis.class);
+        CriteriaQuery<Analysis> criteria = builder.createQuery(Analysis.class);
         Root<Analysis> root = criteria.from(Analysis.class);
         criteria.select(root).where(builder.like(root.get("name"), "%"+name+"%"));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public List findByPrice(int price) {
+    public List<Analysis> findByPrice(int price) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery(Analysis.class);
+        CriteriaQuery<Analysis> criteria = builder.createQuery(Analysis.class);
         Root<Analysis> root = criteria.from(Analysis.class);
         criteria.select(root).where(builder.equal(root.get("price"), price));
         return this.getEntityManager().createQuery(criteria).getResultList();

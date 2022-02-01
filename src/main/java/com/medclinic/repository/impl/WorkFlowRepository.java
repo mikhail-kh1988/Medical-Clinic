@@ -18,18 +18,18 @@ public class WorkFlowRepository extends GenericDAOImpl implements IWorkFlowRepos
 
     //TODO Необходимо описать критерию для вывода только не отработавших графиков.
     @Override
-    public List findByDoctorId(long id) {
+    public List<WorkFlow> findByDoctorId(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<WorkFlow> criteria = builder.createQuery(WorkFlow.class);
         Root<WorkFlow> root = criteria.from(WorkFlow.class);
         criteria.select(root).where(builder.equal(root.get("doctor"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public List findByServiceId(long id) {
+    public List<WorkFlow> findByServiceId(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<WorkFlow> criteria = builder.createQuery(WorkFlow.class);
         Root<WorkFlow> root = criteria.from(WorkFlow.class);
         criteria.select(root).where(builder.equal(root.get("service"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();

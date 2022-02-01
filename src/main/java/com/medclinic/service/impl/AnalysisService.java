@@ -33,9 +33,9 @@ public class AnalysisService implements IAnalysisService {
     private IBillRepository billRepository;
 
     // УДАЛИТЬ ДАННЫЙ МЕТОД!
-    public void setAnalysisRepository(IAnalysisRepository repository){
+    /*public void setAnalysisRepository(IAnalysisRepository repository){
         this.analysisRepository = repository;
-    }
+    }*/
 
     @Transactional
     @Override
