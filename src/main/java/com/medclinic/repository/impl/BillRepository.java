@@ -18,16 +18,16 @@ public class BillRepository extends GenericDAOImpl implements IBillRepository {
     }
 
     @Override
-    public List findByPaid() {
+    public List<Bill> findByPaid() {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Bill> criteria = builder.createQuery(Bill.class);
         Root<Bill> root = criteria.from(Bill.class);
         criteria.select(root).where(builder.equal(root.get("paid"), true));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public List findByClientID(long id) {
+    public List<Bill> findByClientID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery criteria = builder.createQuery();
         Root<Bill> root = criteria.from(Bill.class);
@@ -36,7 +36,7 @@ public class BillRepository extends GenericDAOImpl implements IBillRepository {
     }
 
     @Override
-    public List findByDoctorID(long id) {
+    public List<Bill> findByDoctorID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery criteria = builder.createQuery();
         Root<Bill> root = criteria.from(Bill.class);

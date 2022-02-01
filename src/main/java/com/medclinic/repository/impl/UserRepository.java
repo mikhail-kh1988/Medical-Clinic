@@ -17,27 +17,27 @@ public class UserRepository extends GenericDAOImpl implements IUserRepository {
     }
 
     @Override
-    public Object findByLogin(String login) {
+    public User findByLogin(String login) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
         Root<User> root = criteria.from(User.class);
         criteria.select(root).where(builder.equal(root.get("login"), login));
         return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
     @Override
-    public Object findByEmail(String email) {
+    public User findByEmail(String email) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
         Root<User> root = criteria.from(User.class);
         criteria.select(root).where(builder.equal(root.get("email"), email));
         return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
     @Override
-    public List findByStatus(String status) {
+    public List<User> findByStatus(String status) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
         Root<User> root = criteria.from(User.class);
         criteria.select(root).where(builder.equal(root.get("status"), status));
         return this.getEntityManager().createQuery(criteria).getResultList();

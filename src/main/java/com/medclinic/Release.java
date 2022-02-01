@@ -243,12 +243,12 @@ public class Release {
         dto.setName("FFFFFF");
         dto.setPrice(999);
 
-        AnalysisService analysisService = new AnalysisService();
+        /*AnalysisService analysisService = new AnalysisService();
         analysisService.setAnalysisRepository(repository);
 
         long analId = analysisService.createAnalysis(dto).getId();
 
-        System.out.println("Analysis id from service: "+analId);
+        System.out.println("Analysis id from service: "+analId);*/
 
     }
 }

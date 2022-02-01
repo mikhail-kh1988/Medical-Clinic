@@ -17,18 +17,18 @@ public class TherapyRepository extends GenericDAOImpl implements ITherapyReposit
     }
 
     @Override
-    public List findByDiseaseId(long id) {
+    public List<Therapy> findByDiseaseId(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Therapy> criteria = builder.createQuery(Therapy.class);
         Root<Therapy> root = criteria.from(Therapy.class);
         criteria.select(root).where(builder.equal(root.get("disease"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public List findByDescribeComplaint(String describe) {
+    public List<Therapy> findByDescribeComplaint(String describe) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Therapy> criteria = builder.createQuery(Therapy.class);
         Root<Therapy> root = criteria.from(Therapy.class);
         criteria.select(root).where(builder.equal(root.get("describeComplaint"), describe));
         return this.getEntityManager().createQuery(criteria).getResultList();

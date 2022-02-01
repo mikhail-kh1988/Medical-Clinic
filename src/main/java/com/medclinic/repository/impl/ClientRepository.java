@@ -1,5 +1,6 @@
 package com.medclinic.repository.impl;
 
+import com.medclinic.entity.Bill;
 import com.medclinic.entity.Client;
 import com.medclinic.config.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IClientRepository;
@@ -18,43 +19,37 @@ public class ClientRepository extends GenericDAOImpl implements IClientRepositor
     }
 
     @Override
-    public List findByFamily(String family) {
+    public List<Client> findByFamily(String family) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
         Root<Client> root = criteria.from(Client.class);
         criteria.select(root).where(builder.like(root.get("familyName"), "%"+family+"%"));
         return this.getEntityManager().createQuery(criteria).getResultList();
     }
 
     @Override
-    public Object findByPhoneNumber(String number) {
+    public Client findByPhoneNumber(String number) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
         Root<Client> root = criteria.from(Client.class);
         criteria.select(root).where(builder.equal(root.get("phoneNumber"), number));
-        return this.getEntityManager().createQuery(criteria).getResultList();
+        return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
     @Override
-    public Object findByLogin(String login) {
+    public Client findByLogin(String login) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
         Root<Client> root = criteria.from(Client.class);
         criteria.select(root).where(builder.equal(root.get("login"), login));
         return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
-    //TODO Дописать потом уже уникальную критерию с выборкой данных их медкарты клиента.
-    // Связывая медкарту клиента по id клиента.
-    @Override
-    public List findByBloodGroup(String group) {
-        return null;
-    }
 
     @Override
-    public List findByFullName(String fullName) {
+    public List<Client> findByFullName(String fullName) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
         Root<Client> root = criteria.from(Client.class);
         criteria.select(root).where(builder.equal(root.get("fullName"), fullName));
         return this.getEntityManager().createQuery(criteria).getResultList();

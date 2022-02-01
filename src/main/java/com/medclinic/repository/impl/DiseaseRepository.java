@@ -17,36 +17,36 @@ public class DiseaseRepository extends GenericDAOImpl implements IDiseaseReposit
     }
 
     @Override
-    public Object findByInternalCode(String inCode) {
+    public Disease findByInternalCode(String inCode) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Disease> criteria = builder.createQuery(Disease.class);
         Root<Disease> root = criteria.from(Disease.class);
         criteria.select(root).where(builder.equal(root.get("internalCode"), inCode));
         return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
     @Override
-    public Object findByExternalCode(String exCode) {
+    public Disease findByExternalCode(String exCode) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Disease> criteria = builder.createQuery(Disease.class);
         Root<Disease> root = criteria.from(Disease.class);
         criteria.select(root).where(builder.equal(root.get("externalCode"), exCode));
         return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
     @Override
-    public Object findByWorldCode(String wlCode) {
+    public Disease findByWorldCode(String wlCode) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Disease> criteria = builder.createQuery(Disease.class);
         Root<Disease> root = criteria.from(Disease.class);
         criteria.select(root).where(builder.equal(root.get("worldCode"), wlCode));
         return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
     @Override
-    public List findByName(String name) {
+    public List<Disease> findByName(String name) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Disease> criteria = builder.createQuery(Disease.class);
         Root<Disease> root = criteria.from(Disease.class);
         criteria.select(root).where(builder.equal(root.get("name"), name));
         return this.getEntityManager().createQuery(criteria).getResultList();

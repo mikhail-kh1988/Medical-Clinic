@@ -17,9 +17,9 @@ public class CommentRepository extends GenericDAOImpl implements ICommentReposit
     }
 
     @Override
-    public List findByUserID(long id) {
+    public List<Comment> findByUserID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Comment> criteria = builder.createQuery(Comment.class);
         Root<Comment> root = criteria.from(Comment.class);
         criteria.select(root).where(builder.equal(root.get("createUser"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();
