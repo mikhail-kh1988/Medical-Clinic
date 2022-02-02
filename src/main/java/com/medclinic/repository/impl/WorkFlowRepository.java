@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class WorkFlowRepository extends GenericDAOImpl implements IWorkFlowRepository {
+public class WorkFlowRepository extends GenericDAOImpl<WorkFlow> implements IWorkFlowRepository {
     public WorkFlowRepository() {
         this.setEntityClass(WorkFlow.class);
     }

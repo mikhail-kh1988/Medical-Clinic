@@ -93,9 +93,10 @@ public class AnalysisService implements IAnalysisService {
         result.setCreateDate(LocalDate.now());
         resultRepository.save(result);
 
-        AnalysisServiceResult newResult = (AnalysisServiceResult) resultRepository.findByID(result.getId());
+        AnalysisServiceResult newResult = resultRepository.findByID(result.getId());
         newResult.setTitle("an-"+analysis.getId()+"-"+result.getId());
-        analysisRepository.save(newResult);
+        // TODO Проверить как сохраняет данные в БД.
+        resultRepository.save(newResult);
         return newResult;
     }
 

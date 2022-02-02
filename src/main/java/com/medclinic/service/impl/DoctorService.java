@@ -199,7 +199,7 @@ public class DoctorService implements IDoctorService {
     public void addNewRecordInMedicalCardClient(MedicalCardBodyDto dto, long medCardID) {
 
         MedicalCardClient medicalCard = medicalCardClientService.findById(medCardID);
-        Doctor doctor = (Doctor) doctorRepository.findByID(dto.getDoctorID());
+        Doctor doctor = doctorRepository.findByID(dto.getDoctorID());
         Client client = clientService.findById(dto.getClientID());
         Department department = departmentService.findDepartmentByID(dto.getDepartmentID());
         log.debug("Find components: doctor = "+doctor.getId()+" client = "+client.getId()+" department = "+department.getId());

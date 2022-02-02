@@ -10,7 +10,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class MedicalServiceRepository extends GenericDAOImpl implements IMedicalServiceRepository {
+public class MedicalServiceRepository extends GenericDAOImpl<MedicalService> implements IMedicalServiceRepository {
     public MedicalServiceRepository() {
         this.setEntityClass(MedicalService.class);
     }

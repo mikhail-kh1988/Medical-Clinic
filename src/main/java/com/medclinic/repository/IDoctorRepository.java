@@ -1,14 +1,16 @@
 package com.medclinic.repository;
 
 import com.medclinic.config.hibernate.GenericDAO;
+import com.medclinic.entity.Doctor;
+
 import java.util.List;
 
-public interface IDoctorRepository<T> extends GenericDAO {
-    List<T> findByFullName(String fullName);
-    T findByLogin(String login);
-    List<T> findByFamily(String family);
-    T findByEmail(String email);
-    List<T> findByOnline();
-    List<T> findBySpecializationName(String secName);
-    List<T> findByWhereStudy(String whereStudy);
+public interface IDoctorRepository extends GenericDAO<Doctor> {
+    List<Doctor> findByFullName(String fullName);
+    Doctor findByLogin(String login);
+    List<Doctor> findByFamily(String family);
+    Doctor findByEmail(String email);
+    List<Doctor> findByOnline();
+    List<Doctor> findBySpecializationName(String secName);
+    List<Doctor> findByWhereStudy(String whereStudy);
 }

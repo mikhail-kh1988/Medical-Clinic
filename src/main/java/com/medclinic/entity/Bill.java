@@ -1,12 +1,13 @@
 package com.medclinic.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 @Entity
 @Table(name = "bill")
-public class Bill {
+public class Bill implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

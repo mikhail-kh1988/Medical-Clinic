@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class UserRepository extends GenericDAOImpl implements IUserRepository {
+public class UserRepository extends GenericDAOImpl<User> implements IUserRepository {
     public UserRepository() {
         this.setEntityClass(User.class);
     }

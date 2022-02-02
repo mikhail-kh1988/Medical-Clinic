@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Repository
-public class BillRepository extends GenericDAOImpl implements IBillRepository {
+public class BillRepository extends GenericDAOImpl<Bill> implements IBillRepository {
     public BillRepository() {
         this.setEntityClass(Bill.class);
     }
@@ -29,7 +29,7 @@ public class BillRepository extends GenericDAOImpl implements IBillRepository {
     @Override
     public List<Bill> findByClientID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Bill> criteria = builder.createQuery(Bill.class);
         Root<Bill> root = criteria.from(Bill.class);
         criteria.select(root).where(builder.equal(root.get("client"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();
@@ -38,7 +38,7 @@ public class BillRepository extends GenericDAOImpl implements IBillRepository {
     @Override
     public List<Bill> findByDoctorID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<Bill> criteria = builder.createQuery(Bill.class);
         Root<Bill> root = criteria.from(Bill.class);
         criteria.select(root).where(builder.equal(root.get("doctor"), id));
         return this.getEntityManager().createQuery(criteria).getResultList();

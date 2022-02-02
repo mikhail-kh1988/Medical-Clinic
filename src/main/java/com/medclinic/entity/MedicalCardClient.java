@@ -1,6 +1,7 @@
 package com.medclinic.entity;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "medcard")
+@Table(name = "MEDCARD")
 public class MedicalCardClient implements Serializable {
 
     @Id
@@ -33,8 +34,10 @@ public class MedicalCardClient implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Doctor therapyDoctor;
 
-    @OneToMany(mappedBy = "primaryKey.client",
-            cascade = CascadeType.ALL)
+    /*@OneToMany(mappedBy = "primaryKey.client",
+            cascade = CascadeType.ALL)*/
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id")
     private Set<MedicalCardBody> medicalCardBodies;
 
     public long getId() {

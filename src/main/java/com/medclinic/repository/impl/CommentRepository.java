@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class CommentRepository extends GenericDAOImpl implements ICommentRepository {
+public class CommentRepository extends GenericDAOImpl<Comment> implements ICommentRepository {
     public CommentRepository() {
         this.setEntityClass(Comment.class);
     }

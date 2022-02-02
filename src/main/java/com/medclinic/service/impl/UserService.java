@@ -32,8 +32,8 @@ public class UserService implements IUserService {
     @Autowired
     private IClientService clientService;
 
-    @Autowired
-    private PasswordEncoder encoder;
+    /*@Autowired
+    private PasswordEncoder encoder;*/
 
     @Transactional
     @Override
@@ -41,7 +41,7 @@ public class UserService implements IUserService {
         User user = (User) userRepository.findByLogin(login);
         log.debug("Find user "+user.getFullName()+" by login "+user.getLogin()+". ");
 
-        user.setPassword(encoder.encode(newPassword));
+        //user.setPassword(encoder.encode(newPassword));
         userRepository.save(user);
 
         log.info("User "+login+" change password!");

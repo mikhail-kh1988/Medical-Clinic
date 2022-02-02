@@ -1,7 +1,9 @@
 package com.medclinic.service.impl;
 
 import com.medclinic.dto.MedicalCardBodyDto;
+import com.medclinic.dto.MedicalCardDto;
 import com.medclinic.entity.*;
+import com.medclinic.repository.IMedicalCardClientBodyRepository;
 import com.medclinic.repository.IMedicalCardClientRepository;
 import com.medclinic.service.*;
 import com.medclinic.utils.DateParser;
@@ -11,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -32,6 +36,9 @@ public class MedicalCardClientService implements IMedicalCardClientService {
     @Autowired
     private IDepartmentService departmentService;
 
+    @Autowired
+    private IMedicalCardClientBodyRepository cardClientBodyRepository;
+
     @Override
     public MedicalCardClient createNewMedicalCard(MedicalCardClient cardClient) {
         medicalCardClientRepository.save(cardClient);
@@ -40,7 +47,7 @@ public class MedicalCardClientService implements IMedicalCardClientService {
 
     @Override
     public MedicalCardClient findById(long id) {
-        return (MedicalCardClient) medicalCardClientRepository.findByID(id);
+        return medicalCardClientRepository.findByID(id);
     }
 
     @Override
@@ -60,13 +67,13 @@ public class MedicalCardClientService implements IMedicalCardClientService {
 
     @Override
     public MedicalCardClient findByClientId(long id) {
-        return (MedicalCardClient) medicalCardClientRepository.findByClientId(id);
+        return medicalCardClientRepository.findByClientId(id);
     }
 
     @Transactional
     @Override
     public void newRecordInCard(long medCardID, MedicalCardBodyDto dto) {
-        MedicalCardClient medicalCardClient = (MedicalCardClient) medicalCardClientRepository.findByID(medCardID);
+        MedicalCardClient medicalCardClient = medicalCardClientRepository.findByID(medCardID);
         log.debug("Find medical card client "+medicalCardClient.getClient().getFullName()+". ");
 
         Doctor doctor = doctorService.findById(dto.getDoctorID());
@@ -92,6 +99,8 @@ public class MedicalCardClientService implements IMedicalCardClientService {
         comment.setCreateDate(LocalDate.now());
         log.debug("Create new comment by login <"+comment.getCreateUser().getLogin()+">");
 
+        Set<MedicalCardBody> cardBodies = medicalCardClient.getMedicalCardBodies();
+
         MedicalCardBody medicalCardBody = new MedicalCardBody();
         medicalCardBody.setMedicalCard(medicalCardClient);
         medicalCardBody.setTherapyClosed(dto.isTherapyClosed());
@@ -104,7 +113,22 @@ public class MedicalCardClientService implements IMedicalCardClientService {
         medicalCardBody.setDepartment(department);
         medicalCardBody.setCreateDate(LocalDate.now());
 
-        medicalCardClientRepository.save(medicalCardBody);
+        if (cardBodies.isEmpty()){
+            Set<MedicalCardBody> tempMedCardBody = new HashSet<>();
+            tempMedCardBody.add(medicalCardBody);
+
+            medicalCardClient.setMedicalCardBodies(tempMedCardBody);
+        }else {
+            cardBodies.add(medicalCardBody);
+
+            medicalCardClient.setMedicalCardBodies(null);
+
+            medicalCardClient.setMedicalCardBodies(cardBodies);
+        }
+
+        cardClientBodyRepository.save(medicalCardBody);
+
+        medicalCardClientRepository.save(medicalCardClient);
         log.info("Added into med card "+medCardID+" new record medical card body.");
 
     }

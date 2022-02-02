@@ -1,11 +1,13 @@
 package com.medclinic.repository;
 
 import com.medclinic.config.hibernate.GenericDAO;
+import com.medclinic.entity.Disease;
+
 import java.util.List;
 
-public interface IDiseaseRepository<T> extends GenericDAO {
-    T findByInternalCode(String inCode);
-    T findByExternalCode(String exCode);
-    T findByWorldCode(String wlCode);
-    List<T> findByName(String name);
+public interface IDiseaseRepository extends GenericDAO<Disease> {
+    Disease findByInternalCode(String inCode);
+    Disease findByExternalCode(String exCode);
+    Disease findByWorldCode(String wlCode);
+    List<Disease> findByName(String name);
 }

@@ -6,10 +6,11 @@ import com.medclinic.config.hibernate.GenericDAOImpl;
 import com.medclinic.repository.IAnalysisServiceResultRepository;
 import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Repository
-public class AnalysisServiceResultRepository extends GenericDAOImpl implements IAnalysisServiceResultRepository {
+public class AnalysisServiceResultRepository extends GenericDAOImpl<AnalysisServiceResult> implements IAnalysisServiceResultRepository {
 
     public AnalysisServiceResultRepository() {
         this.setEntityClass(AnalysisServiceResult.class);
@@ -52,7 +53,7 @@ public class AnalysisServiceResultRepository extends GenericDAOImpl implements I
     }
 
     @Override
-    public Object findByBillID(long id) {
+    public AnalysisServiceResult findByBillID(long id) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<AnalysisServiceResult> criteria = builder.createQuery(AnalysisServiceResult.class);
         Root<AnalysisServiceResult> root = criteria.from(AnalysisServiceResult.class);
@@ -63,7 +64,7 @@ public class AnalysisServiceResultRepository extends GenericDAOImpl implements I
     @Override
     public List<AnalysisServiceResult> findByNotPaidResults() {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery criteria = builder.createQuery();
+        CriteriaQuery<AnalysisServiceResult> criteria = builder.createQuery(AnalysisServiceResult.class);
         Root<AnalysisServiceResult> root = criteria.from(AnalysisServiceResult.class);
         Subquery<Bill> sq = criteria.subquery(Bill.class);
         Root<Bill> billRoot = sq.from(Bill.class);

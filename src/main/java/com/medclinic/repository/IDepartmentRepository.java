@@ -1,9 +1,10 @@
 package com.medclinic.repository;
 
 import com.medclinic.config.hibernate.GenericDAO;
+import com.medclinic.entity.Department;
 
-public interface IDepartmentRepository<T> extends GenericDAO {
+public interface IDepartmentRepository extends GenericDAO<Department> {
 
-    T findByDepName(String name);
+    Department findByDepName(String name);
 
 }
