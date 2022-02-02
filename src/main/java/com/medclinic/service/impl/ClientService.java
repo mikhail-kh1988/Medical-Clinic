@@ -31,8 +31,8 @@ public class ClientService implements IClientService {
     @Autowired
     private IAnalysisSvcResultService resultService;
 
-    @Autowired
-    private PasswordEncoder encoder;
+    /*@Autowired
+    private PasswordEncoder encoder;*/
 
     @Transactional
     @Override
@@ -46,7 +46,7 @@ public class ClientService implements IClientService {
             return currentClient;
         }else {*/
             client.setLogin(dto.getLogin());
-            client.setPassword(encoder.encode(dto.getPassword()));
+            //client.setPassword(encoder.encode(dto.getPassword()));
             client.setFullName(dto.getFullName());
             client.setFamilyName(dto.getFamilyName());
             client.setFirstSymbolName(dto.getFamilyName().charAt(0));
@@ -101,22 +101,22 @@ public class ClientService implements IClientService {
 
     @Override
     public Client findByPhoneNumber(String number) {
-        return (Client) clientRepository.findByPhoneNumber(number);
+        return clientRepository.findByPhoneNumber(number);
     }
 
     @Override
     public Client findById(long id) {
-        return (Client) clientRepository.findByID(id);
+        return clientRepository.findByID(id);
     }
 
     @Override
     public Client findByLogin(String login) {
-        return (Client) clientRepository.findByLogin(login);
+        return clientRepository.findByLogin(login);
     }
 
     @Override
     public void update(long clientID, ClientUpdateDto dto) {
-        Client client = (Client) clientRepository.findByID(clientID);
+        Client client = clientRepository.findByID(clientID);
         client.setAbout(dto.getAbout());
         client.setActualAddress(dto.getActualAddress());
         client.setPhoneNumber(dto.getPhoneNumber());

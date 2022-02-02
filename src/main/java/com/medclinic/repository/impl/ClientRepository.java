@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Repository
-public class ClientRepository extends GenericDAOImpl implements IClientRepository {
+public class ClientRepository extends GenericDAOImpl<Client> implements IClientRepository {
     public ClientRepository() {
         this.setEntityClass(Client.class);
     }

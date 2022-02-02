@@ -1,3 +1,4 @@
+/*
 package com.medclinic.config.security;
 
 import com.medclinic.service.IUserService;
@@ -70,3 +71,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .cors().disable();
     }
 }
+*/

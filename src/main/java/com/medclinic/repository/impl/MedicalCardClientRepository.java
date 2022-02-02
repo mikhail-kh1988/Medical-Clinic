@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class MedicalCardClientRepository extends GenericDAOImpl implements IMedicalCardClientRepository {
+public class MedicalCardClientRepository extends GenericDAOImpl<MedicalCardClient> implements IMedicalCardClientRepository {
     public MedicalCardClientRepository() {
         this.setEntityClass(MedicalCardClient.class);
     }

@@ -12,7 +12,7 @@ import javax.print.Doc;
 import java.util.List;
 
 @Repository
-public class DoctorRepository extends GenericDAOImpl implements IDoctorRepository {
+public class DoctorRepository extends GenericDAOImpl<Doctor> implements IDoctorRepository {
     public DoctorRepository() {
         this.setEntityClass(Doctor.class);
     }

@@ -10,7 +10,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class AnalysisRepository extends GenericDAOImpl implements IAnalysisRepository {
+public class AnalysisRepository extends GenericDAOImpl<Analysis> implements IAnalysisRepository {
 
     public AnalysisRepository(){
         this.setEntityClass(Analysis.class);

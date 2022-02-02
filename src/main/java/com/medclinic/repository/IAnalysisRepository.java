@@ -1,11 +1,13 @@
 package com.medclinic.repository;
 
 import com.medclinic.config.hibernate.GenericDAO;
+import com.medclinic.entity.Analysis;
+
 import java.util.List;
 
-public interface IAnalysisRepository<T> extends GenericDAO {
+public interface IAnalysisRepository extends GenericDAO<Analysis> {
 
-    List<T> findByName(String name);
-    List<T> findByPrice(int price);
+    List<Analysis> findByName(String name);
+    List<Analysis> findByPrice(int price);
 
 }

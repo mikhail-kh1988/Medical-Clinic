@@ -51,14 +51,14 @@ public class TherapyService implements ITherapyService {
     @Override
     public void updateTherapy(long id, TherapyDto dto) {
         Disease disease = diseaseService.findByID(dto.getDiseaseID());
-        Therapy therapy = (Therapy) therapyRepository.findByID(id);
+        Therapy therapy = therapyRepository.findByID(id);
         log.debug("Find updatable therapy "+therapy.getId());
 
         therapy.setTherapy(dto.getTherapy());
         therapy.setDisease(disease);
         therapy.setDescribeComplaint(dto.getDescribeComplaint());
 
-        therapyRepository.save(disease);
+        therapyRepository.save(therapy);
         log.info("Update therapy "+therapy.getTherapy());
     }
 

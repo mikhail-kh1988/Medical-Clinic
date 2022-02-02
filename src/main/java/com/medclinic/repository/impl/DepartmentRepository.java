@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 
 
 @Repository
-public class DepartmentRepository extends GenericDAOImpl implements IDepartmentRepository {
+public class DepartmentRepository extends GenericDAOImpl<Department> implements IDepartmentRepository {
     public DepartmentRepository() {
         this.setEntityClass(Department.class);
     }

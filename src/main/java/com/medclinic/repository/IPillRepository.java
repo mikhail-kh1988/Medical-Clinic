@@ -1,9 +1,11 @@
 package com.medclinic.repository;
 
 import com.medclinic.config.hibernate.GenericDAO;
+import com.medclinic.entity.Pills;
+
 import java.util.List;
 
-public interface IPillRepository<T> extends GenericDAO {
-    T findByName(String name);
-    List<T> findByActiveElement(String element);
+public interface IPillRepository extends GenericDAO<Pills> {
+    Pills findByName(String name);
+    List<Pills> findByActiveElement(String element);
 }

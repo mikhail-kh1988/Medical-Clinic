@@ -41,9 +41,9 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
     @Override
     public AnalysisServiceResult createResultByAnalysis(long analysisId , CreateResultDto dto) {
 
-        Analysis analysis = (Analysis) analysisRepository.findByID(analysisId);
-        Client client = (Client) clientRepository.findByID(dto.getClientID());
-        Doctor doctor = (Doctor) doctorRepository.findByID(dto.getDoctorID());
+        Analysis analysis = analysisRepository.findByID(analysisId);
+        Client client = clientRepository.findByID(dto.getClientID());
+        Doctor doctor = doctorRepository.findByID(dto.getDoctorID());
 
         Bill bill = new Bill();
         bill.setSum(analysis.getPrice());
@@ -54,7 +54,7 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
         billRepository.save(bill);
         long tempBillId = bill.getId();
 
-        Bill billForAnalysisResult = (Bill) billRepository.findByID(tempBillId);
+        Bill billForAnalysisResult = billRepository.findByID(tempBillId);
 
         AnalysisServiceResult result = new AnalysisServiceResult();
         result.setAnalysis(analysis);
@@ -65,9 +65,9 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
         resultRepository.save(result);
         long tempResultID = result.getId();
 
-        AnalysisServiceResult returnResult = (AnalysisServiceResult) resultRepository.findByID(tempResultID);
+        AnalysisServiceResult returnResult = resultRepository.findByID(tempResultID);
         returnResult.setTitle("an-"+analysis.getId()+"-"+result.getId());
-        analysisRepository.save(returnResult);
+        resultRepository.save(returnResult);
 
         return returnResult;
     }
@@ -75,9 +75,9 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
     @Transactional
     @Override
     public AnalysisServiceResult createResultByMedService(long serviceId, CreateResultDto dto) {
-        Client client = (Client) clientRepository.findByID(dto.getClientID());
-        Doctor doctor = (Doctor) doctorRepository.findByID(dto.getDoctorID());
-        MedicalService service = (MedicalService) serviceRepository.findByID(serviceId);
+        Client client = clientRepository.findByID(dto.getClientID());
+        Doctor doctor = doctorRepository.findByID(dto.getDoctorID());
+        MedicalService service = serviceRepository.findByID(serviceId);
 
         Bill bill = new Bill();
         bill.setSum(service.getPrice());
@@ -99,9 +99,9 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
         resultRepository.save(result);
         long tempResultID = result.getId();
 
-        AnalysisServiceResult returnResult = (AnalysisServiceResult) resultRepository.findByID(tempResultID);
+        AnalysisServiceResult returnResult = resultRepository.findByID(tempResultID);
         returnResult.setTitle("sc-"+service.getId()+"-"+result.getId());
-        analysisRepository.save(returnResult);
+        resultRepository.save(returnResult);
 
         return returnResult;
     }
@@ -133,21 +133,21 @@ public class AnalysisSvcResultService implements IAnalysisSvcResultService {
 
     @Override
     public AnalysisServiceResult findById(long id) {
-        return (AnalysisServiceResult) resultRepository.findByID(id);
+        return resultRepository.findByID(id);
     }
 
     @Transactional
     @Override
     public void remove(long resultID) {
-        AnalysisServiceResult result = (AnalysisServiceResult) resultRepository.findByID(resultID);
+        AnalysisServiceResult result = resultRepository.findByID(resultID);
         resultRepository.delete(result);
     }
 
     @Transactional
     @Override
     public void update(long resultID, DescribeUpdateAnalysisSvcResult describeUpdate) {
-        AnalysisServiceResult result = (AnalysisServiceResult) resultRepository.findByID(resultID);
-        Doctor doctorChecked = (Doctor) doctorRepository.findByID(describeUpdate.getCheckerID());
+        AnalysisServiceResult result = resultRepository.findByID(resultID);
+        Doctor doctorChecked = doctorRepository.findByID(describeUpdate.getCheckerID());
 
         result.setResult(describeUpdate.getResult());
         result.setMarks(describeUpdate.getMarks());

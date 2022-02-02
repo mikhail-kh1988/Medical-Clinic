@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class TherapyRepository extends GenericDAOImpl implements ITherapyRepository {
+public class TherapyRepository extends GenericDAOImpl<Therapy> implements ITherapyRepository {
     public TherapyRepository() {
         this.setEntityClass(Therapy.class);
     }

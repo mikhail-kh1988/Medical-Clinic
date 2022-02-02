@@ -1,20 +1,24 @@
 package com.medclinic.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "MEDICALCARD_BODY")
-@AssociationOverrides(
+/*@AssociationOverrides(
         {@AssociationOverride(name = "primaryKey.doctor", joinColumns = @JoinColumn(name = "doctor_id")),
          @AssociationOverride(name = "primaryKey.client", joinColumns = @JoinColumn(name = "client_id"))}
-)
-public class MedicalCardBody {
+)*/
+public class MedicalCardBody implements Serializable {
 
-    @EmbeddedId
-    private MedicalCardBodyPK primaryKey = new MedicalCardBodyPK();
+    /*@EmbeddedId
+    private MedicalCardBodyPK primaryKey = new MedicalCardBodyPK();*/
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    private long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Comment comment;
@@ -46,7 +50,15 @@ public class MedicalCardBody {
     @OneToMany
     private List<Analysis> analysisList;
 
-    @Transient
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    /*@Transient
     public Doctor getDoctor(){
         return primaryKey.getDoctor();
     }
@@ -70,6 +82,30 @@ public class MedicalCardBody {
 
     public void setPrimaryKey(MedicalCardBodyPK primaryKey) {
         this.primaryKey = primaryKey;
+    }*/
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Comment getComment() {

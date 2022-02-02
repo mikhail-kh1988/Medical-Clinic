@@ -1,3 +1,4 @@
+/*
 package com.medclinic.config.security;
 
 import com.medclinic.entity.User;
@@ -35,3 +36,4 @@ public class CustomAuthenticateProvider implements AuthenticationProvider {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
+*/

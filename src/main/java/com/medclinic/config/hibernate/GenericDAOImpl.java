@@ -4,10 +4,12 @@ package com.medclinic.config.hibernate;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 
-public abstract class GenericDAOImpl<T> implements GenericDAO {
+public abstract class GenericDAOImpl<T extends Serializable> implements GenericDAO<T> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -15,18 +17,10 @@ public abstract class GenericDAOImpl<T> implements GenericDAO {
     private Class<T> entityClass;
 
     public GenericDAOImpl(){
-        /*if(GenericDAOImpl.class.isAssignableFrom(GenericDAO.class)){
-            this.entityClass = (Class<T>) getClass().getSuperclass();
-        }*/
-
-        /*if(GenericDAO.class.isAssignableFrom(GenericDAOImpl.class)){
-            Class classs =  GenericDAO.class.getClass();
-            entityClass = classs.asSubclass(GenericDAOImpl.class);
-        }*/
     }
 
     @Override
-    public Object findByID(long id) {
+    public T findByID(long id) {
         return entityManager.find(entityClass, id);
     }
 
@@ -45,14 +39,14 @@ public abstract class GenericDAOImpl<T> implements GenericDAO {
     }
 
     @Override
-    public Object save(Object entity) {
+    public T save(T entity) {
         entityManager.persist(entity);
         entityManager.flush();
         return entity;
     }
 
     @Override
-    public void delete(Object entity) {
+    public void delete(T entity) {
         entityManager.remove(entity);
     }
 
