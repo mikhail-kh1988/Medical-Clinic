@@ -13,7 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/clients")
@@ -29,7 +32,7 @@ public class ClientController {
     private IBillService billService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerClient(@RequestBody CreateClientDto dto) throws JsonProcessingException, NotUniqueUserRegistrationException {
+    public ResponseEntity<String> registerClient(@RequestBody @Validated CreateClientDto dto) throws JsonProcessingException, NotUniqueUserRegistrationException {
         return new ResponseEntity<>(mapper.writeValueAsString(clientService.createClient(dto).getId()), HttpStatus.OK);
     }
 
@@ -45,7 +48,7 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateClient(@PathVariable long id, @RequestBody ClientUpdateDto dto){
+    public ResponseEntity<String> updateClient(@PathVariable long id, @RequestBody @Validated ClientUpdateDto dto){
         clientService.update(id, dto);
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }

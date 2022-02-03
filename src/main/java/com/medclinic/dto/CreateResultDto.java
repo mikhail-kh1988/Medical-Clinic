@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 
 @Getter
@@ -13,16 +15,16 @@ import javax.validation.constraints.Positive;
 @AllArgsConstructor
 public class CreateResultDto {
 
-    @Positive
+    @Min(1)
     public long analysisID;
 
-    @Positive
+    @Min(1)
     public long serviceID;
 
-    @Positive
+    @Min(1)
     public long doctorID;
 
-    @Positive
+    @Min(1)
     public long clientID;
 
 }

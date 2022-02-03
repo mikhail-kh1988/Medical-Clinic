@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -21,7 +19,7 @@ public class TherapyDto {
     @NotBlank
     private String describeComplaint;
 
-    @Positive
+    @Min(1)
     private long diseaseID;
 
 }

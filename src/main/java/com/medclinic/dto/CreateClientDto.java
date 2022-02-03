@@ -30,7 +30,6 @@ public class CreateClientDto {
     private String email;
 
     @Max(120)
-    @Positive
     private int age;
 
     @NotBlank

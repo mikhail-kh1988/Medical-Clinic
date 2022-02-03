@@ -12,6 +12,7 @@ import com.medclinic.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/doctor")
-    public ResponseEntity<String> createNewDoctor(@RequestBody DoctorDto dto) throws NotUniqueUserRegistrationException, JsonProcessingException {
+    public ResponseEntity<String> createNewDoctor(@RequestBody @Validated DoctorDto dto) throws NotUniqueUserRegistrationException, JsonProcessingException {
         return new ResponseEntity<>(mapper.writeValueAsString(userService.registerDoctor(dto).getId()), HttpStatus.OK);
     }
 
@@ -47,7 +48,7 @@ public class UserController {
     }
 
     @PostMapping("/client")
-    public ResponseEntity<String> createNewClient(@RequestBody CreateClientDto dto) throws NotUniqueUserRegistrationException, JsonProcessingException {
+    public ResponseEntity<String> createNewClient(@RequestBody @Validated CreateClientDto dto) throws NotUniqueUserRegistrationException, JsonProcessingException {
         return new ResponseEntity<>(mapper.writeValueAsString(userService.registerClient(dto).getId()), HttpStatus.OK);
     }
     @GetMapping("/client/{login}")

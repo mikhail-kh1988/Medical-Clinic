@@ -22,7 +22,6 @@ public class DoctorDto {
     @Email
     private String email;
 
-    @Positive
     @Max(120)
     private Integer age;
 

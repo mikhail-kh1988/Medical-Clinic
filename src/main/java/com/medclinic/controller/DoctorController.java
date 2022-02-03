@@ -11,6 +11,7 @@ import com.medclinic.service.IDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -31,7 +32,7 @@ public class DoctorController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<String> updateDoctor(@PathVariable long id, @RequestBody DoctorDto dto){
+    public ResponseEntity<String> updateDoctor(@PathVariable long id, @RequestBody @Validated DoctorDto dto){
         doctorService.updateDoctor(id, dto);
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }
@@ -49,12 +50,12 @@ public class DoctorController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<String> createDoctor(@RequestBody DoctorDto dto) throws NotUniqueUserRegistrationException, JsonProcessingException {
+    public ResponseEntity<String> createDoctor(@RequestBody @Validated DoctorDto dto) throws NotUniqueUserRegistrationException, JsonProcessingException {
         return new ResponseEntity<>(mapper.writeValueAsString(doctorService.createNewDoctor(dto)), HttpStatus.OK);
     }
 
     @PostMapping("/{login}/createWF")
-    public ResponseEntity<String> createWorkFlow(@RequestBody DoctorWorkFlowDto dto, @PathVariable String login){
+    public ResponseEntity<String> createWorkFlow(@RequestBody @Validated DoctorWorkFlowDto dto, @PathVariable String login){
         doctorService.setWorkFlow(login, dto);
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }
@@ -65,7 +66,7 @@ public class DoctorController {
     }
 
     @PutMapping("/{doctorID}/medicalCard")
-    public ResponseEntity<String> createMedicalCard(@PathVariable long doctorID, @RequestBody MedicalCardDto dto) throws JsonProcessingException {
+    public ResponseEntity<String> createMedicalCard(@PathVariable long doctorID, @RequestBody @Validated MedicalCardDto dto) throws JsonProcessingException {
         return new ResponseEntity<>(mapper.writeValueAsString(doctorService.createMedicalCard(dto, doctorID)), HttpStatus.OK);
     }
 
@@ -75,7 +76,7 @@ public class DoctorController {
     }
 
     @PostMapping("/{medcardID}/medicalCard")
-    public ResponseEntity<String> addNewRecordInMedcard(@PathVariable long medcardID, @RequestBody MedicalCardBodyDto dto){
+    public ResponseEntity<String> addNewRecordInMedcard(@PathVariable long medcardID, @RequestBody @Validated MedicalCardBodyDto dto){
         doctorService.addNewRecordInMedicalCardClient(dto, medcardID);
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }

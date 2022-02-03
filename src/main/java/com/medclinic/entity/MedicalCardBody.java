@@ -1,11 +1,13 @@
 package com.medclinic.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Data
 @Entity
 @Table(name = "MEDICALCARD_BODY")
 /*@AssociationOverrides(
@@ -84,107 +86,4 @@ public class MedicalCardBody implements Serializable {
         this.primaryKey = primaryKey;
     }*/
 
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Comment getComment() {
-        return comment;
-    }
-
-    public void setComment(Comment comment) {
-        this.comment = comment;
-    }
-
-    public LocalDate getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDate createDate) {
-        this.createDate = createDate;
-    }
-
-    public Therapy getTherapy() {
-        return therapy;
-    }
-
-    public void setTherapy(Therapy therapy) {
-        this.therapy = therapy;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public MedicalCardClient getMedicalCard() {
-        return medicalCard;
-    }
-
-    public void setMedicalCard(MedicalCardClient medicalCard) {
-        this.medicalCard = medicalCard;
-    }
-
-    public Disease getDisease() {
-        return disease;
-    }
-
-    public void setDisease(Disease disease) {
-        this.disease = disease;
-    }
-
-    public List<Pills> getDrugsList() {
-        return pillsList;
-    }
-
-    public void setDrugsList(List<Pills> pillsList) {
-        this.pillsList = pillsList;
-    }
-
-    public List<Analysis> getAnalysisList() {
-        return analysisList;
-    }
-
-    public void setAnalysisList(List<Analysis> analysisList) {
-        this.analysisList = analysisList;
-    }
-
-    public LocalDateTime getFutureDateRecipient() {
-        return futureDateRecipient;
-    }
-
-    public void setFutureDateRecipient(LocalDateTime futureDateRecipient) {
-        this.futureDateRecipient = futureDateRecipient;
-    }
-
-    public boolean isTherapyClosed() {
-        return therapyClosed;
-    }
-
-    public void setTherapyClosed(boolean therapyClosed) {
-        this.therapyClosed = therapyClosed;
-    }
 }
