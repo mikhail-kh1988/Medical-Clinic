@@ -1,10 +1,13 @@
 package com.medclinic.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
+@Data
 @Entity
 @Table(name = "comments")
 public class Comment implements Serializable {
@@ -21,35 +24,4 @@ public class Comment implements Serializable {
     @ManyToOne
     private User createUser;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDate getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDate createDate) {
-        this.createDate = createDate;
-    }
-
-    public User getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(User createUser) {
-        this.createUser = createUser;
-    }
 }

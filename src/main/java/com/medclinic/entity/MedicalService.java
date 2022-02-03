@@ -1,8 +1,11 @@
 package com.medclinic.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Data
 @Entity
 @Table(name = "services")
 public class MedicalService implements Serializable {
@@ -19,51 +22,4 @@ public class MedicalService implements Serializable {
     @Column(name = "external_code")
     private String externalCode;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescribe() {
-        return describe;
-    }
-
-    public void setDescribe(String describe) {
-        this.describe = describe;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public String getExternalCode() {
-        return externalCode;
-    }
-
-    public void setExternalCode(String externalCode) {
-        this.externalCode = externalCode;
-    }
 }

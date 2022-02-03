@@ -1,8 +1,11 @@
 package com.medclinic.entity;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "therapy")
 public class Therapy implements Serializable {
@@ -20,35 +23,4 @@ public class Therapy implements Serializable {
     @Column(name = "therapy")
     private String therapy;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getDescribeComplaint() {
-        return describeComplaint;
-    }
-
-    public void setDescribeComplaint(String describeComplaint) {
-        this.describeComplaint = describeComplaint;
-    }
-
-    public Disease getDisease() {
-        return disease;
-    }
-
-    public void setDisease(Disease disease) {
-        this.disease = disease;
-    }
-
-    public String getTherapy() {
-        return therapy;
-    }
-
-    public void setTherapy(String therapy) {
-        this.therapy = therapy;
-    }
 }

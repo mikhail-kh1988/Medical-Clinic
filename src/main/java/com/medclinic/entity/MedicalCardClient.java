@@ -1,5 +1,7 @@
 package com.medclinic.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.io.Serializable;
@@ -8,6 +10,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "MEDCARD")
 public class MedicalCardClient implements Serializable {
@@ -40,67 +43,4 @@ public class MedicalCardClient implements Serializable {
     @JoinColumn(name = "id")
     private Set<MedicalCardBody> medicalCardBodies;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public LocalDate getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDate createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getDescribe() {
-        return describe;
-    }
-
-    public void setDescribe(String describe) {
-        this.describe = describe;
-    }
-
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
-
-    public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
-    }
-
-    public String getChronicDisease() {
-        return chronicDisease;
-    }
-
-    public void setChronicDisease(String chronicDisease) {
-        this.chronicDisease = chronicDisease;
-    }
-
-    public Doctor getTherapyDoctor() {
-        return therapyDoctor;
-    }
-
-    public void setTherapyDoctor(Doctor therapyDoctor) {
-        this.therapyDoctor = therapyDoctor;
-    }
-
-    public Set<MedicalCardBody> getMedicalCardBodies() {
-        return medicalCardBodies;
-    }
-
-    public void setMedicalCardBodies(Set<MedicalCardBody> medicalCardBodies) {
-        this.medicalCardBodies = medicalCardBodies;
-    }
 }

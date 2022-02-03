@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
@@ -21,16 +18,16 @@ public class MedicalCardBodyDto {
     @NotBlank
     private String comment;
 
-    @Positive
+    @Min(1)
     private long doctorID;
 
-    @Positive
+    @Min(1)
     private long clientID;
 
     @PastOrPresent
     private LocalDate createDate;
 
-    @Positive
+    @Min(1)
     private long diseaseID;
 
     @NotBlank
@@ -39,10 +36,10 @@ public class MedicalCardBodyDto {
     @NotBlank
     private String therapy;
 
-    @Positive
+    @Min(1)
     private long departmentID;
 
-    @Positive
+    @Min(1)
     private long medicalCardID;
 
     @Future

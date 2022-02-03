@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -29,12 +30,12 @@ public class ResultController {
     private IMedicalSvcService medicalSvcService;
 
     @PutMapping("/analysis/")
-    public ResponseEntity<String> createNewAnalysis(@RequestBody DescribeAnalysisDto dto){
+    public ResponseEntity<String> createNewAnalysis(@RequestBody @Validated DescribeAnalysisDto dto){
         return new ResponseEntity<>("success! id:"+analysisService.createAnalysis(dto).getId(), HttpStatus.OK);
     }
 
     @PutMapping("/analysis/{id}")
-    public ResponseEntity<String> updateAnalysis(@PathVariable long id, @RequestBody DescribeAnalysisDto dto) throws JsonProcessingException {
+    public ResponseEntity<String> updateAnalysis(@PathVariable long id, @RequestBody @Validated DescribeAnalysisDto dto) throws JsonProcessingException {
         return new ResponseEntity<String>(mapper.writeValueAsString(analysisService.updateAnalysis(dto, id)), HttpStatus.OK);
     }
 
@@ -56,7 +57,7 @@ public class ResultController {
 
     //TODO Возможно следуюет поменять название контроллера
     @PostMapping("/analysis/{analysisID}/")
-    public ResponseEntity<String> createResultByAnalysis(@PathVariable long analysisId, @RequestBody ResultByAnalysisDto dto){
+    public ResponseEntity<String> createResultByAnalysis(@PathVariable long analysisId, @RequestBody @Validated ResultByAnalysisDto dto){
         return new ResponseEntity<>(analysisService.createResultByAnalysis(analysisId, dto).getTitle(), HttpStatus.OK);
     }
 
@@ -91,18 +92,18 @@ public class ResultController {
     }
 
     @PostMapping("/{resultId}")
-    public ResponseEntity<String> updateResult(@PathVariable long resultId, DescribeUpdateAnalysisSvcResult dto){
+    public ResponseEntity<String> updateResult(@PathVariable long resultId, @RequestBody @Validated DescribeUpdateAnalysisSvcResult dto){
         resultService.update(resultId, dto);
         return new ResponseEntity<>("success!", HttpStatus.OK);
     }
 
     @PostMapping("/{analysisId}/createByAnalysis")
-    public ResponseEntity<String> createResultByAnalysis(@PathVariable long analysisId, @RequestBody CreateResultDto dto) throws JsonProcessingException {
+    public ResponseEntity<String> createResultByAnalysis(@PathVariable long analysisId, @RequestBody @Validated CreateResultDto dto) throws JsonProcessingException {
         return new ResponseEntity<>(mapper.writeValueAsString(resultService.createResultByAnalysis(analysisId, dto).getTitle()), HttpStatus.OK);
     }
 
     @PostMapping("/{serviceId}/createByService")
-    public ResponseEntity<String> createResultByService(@PathVariable long serviceId, @RequestBody CreateResultDto dto) throws JsonProcessingException {
+    public ResponseEntity<String> createResultByService(@PathVariable long serviceId, @RequestBody @Validated CreateResultDto dto) throws JsonProcessingException {
         return new ResponseEntity<>(mapper.writeValueAsString(resultService.createResultByMedService(serviceId, dto).getTitle()), HttpStatus.OK);
     }
 

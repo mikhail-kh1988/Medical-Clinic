@@ -1,8 +1,11 @@
 package com.medclinic.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Data
 @Entity
 @Table(name = "pills")
 public class Pills implements Serializable {
@@ -18,43 +21,4 @@ public class Pills implements Serializable {
     private String composition;
     private String dosage;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getActiveElement() {
-        return activeElement;
-    }
-
-    public void setActiveElement(String activeElement) {
-        this.activeElement = activeElement;
-    }
-
-    public String getComposition() {
-        return composition;
-    }
-
-    public void setComposition(String composition) {
-        this.composition = composition;
-    }
-
-    public String getDosage() {
-        return dosage;
-    }
-
-    public void setDosage(String dosage) {
-        this.dosage = dosage;
-    }
 }

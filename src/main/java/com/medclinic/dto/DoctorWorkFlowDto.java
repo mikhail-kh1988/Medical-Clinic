@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Future;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 
 @Getter
@@ -20,7 +22,7 @@ public class DoctorWorkFlowDto {
     @Future
     private String endDateWorkFlow;
 
-    @Positive
+    @Min(1)
     private long serviceId;
 
 }
