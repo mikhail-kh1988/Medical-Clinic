@@ -1,14 +1,18 @@
 package com.medclinic.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "workflow")
 public class WorkFlow implements Serializable {
@@ -18,10 +22,10 @@ public class WorkFlow implements Serializable {
     private long id;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Doctor doctor;

@@ -1,13 +1,16 @@
 package com.medclinic.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "department")
 public class Department implements Serializable {
@@ -19,7 +22,8 @@ public class Department implements Serializable {
     @Column(name = "dep_name", unique = true)
     private String departmentName;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id")
     private List<Doctor> doctorList;
 
     public void addDoctor(Doctor doctor){

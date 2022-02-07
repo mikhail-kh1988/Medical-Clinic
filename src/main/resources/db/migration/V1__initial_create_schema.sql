@@ -168,10 +168,10 @@ CREATE TABLE IF NOT EXISTS public.users_services
 
 CREATE TABLE IF NOT EXISTS public.workflow
 (
-    id bigint NOT NULL,
-    end_date date,
+    id bigserial NOT NULL,
+    start_date timestamp,
+    end_date timestamp,
     size_client integer,
-    start_date date,
     worked boolean NOT NULL,
     doctor_id bigint,
     service_id bigint,

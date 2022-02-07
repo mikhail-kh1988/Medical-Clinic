@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
-@Embeddable
+/*@Embeddable
 public class MedicalCardBodyPK implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -29,4 +29,4 @@ public class MedicalCardBodyPK implements Serializable {
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
-}
+}*/

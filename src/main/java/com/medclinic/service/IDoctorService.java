@@ -1,9 +1,6 @@
 package com.medclinic.service;
 
-import com.medclinic.dto.DoctorDto;
-import com.medclinic.dto.DoctorWorkFlowDto;
-import com.medclinic.dto.MedicalCardBodyDto;
-import com.medclinic.dto.MedicalCardDto;
+import com.medclinic.dto.*;
 import com.medclinic.entity.Client;
 import com.medclinic.entity.Doctor;
 import com.medclinic.entity.MedicalCardClient;

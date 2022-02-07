@@ -1,16 +1,15 @@
 package com.medclinic.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "MEDCARD")
 public class MedicalCardClient implements Serializable {
@@ -19,7 +18,7 @@ public class MedicalCardClient implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Client client;
 
     @Column(name = "create_date")
@@ -34,13 +33,11 @@ public class MedicalCardClient implements Serializable {
     @Column(name = "chronic_disease", length = 100)
     private String chronicDisease;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Doctor therapyDoctor;
 
-    /*@OneToMany(mappedBy = "primaryKey.client",
-            cascade = CascadeType.ALL)*/
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", updatable = false)
     private Set<MedicalCardBody> medicalCardBodies;
 
 }

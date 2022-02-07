@@ -1,7 +1,6 @@
 package com.medclinic.service.impl;
 
 import com.medclinic.dto.MedicalCardBodyDto;
-import com.medclinic.dto.MedicalCardDto;
 import com.medclinic.entity.*;
 import com.medclinic.repository.IMedicalCardClientBodyRepository;
 import com.medclinic.repository.IMedicalCardClientRepository;
@@ -113,6 +112,8 @@ public class MedicalCardClientService implements IMedicalCardClientService {
         medicalCardBody.setDepartment(department);
         medicalCardBody.setCreateDate(LocalDate.now());
 
+        cardClientBodyRepository.save(medicalCardBody);
+
         if (cardBodies.isEmpty()){
             Set<MedicalCardBody> tempMedCardBody = new HashSet<>();
             tempMedCardBody.add(medicalCardBody);
@@ -125,8 +126,6 @@ public class MedicalCardClientService implements IMedicalCardClientService {
 
             medicalCardClient.setMedicalCardBodies(cardBodies);
         }
-
-        cardClientBodyRepository.save(medicalCardBody);
 
         medicalCardClientRepository.save(medicalCardClient);
         log.info("Added into med card "+medCardID+" new record medical card body.");

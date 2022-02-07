@@ -1,25 +1,24 @@
 package com.medclinic.entity;
 
-import lombok.Data;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-@Data
+
+@Getter
+@Setter
 @Entity
 @Table(name = "MEDICALCARD_BODY")
-/*@AssociationOverrides(
-        {@AssociationOverride(name = "primaryKey.doctor", joinColumns = @JoinColumn(name = "doctor_id")),
-         @AssociationOverride(name = "primaryKey.client", joinColumns = @JoinColumn(name = "client_id"))}
-)*/
 public class MedicalCardBody implements Serializable {
 
-    /*@EmbeddedId
-    private MedicalCardBodyPK primaryKey = new MedicalCardBodyPK();*/
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -34,6 +33,7 @@ public class MedicalCardBody implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Department department;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private MedicalCardClient medicalCard;
 
@@ -46,10 +46,14 @@ public class MedicalCardBody implements Serializable {
     @Column(name = "therapy_closed")
     private boolean therapyClosed;
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "id")
     private List<Pills> pillsList;
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "id")
     private List<Analysis> analysisList;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -59,31 +63,5 @@ public class MedicalCardBody implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
     private Client client;
-
-    /*@Transient
-    public Doctor getDoctor(){
-        return primaryKey.getDoctor();
-    }
-
-    @Transient
-    public Client getClient(){
-        return primaryKey.getClient();
-    }
-
-    public void setDoctor(Doctor doctor){
-        primaryKey.setDoctor(doctor);
-    }
-
-    public void setClient(Client client){
-        primaryKey.setClient(client);
-    }
-
-    public MedicalCardBodyPK getPrimaryKey() {
-        return primaryKey;
-    }
-
-    public void setPrimaryKey(MedicalCardBodyPK primaryKey) {
-        this.primaryKey = primaryKey;
-    }*/
 
 }
