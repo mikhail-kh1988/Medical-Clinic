@@ -1,14 +1,10 @@
 package com.medclinic.service.impl;
 
-import com.medclinic.dto.DoctorDto;
-import com.medclinic.dto.DoctorWorkFlowDto;
-import com.medclinic.dto.MedicalCardBodyDto;
-import com.medclinic.dto.MedicalCardDto;
+import com.medclinic.dto.*;
 import com.medclinic.entity.*;
 import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.repository.IDoctorRepository;
 import com.medclinic.service.*;
-import com.medclinic.utils.DateParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

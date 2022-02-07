@@ -11,3 +11,6 @@ ALTER TABLE IF EXISTS public.medicalcard_body
 
 ALTER TABLE IF EXISTS public.medicalcard_body
     ADD CONSTRAINT medicalcard_body_pkey PRIMARY KEY (id);
+
+
+ALTER SEQUENCE public.medicalcard_body_id_seq RESTART;

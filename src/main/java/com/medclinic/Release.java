@@ -41,7 +41,7 @@ public class Release {
                 .addAnnotatedClass(WorkFlow.class)
                 .addAnnotatedClass(WorkFlowPK.class)
                 .addAnnotatedClass(WorkFlowBody.class)
-                .addAnnotatedClass(MedicalCardBodyPK.class)
+                //.addAnnotatedClass(MedicalCardBodyPK.class)
                 .addAnnotatedClass(MedicalCardBody.class)
                 //.addPackage("com.medclinic.entity")
                 .buildMetadata()

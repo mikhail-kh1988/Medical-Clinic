@@ -47,8 +47,8 @@ public class WorkFlowService implements IWorkFlowService {
 
         workFlow.setService(service);
         workFlow.setDoctor(doctor);
-        workFlow.setEndDate(DateParser.getDateByString(dto.getEndDateWorkFlow()));
-        workFlow.setStartDate(DateParser.getDateByString(dto.getStartDateWorkFlow()));
+        workFlow.setEndDate(DateParser.getDateTimeByString(dto.getEndDateWorkFlow()));
+        workFlow.setStartDate(DateParser.getDateTimeByString(dto.getStartDateWorkFlow()));
 
         workFlowRepository.save(workFlow);
         log.info("Update for doctor "+doctor.getFullName()+" workflow (id:"+workFlow.getId()+") new date between " +
@@ -66,8 +66,8 @@ public class WorkFlowService implements IWorkFlowService {
         workFlow.setWorked(false);
         workFlow.setDoctor(doctor);
         workFlow.setSizeClient(10);
-        workFlow.setStartDate(DateParser.getDateByString(dto.getStartDateWorkFlow()));
-        workFlow.setEndDate(DateParser.getDateByString(dto.getEndDateWorkFlow()));
+        workFlow.setStartDate(DateParser.getDateTimeByString(dto.getStartDateWorkFlow()));
+        workFlow.setEndDate(DateParser.getDateTimeByString(dto.getEndDateWorkFlow()));
 
         workFlowRepository.save(workFlow);
         log.info("Create new workflow "+doctor.getFullName()+" for date "+dto.getStartDateWorkFlow()+" and "+dto.getEndDateWorkFlow());

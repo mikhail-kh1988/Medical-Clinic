@@ -25,7 +25,7 @@ public class MedicalCardBodyDto {
     private long clientID;
 
     @PastOrPresent
-    private LocalDate createDate;
+    private String createDate;
 
     @Min(1)
     private long diseaseID;
