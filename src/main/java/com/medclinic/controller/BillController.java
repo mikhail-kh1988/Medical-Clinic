@@ -1,56 +1,52 @@
 package com.medclinic.controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.medclinic.entity.Bill;
 import com.medclinic.service.IBillService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @RestController
 @RequestMapping("/bills")
 public class BillController {
 
     @Autowired
-    private ObjectMapper mapper;
-
-    @Autowired
     private IBillService billService;
 
     @GetMapping("/paid")
-    public ResponseEntity<String> getPaidBill() throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(billService.findByPaid()), HttpStatus.OK);
+    public ResponseEntity<List<Bill>> getPaidBill(){
+        return ResponseEntity.ok(billService.findByPaid());
     }
 
     @GetMapping("/paid/{id}")
     public ResponseEntity<String> toPaidBill(@PathVariable long id){
         billService.toPaid(id);
-        return new ResponseEntity<>("success!", HttpStatus.OK);
+        return ResponseEntity.ok("success!");
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<String> getBillById(@PathVariable long id) throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(billService.findById(id)), HttpStatus.OK);
+    public ResponseEntity<Bill> getBillById(@PathVariable long id){
+        return ResponseEntity.ok(billService.findById(id));
     }
 
     @GetMapping("/{id}/doctor")
-    public ResponseEntity<String> getBillByDoctor(@PathVariable long id) throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(billService.findByDoctorID(id)), HttpStatus.OK);
+    public ResponseEntity<List<Bill>> getBillByDoctor(@PathVariable long id){
+        return ResponseEntity.ok(billService.findByDoctorID(id));
     }
 
     @GetMapping("/{id}/client")
-    public ResponseEntity<String> getBillByClient(@PathVariable long id) throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(billService.findByClientID(id)), HttpStatus.OK);
+    public ResponseEntity<List<Bill>> getBillByClient(@PathVariable long id){
+        return ResponseEntity.ok(billService.findByClientID(id));
     }
 
     @GetMapping("/count")
-    public ResponseEntity<String> getCountBill() throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(billService.getCountBill()), HttpStatus.OK);
+    public ResponseEntity<String> getCountBill(){
+        return ResponseEntity.ok(""+billService.getCountBill());
     }
 
 

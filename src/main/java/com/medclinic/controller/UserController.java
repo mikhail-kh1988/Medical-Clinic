@@ -1,19 +1,16 @@
 package com.medclinic.controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.medclinic.dto.CreateClientDto;
 import com.medclinic.dto.DoctorDto;
+import com.medclinic.entity.User;
 import com.medclinic.exception.NotUniqueUserRegistrationException;
-import com.medclinic.repository.impl.UserRepository;
 import com.medclinic.service.IUserService;
-import com.medclinic.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 
 @RestController
@@ -23,37 +20,33 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @Autowired
-    private ObjectMapper mapper;
-
-
     @GetMapping("/{id}")
-    public ResponseEntity<String> getUserByID(@PathVariable long id) throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(userService.findByID(id)), HttpStatus.OK);
+    public ResponseEntity<User> getUserByID(@PathVariable long id) {
+        return ResponseEntity.ok(userService.findByID(id));
     }
 
     @GetMapping("/")
-    public ResponseEntity<String> getAllUsers() throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(userService.findAll()), HttpStatus.OK);
+    public ResponseEntity<List<User>> getAllUsers(){
+        return ResponseEntity.ok(userService.findAll());
     }
 
     @PostMapping("/doctor")
-    public ResponseEntity<String> createNewDoctor(@RequestBody @Validated DoctorDto dto) throws NotUniqueUserRegistrationException, JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(userService.registerDoctor(dto).getId()), HttpStatus.OK);
+    public ResponseEntity<String> createNewDoctor(@RequestBody @Validated DoctorDto dto) throws NotUniqueUserRegistrationException {
+        return ResponseEntity.ok(""+userService.registerDoctor(dto).getId());
     }
 
     @GetMapping("/doctor/{login}")
-    public ResponseEntity<String> getDoctorByID(@PathVariable String login) throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(userService.findByLogin(login)), HttpStatus.OK);
+    public ResponseEntity<User> getDoctorByID(@PathVariable String login) {
+        return ResponseEntity.ok(userService.findByLogin(login));
     }
 
     @PostMapping("/client")
-    public ResponseEntity<String> createNewClient(@RequestBody @Validated CreateClientDto dto) throws NotUniqueUserRegistrationException, JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(userService.registerClient(dto).getId()), HttpStatus.OK);
+    public ResponseEntity<String> createNewClient(@RequestBody @Validated CreateClientDto dto) throws NotUniqueUserRegistrationException{
+        return ResponseEntity.ok(""+userService.registerClient(dto).getId());
     }
     @GetMapping("/client/{login}")
-    public ResponseEntity<String> getClientByID(@PathVariable String login) throws JsonProcessingException {
-        return new ResponseEntity<>(mapper.writeValueAsString(userService.findByLogin(login)), HttpStatus.OK);
+    public ResponseEntity<User> getClientByID(@PathVariable String login) {
+        return ResponseEntity.ok(userService.findByLogin(login));
     }
 
 }

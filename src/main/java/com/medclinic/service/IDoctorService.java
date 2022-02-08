@@ -28,6 +28,7 @@ public interface IDoctorService {
     List<Doctor> findByWhereStudy(String whereStudy);
     List<Client> getListMyClients(long doctorID);
     WorkFlow getMyWorkFlow(LocalDate currentDate, long doctorID);
+    List<WorkFlow> getListMyWorkFlow(long doctorID);
     MedicalCardClient getMedicalCard(long clientID);
     MedicalCardClient createMedicalCard(MedicalCardDto dto, long doctorID);
     void addNewRecordInMedicalCardClient(MedicalCardBodyDto dto, long medCardID);

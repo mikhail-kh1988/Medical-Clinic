@@ -32,10 +32,6 @@ public class AnalysisService implements IAnalysisService {
     @Autowired
     private IBillRepository billRepository;
 
-    // УДАЛИТЬ ДАННЫЙ МЕТОД!
-    /*public void setAnalysisRepository(IAnalysisRepository repository){
-        this.analysisRepository = repository;
-    }*/
 
     @Transactional
     @Override
@@ -52,7 +48,7 @@ public class AnalysisService implements IAnalysisService {
     }
 
     @Override
-    public List<Analysis> findByAnalysisByName(String name) {
+    public Analysis findByAnalysisByName(String name) {
         return analysisRepository.findByName(name);
     }
 
@@ -63,15 +59,15 @@ public class AnalysisService implements IAnalysisService {
 
     @Override
     public Analysis findAnalysisByID(long id) {
-        return (Analysis) analysisRepository.findByID(id);
+        return analysisRepository.findByID(id);
     }
 
     @Transactional
     @Override
     public AnalysisServiceResult createResultByAnalysis(long analysisId, ResultByAnalysisDto dto) {
-        Client client = (Client) clientRepository.findByID(dto.getClientID());
-        Doctor doctor = (Doctor) doctorRepository.findByID(dto.getDoctorID());
-        Analysis analysis = (Analysis) analysisRepository.findByID(analysisId);
+        Client client = clientRepository.findByID(dto.getClientID());
+        Doctor doctor = doctorRepository.findByID(dto.getDoctorID());
+        Analysis analysis = analysisRepository.findByID(analysisId);
         log.debug("Create temporal data client login="+client.getLogin()+", doctor login="+doctor.getLogin());
 
         Bill bill = new Bill();
@@ -82,7 +78,7 @@ public class AnalysisService implements IAnalysisService {
         bill.setCreateDate(LocalDate.now());
         billRepository.save(bill);
         long tempID = bill.getId();
-        Bill updBill = (Bill) billRepository.findByID(tempID);
+        Bill updBill = billRepository.findByID(tempID);
         log.debug("Create bill with id:"+ tempID);
 
         AnalysisServiceResult result = new AnalysisServiceResult();
@@ -103,7 +99,7 @@ public class AnalysisService implements IAnalysisService {
     @Transactional
     @Override
     public Analysis updateAnalysis(DescribeAnalysisDto dto, long analysisID) {
-        Analysis analysis = (Analysis) analysisRepository.findByID(analysisID);
+        Analysis analysis = analysisRepository.findByID(analysisID);
         analysis.setPrice(dto.getPrice());
         analysis.setName(dto.getName());
         analysis.setDescribe(dto.getDescribe());
@@ -114,7 +110,7 @@ public class AnalysisService implements IAnalysisService {
     @Transactional
     @Override
     public void deleteAnalysis(long analysisID) {
-        Analysis analysis = (Analysis) analysisRepository.findByID(analysisID);
+        Analysis analysis = analysisRepository.findByID(analysisID);
         analysisRepository.delete(analysis);
     }
 }
