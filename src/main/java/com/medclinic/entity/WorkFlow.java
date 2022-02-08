@@ -1,5 +1,6 @@
 package com.medclinic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +31,7 @@ public class WorkFlow implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Doctor doctor;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "primaryKey.doctor",
             cascade = CascadeType.ALL)
     private Set<WorkFlowBody> bodySet;

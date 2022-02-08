@@ -158,6 +158,11 @@ public class DoctorService implements IDoctorService {
         return null;
     }
 
+    @Override
+    public List<WorkFlow> getListMyWorkFlow(long doctorID) {
+        return workFlowService.findByDoctorId(doctorID);
+    }
+
     //TODO Реализовать выдачу рабочего графика врача.
     @Override
     public WorkFlow getMyWorkFlow(LocalDate currentDate, long doctorID) {
@@ -174,7 +179,7 @@ public class DoctorService implements IDoctorService {
     @Override
     public MedicalCardClient createMedicalCard(MedicalCardDto dto, long doctorID) {
         Client client = clientService.findById(dto.getClientID());
-        Doctor doctor = (Doctor) doctorRepository.findByID(doctorID);
+        Doctor doctor = doctorRepository.findByID(doctorID);
 
         MedicalCardClient cardClient = new MedicalCardClient();
         cardClient.setClient(client);
@@ -199,37 +204,6 @@ public class DoctorService implements IDoctorService {
         Client client = clientService.findById(dto.getClientID());
         Department department = departmentService.findDepartmentByID(dto.getDepartmentID());
         log.debug("Find components: doctor = "+doctor.getId()+" client = "+client.getId()+" department = "+department.getId());
-
-        /*Comment comment = new Comment();
-        comment.setCreateDate(LocalDate.now());
-        comment.setCreateUser(doctor);
-        comment.setDescription(dto.getComment());
-        log.debug("Create component comment: "+comment.getDescription());
-
-        Disease disease = diseaseService.findByID(dto.getDiseaseID());
-
-        Therapy therapy = new Therapy();
-        therapy.setDisease(disease);
-        therapy.setDescribeComplaint(dto.getComplaint());
-        therapy.setTherapy(dto.getTherapy());
-        log.debug("Create therapy complaint: "+therapy.getDescribeComplaint()+"; therapy: "+therapy.getTherapy()+"; find disease: "+disease.getName());
-
-
-        MedicalCardBody cardBody = new MedicalCardBody();
-        cardBody.setClient(client);
-        cardBody.setDoctor(doctor);
-        cardBody.setCreateDate(LocalDate.now());
-        cardBody.setMedicalCard(medicalCard);
-        cardBody.setComment(comment);
-        cardBody.setDepartment(department);
-        cardBody.setDisease(disease);
-        //cardBody.setFutureDateRecipient(DateParser.getDateByString(dto.getFutureDateRecipient()));
-        cardBody.setTherapy(therapy);
-        cardBody.setTherapyClosed(dto.isTherapyClosed());
-
-        log.info("Doctor "+doctor.getFullName()+"("+doctor.getLogin()+") add new record in medcard client of " +
-                ""+client.getFullName()+". Doctor set disease "+disease.getName()+" and assign therapy: "+therapy.getTherapy());
-*/
         medicalCardClientService.newRecordInCard(medCardID, dto);
     }
 }

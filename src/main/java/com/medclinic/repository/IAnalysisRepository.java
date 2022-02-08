@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IAnalysisRepository extends GenericDAO<Analysis> {
 
-    List<Analysis> findByName(String name);
+    Analysis findByName(String name);
     List<Analysis> findByPrice(int price);
 
 }

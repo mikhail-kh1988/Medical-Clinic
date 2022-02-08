@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IAnalysisService {
     Analysis createAnalysis(DescribeAnalysisDto dto);
-    List<Analysis> findByAnalysisByName(String name);
+    Analysis findByAnalysisByName(String name);
     List<Analysis> findAllAnalysis();
     Analysis findAnalysisByID(long id);
     AnalysisServiceResult createResultByAnalysis(long analysisId, ResultByAnalysisDto dto);

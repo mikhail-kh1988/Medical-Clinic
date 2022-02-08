@@ -67,13 +67,13 @@ class IAnalysisServiceTest{
             List<Analysis> analysisList = new ArrayList<>();
             analysisList.add(analysis);
 
-            assertAll("Counting test", ()-> assertEquals(1, analysisService.findByAnalysisByName("BLOOD TEST").size()));
+            assertAll("Counting test", ()-> assertNull(analysisService.findByAnalysisByName("BLOOD TEST")));
 
-            List<Analysis> analysisListActual = analysisService.findByAnalysisByName("BLOOD TEST");
+            Analysis analysisActual = analysisService.findByAnalysisByName("BLOOD TEST");
 
-            assertAll("Matching test", ()-> assertEquals("BLOOD TEST", analysisListActual.get(0).getName()),
-                    ()-> assertEquals("BLOOD TEST ALL THIS", analysisListActual.get(0).getDescribe()),
-                    ()-> assertEquals(111, analysisListActual.get(0).getPrice()));
+            assertAll("Matching test", ()-> assertEquals("BLOOD TEST", analysisActual.getName()),
+                    ()-> assertEquals("BLOOD TEST ALL THIS", analysisActual.getDescribe()),
+                    ()-> assertEquals(111, analysisActual.getPrice()));
         }
 
         @Test

@@ -17,12 +17,12 @@ public class AnalysisRepository extends GenericDAOImpl<Analysis> implements IAna
     }
 
     @Override
-    public List<Analysis> findByName(String name) {
+    public Analysis findByName(String name) {
         CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Analysis> criteria = builder.createQuery(Analysis.class);
         Root<Analysis> root = criteria.from(Analysis.class);
         criteria.select(root).where(builder.like(root.get("name"), "%"+name+"%"));
-        return this.getEntityManager().createQuery(criteria).getResultList();
+        return this.getEntityManager().createQuery(criteria).getSingleResult();
     }
 
     @Override
