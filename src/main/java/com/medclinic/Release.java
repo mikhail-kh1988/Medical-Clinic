@@ -39,7 +39,7 @@ public class Release {
                 .addAnnotatedClass(Therapy.class)
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(WorkFlow.class)
-                .addAnnotatedClass(WorkFlowPK.class)
+                //.addAnnotatedClass(WorkFlowPK.class)
                 .addAnnotatedClass(WorkFlowBody.class)
                 //.addAnnotatedClass(MedicalCardBodyPK.class)
                 .addAnnotatedClass(MedicalCardBody.class)

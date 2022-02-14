@@ -1,8 +1,8 @@
-/*
 package com.medclinic.config.security;
 
 import com.medclinic.entity.User;
 import com.medclinic.service.IUserService;
+import com.medclinic.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,4 +36,3 @@ public class CustomAuthenticateProvider implements AuthenticationProvider {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
-*/

@@ -1,31 +1,30 @@
 package com.medclinic.entity;
 
-import lombok.Data;
-
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "WORKFLOW_BODY")
-@AssociationOverrides(
-        {@AssociationOverride(name = "primaryKey.client", joinColumns = @JoinColumn(name = "client_id")),
-        @AssociationOverride(name = "primaryKey.doctor", joinColumns = @JoinColumn(name = "doctor_id"))}
-)
-public class WorkFlowBody {
+public class WorkFlowBody implements Serializable {
 
-    @EmbeddedId
-    private WorkFlowPK primaryKey = new WorkFlowPK();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private WorkFlow workFlow;
 
     @Column(name = "create_date")
-    private LocalDate createDate;
+    private LocalDateTime createDate;
 
     @Column(name = "receipt_date")
-    private LocalDate receiptOfDate;
+    private LocalDateTime receiptOfDate;
 
     @Column(name = "describe_complaint")
     private String describeComplain;
@@ -36,22 +35,9 @@ public class WorkFlowBody {
     @Column(name = "receipt")
     private boolean receipt;
 
-    @Transient
-    public Doctor getDoctor(){
-        return primaryKey.getDoctor();
-    }
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Doctor doctor;
 
-    public void setDoctor(Doctor doctor){
-        primaryKey.setDoctor(doctor);
-    }
-
-    @Transient
-    public Client getClient(){
-        return primaryKey.getClient();
-    }
-
-    public void setClient(Client client){
-        primaryKey.setClient(client);
-    }
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Client client;
 }

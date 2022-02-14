@@ -4,6 +4,7 @@ import com.medclinic.dto.CreateClientDto;
 import com.medclinic.dto.DoctorDto;
 import com.medclinic.entity.User;
 import com.medclinic.exception.NotUniqueUserRegistrationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -17,5 +18,6 @@ public interface IUserService extends UserDetailsService {
     User findByID(long id);
     List<User> findByStatus(String status);
     List<User> findAll();
+    UserDetails findByLoginAndPassword(String login, String password);
 
 }

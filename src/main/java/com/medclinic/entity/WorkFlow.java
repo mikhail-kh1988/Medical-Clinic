@@ -1,15 +1,12 @@
 package com.medclinic.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.GregorianCalendar;
 import java.util.Set;
 
 @Getter
@@ -32,8 +29,8 @@ public class WorkFlow implements Serializable {
     private Doctor doctor;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "primaryKey.doctor",
-            cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id", updatable = false)
     private Set<WorkFlowBody> bodySet;
 
     private boolean worked;

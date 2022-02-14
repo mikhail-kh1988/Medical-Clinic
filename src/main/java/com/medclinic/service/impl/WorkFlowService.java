@@ -1,10 +1,11 @@
 package com.medclinic.service.impl;
 
+import com.medclinic.dto.ClientWorkFlowDto;
 import com.medclinic.dto.DoctorWorkFlowDto;
-import com.medclinic.entity.Doctor;
-import com.medclinic.entity.MedicalService;
-import com.medclinic.entity.WorkFlow;
+import com.medclinic.entity.*;
+import com.medclinic.repository.IWorkFlowBodyRepository;
 import com.medclinic.repository.IWorkFlowRepository;
+import com.medclinic.service.IClientService;
 import com.medclinic.service.IDoctorService;
 import com.medclinic.service.IMedicalSvcService;
 import com.medclinic.service.IWorkFlowService;
@@ -13,7 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -28,6 +33,12 @@ public class WorkFlowService implements IWorkFlowService {
     @Autowired
     private IMedicalSvcService medicalSvcService;
 
+    @Autowired
+    private IClientService clientService;
+
+    @Autowired
+    private IWorkFlowBodyRepository workFlowBodyRepository;
+
     @Transactional
     @Override
     public void deleteWorkFlow(long id) {
@@ -38,7 +49,7 @@ public class WorkFlowService implements IWorkFlowService {
     @Transactional
     @Override
     public void updateWorkFlow(long id, String login, DoctorWorkFlowDto dto) {
-        WorkFlow workFlow = (WorkFlow) workFlowRepository.findByID(id);
+        WorkFlow workFlow = workFlowRepository.findByID(id);
         Doctor doctor = doctorService.findByLogin(login);
         MedicalService service = medicalSvcService.findById(dto.getServiceId());
         log.debug("Find data for update. Find service "+service.getName()+"(id:"+service.getId()+"). Find doctor " +
@@ -82,5 +93,44 @@ public class WorkFlowService implements IWorkFlowService {
     @Override
     public List<WorkFlow> findByServiceId(long id) {
         return workFlowRepository.findByServiceId(id);
+    }
+
+    @Override
+    public List<WorkFlowBody> findWorkFlowBodiesById(long wfID) {
+        WorkFlow workFlow = workFlowRepository.findByID(wfID);
+        return (List<WorkFlowBody>) workFlow.getBodySet();
+    }
+
+    @Override
+    public LocalDateTime createWorkFlowBody(ClientWorkFlowDto dto, long wfId){
+        Client client = clientService.findById(dto.getClientID());
+        Doctor doctor = doctorService.findById(dto.getDoctorID());
+        MedicalService medicalService = medicalSvcService.findById(dto.getServiceID());
+        WorkFlow workFlow = workFlowRepository.findByID(wfId);
+
+        WorkFlowBody workFlowBody = new WorkFlowBody();
+        workFlowBody.setService(medicalService);
+        workFlowBody.setCreateDate(LocalDateTime.now());
+        workFlowBody.setDoctor(doctor);
+        workFlowBody.setClient(client);
+        workFlowBody.setDescribeComplain(dto.getComplaint());
+        workFlowBody.setReceiptOfDate(DateParser.getDateTimeByString(dto.getRecipeDate()));
+        workFlowBody.setWorkFlow(workFlow);
+
+        if(workFlow.getBodySet().isEmpty()){
+            Set<WorkFlowBody> set = new HashSet<>();
+            set.add(workFlowBody);
+            workFlow.setBodySet(set);
+        }else {
+            Set<WorkFlowBody> set = workFlow.getBodySet();
+            set.add(workFlowBody);
+            workFlow.setBodySet(null);
+            workFlow.setBodySet(set);
+        }
+
+        workFlowBodyRepository.save(workFlowBody);
+        workFlowRepository.save(workFlow);
+
+        return workFlowBody.getReceiptOfDate();
     }
 }

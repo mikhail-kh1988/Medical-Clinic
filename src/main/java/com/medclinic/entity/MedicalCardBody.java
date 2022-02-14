@@ -48,12 +48,10 @@ public class MedicalCardBody implements Serializable {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id")
     private List<Pills> pillsList;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id")
     private List<Analysis> analysisList;
 
     @ManyToOne(cascade = CascadeType.ALL)

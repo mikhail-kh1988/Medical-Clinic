@@ -1,12 +1,14 @@
 package com.medclinic.controller;
 
 import com.medclinic.dto.ClientUpdateDto;
+import com.medclinic.dto.ClientWorkFlowDto;
 import com.medclinic.dto.CreateClientDto;
 import com.medclinic.entity.Bill;
 import com.medclinic.entity.Client;
 import com.medclinic.exception.NotUniqueUserRegistrationException;
 import com.medclinic.service.IBillService;
 import com.medclinic.service.IClientService;
+import com.medclinic.service.IWorkFlowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,9 +25,17 @@ public class ClientController {
     @Autowired
     private IBillService billService;
 
+    @Autowired
+    private IWorkFlowService workFlowService;
+
     @PostMapping("/register")
     public ResponseEntity<String> registerClient(@RequestBody @Validated CreateClientDto dto) throws NotUniqueUserRegistrationException {
         return ResponseEntity.ok(""+clientService.createClient(dto).getId());
+    }
+
+    @PutMapping("/{wfID}/receipt")
+    public ResponseEntity<String> receiptForDoctor(@RequestBody ClientWorkFlowDto dto, @PathVariable long wfID){
+        return ResponseEntity.ok(""+workFlowService.createWorkFlowBody(dto, wfID).toString());
     }
 
     @GetMapping("/{login}")
