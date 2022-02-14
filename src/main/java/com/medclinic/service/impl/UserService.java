@@ -32,8 +32,8 @@ public class UserService implements IUserService {
     @Autowired
     private IClientService clientService;
 
-    /*@Autowired
-    private PasswordEncoder encoder;*/
+    @Autowired
+    private PasswordEncoder encoder;
 
     @Transactional
     @Override
@@ -41,7 +41,7 @@ public class UserService implements IUserService {
         User user = (User) userRepository.findByLogin(login);
         log.debug("Find user "+user.getFullName()+" by login "+user.getLogin()+". ");
 
-        //user.setPassword(encoder.encode(newPassword));
+        user.setPassword(encoder.encode(newPassword));
         userRepository.save(user);
 
         log.info("User "+login+" change password!");
@@ -64,7 +64,7 @@ public class UserService implements IUserService {
 
     @Override
     public User findByLogin(String login) {
-        return (User) userRepository.findByLogin(login);
+        return userRepository.findByLogin(login);
     }
 
     @Override
@@ -90,5 +90,16 @@ public class UserService implements IUserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return findByLogin(username);
+    }
+
+    @Override
+    public UserDetails findByLoginAndPassword(String login, String password) {
+        User user = findByLogin(login);
+        if (user != null){
+            if (encoder.matches(password, user.getPassword())){
+                return user;
+            }
+        }
+        return null;
     }
 }

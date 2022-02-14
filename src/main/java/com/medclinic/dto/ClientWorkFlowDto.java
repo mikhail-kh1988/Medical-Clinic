@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Future;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 
@@ -25,8 +22,11 @@ public class ClientWorkFlowDto {
     private long doctorID;
 
     @Future
-    private LocalDateTime recipeDate;
+    private String recipeDate;
 
     @Positive
     private long serviceID;
+
+    @NotBlank
+    private String complaint;
 }

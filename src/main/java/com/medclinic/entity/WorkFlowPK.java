@@ -1,3 +1,4 @@
+/*
 package com.medclinic.entity;
 
 import javax.persistence.CascadeType;
@@ -30,3 +31,4 @@ public class WorkFlowPK implements Serializable {
         this.client = client;
     }
 }
+*/
