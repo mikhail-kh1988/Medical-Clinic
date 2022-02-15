@@ -2,11 +2,9 @@ package com.medclinic;
 
 import com.medclinic.dto.DescribeAnalysisDto;
 import com.medclinic.entity.*;
-import com.medclinic.repository.impl.AnalysisRepository;
-import com.medclinic.repository.impl.AnalysisServiceResultRepository;
-import com.medclinic.repository.impl.BillRepository;
-import com.medclinic.repository.impl.ClientRepository;
+import com.medclinic.repository.impl.*;
 import com.medclinic.service.impl.AnalysisService;
+import com.medclinic.service.impl.WorkFlowService;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -250,5 +248,10 @@ public class Release {
 
         System.out.println("Analysis id from service: "+analId);*/
 
+
+        System.out.println("WF BODY ID 1 : ");
+        WorkFlowBodyRepository workFlowBodyRepository = new WorkFlowBodyRepository();
+
+        System.out.println(workFlowBodyRepository.findByID(1));
     }
 }

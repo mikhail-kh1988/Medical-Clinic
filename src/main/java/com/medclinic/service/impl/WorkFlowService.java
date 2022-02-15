@@ -76,7 +76,7 @@ public class WorkFlowService implements IWorkFlowService {
         workFlow.setService(medicalService);
         workFlow.setWorked(false);
         workFlow.setDoctor(doctor);
-        workFlow.setSizeClient(10);
+        workFlow.setSizeClient(3);
         workFlow.setStartDate(DateParser.getDateTimeByString(dto.getStartDateWorkFlow()));
         workFlow.setEndDate(DateParser.getDateTimeByString(dto.getEndDateWorkFlow()));
 
@@ -96,12 +96,13 @@ public class WorkFlowService implements IWorkFlowService {
     }
 
     @Override
-    public List<WorkFlowBody> findWorkFlowBodiesById(long wfID) {
+    public Set<WorkFlowBody> findWorkFlowBodiesById(long wfID) {
         WorkFlow workFlow = workFlowRepository.findByID(wfID);
-        return (List<WorkFlowBody>) workFlow.getBodySet();
+        return workFlow.getBodySet();
     }
 
     @Override
+    @Transactional
     public LocalDateTime createWorkFlowBody(ClientWorkFlowDto dto, long wfId){
         Client client = clientService.findById(dto.getClientID());
         Doctor doctor = doctorService.findById(dto.getDoctorID());
@@ -117,11 +118,11 @@ public class WorkFlowService implements IWorkFlowService {
         workFlowBody.setReceiptOfDate(DateParser.getDateTimeByString(dto.getRecipeDate()));
         workFlowBody.setWorkFlow(workFlow);
 
-        if(workFlow.getBodySet().isEmpty()){
+        if (workFlow.getBodySet().isEmpty()) {
             Set<WorkFlowBody> set = new HashSet<>();
             set.add(workFlowBody);
             workFlow.setBodySet(set);
-        }else {
+        } else {
             Set<WorkFlowBody> set = workFlow.getBodySet();
             set.add(workFlowBody);
             workFlow.setBodySet(null);
@@ -132,5 +133,15 @@ public class WorkFlowService implements IWorkFlowService {
         workFlowRepository.save(workFlow);
 
         return workFlowBody.getReceiptOfDate();
+    }
+
+    @Override
+    @Transactional
+    public void toRecipeClient(long wfBodyId) {
+        WorkFlowBody flowBody = workFlowBodyRepository.findByID(wfBodyId);
+
+        flowBody.setReceipt(true);
+
+        workFlowBodyRepository.save(flowBody);
     }
 }
