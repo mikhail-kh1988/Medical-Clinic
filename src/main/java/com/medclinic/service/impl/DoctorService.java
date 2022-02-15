@@ -68,9 +68,10 @@ public class DoctorService implements IDoctorService {
 
     @Transactional
     @Override
-    public void setWorkFlow(String login, DoctorWorkFlowDto dto) {
-        workFlowService.createWorkFlow(login, dto);
+    public long setWorkFlow(String login, DoctorWorkFlowDto dto) {
+        WorkFlow flow = workFlowService.createWorkFlow(login, dto);
         log.info("Doctor "+login+" set workflow between "+dto.getStartDateWorkFlow()+" and "+dto.getEndDateWorkFlow());
+        return flow.getId();
     }
 
     @Transactional

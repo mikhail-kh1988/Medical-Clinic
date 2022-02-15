@@ -7,6 +7,7 @@ import com.medclinic.entity.WorkFlowBody;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public interface IWorkFlowService {
     void deleteWorkFlow(long id);
@@ -14,6 +15,7 @@ public interface IWorkFlowService {
     WorkFlow createWorkFlow(String login, DoctorWorkFlowDto dto);
     List<WorkFlow> findByDoctorId(long id);
     List<WorkFlow> findByServiceId(long id);
-    List<WorkFlowBody> findWorkFlowBodiesById(long wfID);
+    Set<WorkFlowBody> findWorkFlowBodiesById(long wfID);
     LocalDateTime createWorkFlowBody(ClientWorkFlowDto dto, long wfId);
+    void toRecipeClient(long wfBodyId);
 }

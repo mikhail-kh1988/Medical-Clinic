@@ -4,6 +4,10 @@ plugins {
     id 'org.flywaydb.flyway' version '8.0.5'
 }
 
+war {
+    archiveName("MedicalClinic.war")
+}
+
 group 'com.medclinic'
 version '0.1'
 

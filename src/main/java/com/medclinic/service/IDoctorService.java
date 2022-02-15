@@ -13,7 +13,7 @@ import java.util.List;
 public interface IDoctorService {
 
     Doctor createNewDoctor(DoctorDto dto) throws NotUniqueUserRegistrationException;
-    void setWorkFlow(String login, DoctorWorkFlowDto dto);
+    long setWorkFlow(String login, DoctorWorkFlowDto dto);
     void deleteDoctor(long id);
     void updateDoctor(long id, DoctorDto dto);
     void addNewService(long serviceID, long doctorID);
