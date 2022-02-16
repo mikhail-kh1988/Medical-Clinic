@@ -2,8 +2,8 @@
 CREATE TABLE IF NOT EXISTS public.analysis
 (
     id bigserial NOT NULL,
-    describe character varying(255),
-    name character varying(255),
+    describe varchar(255),
+    name varchar(255),
     price integer NOT NULL,
     CONSTRAINT analysis_pkey PRIMARY KEY (id)
 );
@@ -12,10 +12,10 @@ CREATE TABLE IF NOT EXISTS public.analysis_service_result
 (
     id bigserial NOT NULL,
     create_date date,
-    marks character varying(255),
-    result character varying(255),
+    marks varchar(255),
+    result varchar(255),
     submit_date date,
-    title character varying(255),
+    title varchar(255),
     analysis_id bigint,
     bill_id bigint,
     client_id bigint,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS public.comments
 (
     id bigserial NOT NULL,
     create_date date,
-    description character varying(255),
+    description varchar(255),
     createuser_id bigint,
     CONSTRAINT comments_pkey PRIMARY KEY (id)
 );
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS public.comments
 CREATE TABLE IF NOT EXISTS public.department
 (
     id bigserial NOT NULL,
-    dep_name character varying(255),
+    dep_name varchar(255),
     CONSTRAINT department_pkey PRIMARY KEY (id)
 );
 
@@ -63,28 +63,28 @@ CREATE TABLE IF NOT EXISTS public.department_users
 CREATE TABLE IF NOT EXISTS public.diseases
 (
     id bigserial NOT NULL,
-    name character varying(255),
-    world_code character varying(255),
+    name varchar(255),
+    world_code varchar(255),
     CONSTRAINT diseases_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.pills
 (
     id bigserial NOT NULL,
-    active_element character varying(255),
-    composition character varying(255),
-    dosage character varying(255),
-    name character varying(255),
+    active_element varchar(255),
+    composition varchar(255),
+    dosage varchar(255),
+    name varchar(255),
     CONSTRAINT drugs_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.medcard
 (
     id bigserial NOT NULL,
-    blood_group character varying(6),
-    chronic_disease character varying(100),
+    blood_group varchar(6),
+    chronic_disease varchar(100),
     create_date date,
-    describe character varying(255),
+    describe varchar(255),
     client_id bigint,
     therapydoctor_id bigint,
     CONSTRAINT medcard_pkey PRIMARY KEY (id)
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS public.services
 (
     id bigserial NOT NULL,
     active boolean NOT NULL,
-    name character varying(255),
+    name varchar(255),
     price integer NOT NULL,
     CONSTRAINT services_pkey PRIMARY KEY (id)
 );
@@ -130,32 +130,32 @@ CREATE TABLE IF NOT EXISTS public.services
 CREATE TABLE IF NOT EXISTS public.therapy
 (
     id bigserial NOT NULL,
-    describe_complaint character varying(255),
-    therapy character varying(255),
+    describe_complaint varchar(255),
+    therapy varchar(255),
     disease_id bigint,
     CONSTRAINT therapy_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.users
 (
-    type_user character varying(31) NOT NULL,
+    type_user varchar(31) NOT NULL,
     id bigserial NOT NULL,
     age integer,
-    email character varying(64),
-    family_name character varying(255),
+    email varchar(64),
+    family_name varchar(255),
     first_symbol_name character(1),
-    full_name character varying(255),
-    login character varying(32),
+    full_name varchar(255),
+    login varchar(32),
     online boolean NOT NULL,
-    password character varying(32),
-    status_user character varying(16),
-    about character varying(255),
-    actual_address character varying(255),
+    password varchar(32),
+    status_user varchar(16),
+    about varchar(255),
+    actual_address varchar(255),
     birth_day date,
-    phone_number character varying(12),
-    certificate_number character varying(255),
-    specialization_name character varying(255),
-    where_study character varying(255),
+    phone_number varchar(12),
+    certificate_number varchar(255),
+    specialization_name varchar(255),
+    where_study varchar(255),
     CONSTRAINT users_pkey PRIMARY KEY (id)
 );
 
@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS public.workflow
 CREATE TABLE IF NOT EXISTS public.workflow_body
 (
     create_date date,
-    describe_complaint character varying(255),
+    describe_complaint varchar(255),
     doctor_id bigint NOT NULL,
     client_id bigint NOT NULL,
     service_id bigint,

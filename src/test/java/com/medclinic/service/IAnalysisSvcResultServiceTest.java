@@ -25,12 +25,12 @@ class IAnalysisSvcResultServiceTest{
 
     @Nested
     @DisplayName("This test for create result on by analysis")
-    class TestForResultByAnalysys{
+    public class TestForResultByAnalysys{
 
 
         @Test
         @DisplayName("When exist analysis")
-        void createResultByAnalysis(){
+        public void createResultByAnalysis(){
             CreateResultDto dto = new CreateResultDto();
             dto.setAnalysisID(1);
             dto.setClientID(2);
@@ -48,11 +48,11 @@ class IAnalysisSvcResultServiceTest{
 
     @Nested
     @DisplayName("This test for create result by service")
-    class TestForResultByService{
+    public class TestForResultByService{
 
         @Test
         @DisplayName("When create result on by service")
-        void createResultByService(){
+        public void createResultByService(){
             CreateResultDto resultDto = new CreateResultDto();
             resultDto.setServiceID(1);
             resultDto.setClientID(2);
@@ -71,12 +71,12 @@ class IAnalysisSvcResultServiceTest{
 
     @Nested
     @DisplayName("This test for find result by client ID")
-    class TestForFindResultByClientID{
+    public class TestForFindResultByClientID{
 
 
         @Test
         @DisplayName("When exist id")
-        void findResultByClientID(){
+        public void findResultByClientID(){
 
             assertNotNull(resultService.findByClient(2));
 
@@ -84,7 +84,7 @@ class IAnalysisSvcResultServiceTest{
 
         @Test
         @DisplayName("When not exist id")
-        void findResultNotExistClientID(){
+        public void findResultNotExistClientID(){
             assertEquals(true, resultService.findByClient(858).isEmpty());
         }
 
@@ -92,17 +92,17 @@ class IAnalysisSvcResultServiceTest{
 
     @Nested
     @DisplayName("This test for find result by ID")
-    class TestForFindResultByDoctorID{
+    public class TestForFindResultByDoctorID{
 
         @Test
         @DisplayName("When exist result ID")
-        void findResultByDoctorIDExist(){
+        public void findResultByDoctorIDExist(){
             assertNotNull(resultService.findById(1));
         }
 
         @Test
         @DisplayName("When not exist result ID")
-        void findResultByResultID(){
+        public void findResultByResultID(){
             result = resultService.findById(5454);
 
             assertNull(result);
@@ -112,26 +112,26 @@ class IAnalysisSvcResultServiceTest{
 
     @Nested
     @DisplayName("This test for remove results")
-    class TestForRemoveResults{
+    public class TestForRemoveResults{
 
         @Test
         @DisplayName("When exist result id")
-        void removeResultByID(){
+        public void removeResultByID(){
         }
 
         @Test
         @DisplayName("When not exist result ID")
-        void removeResultWithoutID(){
+        public void removeResultWithoutID(){
         }
     }
 
     @Nested
     @DisplayName("This test for update result")
-    class TestForUpdateResult{
+    public class TestForUpdateResult{
 
         @Test
         @DisplayName("Check field update")
-        void checkFieldUpdate(){
+        public void checkFieldUpdate(){
 
             DescribeUpdateAnalysisSvcResult resultDTO = new DescribeUpdateAnalysisSvcResult();
 

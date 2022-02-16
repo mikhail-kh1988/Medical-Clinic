@@ -26,7 +26,7 @@ class ICommentServiceTest {
 
     @Test
     @DisplayName("This test find comments by ID")
-    void findByID() {
+    public void findByID() {
 
         CreateCommentDto dto = new CreateCommentDto();
         dto.setCreateBy(1);
@@ -39,7 +39,7 @@ class ICommentServiceTest {
 
     @Test
     @DisplayName("This test find comment with not exist id")
-    void findNotExistID(){
+    public void findNotExistID(){
         assertNull(commentService.findByID(32323));
     }
 }

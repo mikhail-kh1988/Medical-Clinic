@@ -25,17 +25,17 @@ class IBillServiceTest {
 
     @Nested
     @DisplayName("This test for found bill by id")
-    class FindBillByID{
+    public class FindBillByID{
 
         @Test
         @DisplayName("Find bill by id")
-        void findBillByID(){
+        public void findBillByID(){
             assertNotNull(billService.findById(1));
         }
 
         @Test
         @DisplayName("When id not exists")
-        void findBillByNotExistsID(){
+        public void findBillByNotExistsID(){
             assertNull(billService.findById(9898));
         }
 
@@ -43,11 +43,11 @@ class IBillServiceTest {
 
     @Nested
     @DisplayName("This test find count bills")
-    class FindCountBills{
+    public class FindCountBills{
 
         @Test
         @DisplayName("Find count bill")
-        void findCountBill(){
+        public void findCountBill(){
             assertNotNull(billService.getCountBill());
         }
     }
@@ -55,11 +55,11 @@ class IBillServiceTest {
 
     @Nested
     @DisplayName("This test for trying paid bill")
-    class TestTryingPaidBill{
+    public class TestTryingPaidBill{
 
         @Test
         @DisplayName("Try paid bill")
-        void tryPaidBill(){
+        public void tryPaidBill(){
 
             bill = billService.findById(1);
 
@@ -76,7 +76,7 @@ class IBillServiceTest {
 
         @Test
         @DisplayName("Find paid bill")
-        void findPaidBill(){
+        public void findPaidBill(){
             List<Bill> billList = billService.findByPaid();
 
             assertEquals(false, billList.isEmpty());
