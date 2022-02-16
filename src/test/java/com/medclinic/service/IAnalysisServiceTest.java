@@ -26,10 +26,10 @@ class IAnalysisServiceTest{
 
     @Nested
     @DisplayName("Test for dto")
-    class WhenEmptyDTO{
+    public class WhenEmptyDTO{
         @Test
         @DisplayName("This test create new analysis from DTO")
-        void testCreateAnalysis() {
+        public void testCreateAnalysis() {
             DescribeAnalysisDto dto = new DescribeAnalysisDto();
             dto.setDescribe("TEST");
             dto.setName("TEST NAME");
@@ -51,7 +51,7 @@ class IAnalysisServiceTest{
 
         @Test
         @DisplayName("When empty DTO")
-        void testCreateAnalysisWithoutDTO(){
+        public void testCreateAnalysisWithoutDTO(){
             assertThrows(NullPointerException.class, ()->analysisService.createAnalysis(null));
         }
     }
@@ -59,10 +59,10 @@ class IAnalysisServiceTest{
 
     @Nested
     @DisplayName("Nested test find analysis")
-    class FindByName{
+    public class FindByName{
         @Test
         @DisplayName("Test when find analysis by name")
-        void testFindByAnalysisByName() {
+        public void testFindByAnalysisByName() {
 
             List<Analysis> analysisList = new ArrayList<>();
             analysisList.add(analysis);
@@ -78,7 +78,7 @@ class IAnalysisServiceTest{
 
         @Test
         @DisplayName("Test when not found analysis by name")
-        void testFindByAnalysisByNameWhereNotFoundExceptin(){
+        public void testFindByAnalysisByNameWhereNotFoundExceptin(){
 
             assertNotNull(analysisService.findByAnalysisByName("LDSKJFl"));
 
@@ -88,18 +88,18 @@ class IAnalysisServiceTest{
 
     @Nested
     @DisplayName("Test when get all analysis")
-    class GetAllAnalysis{
+    public class GetAllAnalysis{
 
         @Test
         @DisplayName("return all analysis when exists data")
-        void getAllAnalysisWhenExistsData(){
+        public void getAllAnalysisWhenExistsData(){
             assertNotNull(analysisService.findAllAnalysis());
         }
 
         @Test
         @Order(1)
         @DisplayName("return analysis when no data")
-        void getAllAnalysisWhenNoData(){
+        public void getAllAnalysisWhenNoData(){
 
             assertEquals(true ,analysisService.findAllAnalysis().isEmpty());
 
@@ -109,11 +109,11 @@ class IAnalysisServiceTest{
 
     @Nested
     @DisplayName("Find analysis when find by id")
-    class NestedClassFindAnalysisByID{
+    public class NestedClassFindAnalysisByID{
 
         @Test
         @DisplayName("Find by id")
-        void findAnalysisByID(){
+        public void findAnalysisByID(){
 
             analysis = analysisService.findAnalysisByID(2);
 
@@ -127,7 +127,7 @@ class IAnalysisServiceTest{
 
         @Test
         @DisplayName("Find not exists id")
-        void findAnalysisByNotExistID(){
+        public void findAnalysisByNotExistID(){
             assertNull(analysisService.findAnalysisByID(898));
         }
 
@@ -136,11 +136,11 @@ class IAnalysisServiceTest{
 
     @Nested
     @DisplayName("This test updatable fields")
-    class TestUpdateFieldsAnalysis{
+    public class TestUpdateFieldsAnalysis{
 
         @Test
         @DisplayName("when update method in service")
-        void testWhenUpdateData(){
+        public void testWhenUpdateData(){
             DescribeAnalysisDto dto = new DescribeAnalysisDto();
             dto.setName("TEST UPDATE");
             dto.setPrice(123);
@@ -171,17 +171,17 @@ class IAnalysisServiceTest{
     }
 
     @Test
-    void testDeleteAnalysis() {
+    public void testDeleteAnalysis() {
     }
 
     @Nested
     @DisplayName("This nested test for ckecked deleted function")
-    class WhenTestedCheckedDeleteFunctionServiceAnalaysis{
+    public class WhenTestedCheckedDeleteFunctionServiceAnalaysis{
 
 
         @Test
         @DisplayName("When check deleted analysis")
-        void deleteAnalysisFromAnalysisService(){
+        public void deleteAnalysisFromAnalysisService(){
             DescribeAnalysisDto dto = new DescribeAnalysisDto();
             dto.setName("KDJFH UPDATE");
             dto.setPrice(123);

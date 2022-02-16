@@ -24,11 +24,11 @@ class IDepartmentServiceTest {
 
     @Nested
     @DisplayName("THis test find dep by name")
-    class TestFindDepByName{
+    public class TestFindDepByName{
 
         @Test
         @DisplayName("When name is exists")
-        void testFindDepByNameWhenNameIsExists(){
+        public void testFindDepByNameWhenNameIsExists(){
             department = departmentService.findDepartmentByName("Therapy Department");
 
             assertEquals("Therapy Department", department.getDepartmentName());
@@ -38,18 +38,18 @@ class IDepartmentServiceTest {
 
     @Nested
     @DisplayName("This test find dep by id")
-    class TestFindDepByID{
+    public class TestFindDepByID{
 
         @Test
         @DisplayName("When id is exist")
-        void findDepartmentWhenExistID(){
+        public void findDepartmentWhenExistID(){
             department = departmentService.findDepartmentByID(1);
             assertEquals("Therapy Department", department.getDepartmentName());
         }
 
         @Test
         @DisplayName("When id is not exists")
-        void findDepartmentWhenIdNotExists(){
+        public void findDepartmentWhenIdNotExists(){
             department = departmentService.findDepartmentByID(212121);
             assertNull(department);
         }
@@ -57,11 +57,11 @@ class IDepartmentServiceTest {
 
     @Nested
     @DisplayName("This test for create department")
-    class CreateDepartmentTest{
+    public class CreateDepartmentTest{
 
         @Test
         @DisplayName("This test create department")
-        void createNewDepartment(){
+        public void createNewDepartment(){
             department = departmentService.createNewDepartment("Test DEPTH");
             assertNotNull(department);
             assertEquals("Test DEPTH", department.getDepartmentName());
@@ -71,11 +71,11 @@ class IDepartmentServiceTest {
 
     @Nested
     @DisplayName("This test for updatable department")
-    class TestUpdateDepartment{
+    public class TestUpdateDepartment{
 
         @Test
         @DisplayName("Update department")
-        void updateDepartment(){
+        public void updateDepartment(){
 
             department = departmentService.createNewDepartment("Test update dep");
 

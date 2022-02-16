@@ -2,7 +2,7 @@ ALTER TABLE IF EXISTS USERS
 DROP COLUMN password ;
 
 ALTER TABLE IF EXISTS users
-add column password character varying(128);
+add column password varchar(128);
 
 create table USERS_ROLES (user_id bigint not null, role varchar(255));
 alter table if exists USERS_ROLES add constraint users_roles_pkey foreign key (user_id) references users;
