@@ -1,5 +1,6 @@
 package com.medclinic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +25,7 @@ public class User implements Serializable, UserDetails {
     @Column(name = "login", length = 32, unique = true)
     private String login;
 
+    @JsonIgnore
     @Column(name = "password", length = 128)
     private String password;
 

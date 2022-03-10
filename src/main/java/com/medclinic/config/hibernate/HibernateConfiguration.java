@@ -41,7 +41,7 @@ public class HibernateConfiguration {
         properties.setProperty("hibernate.connection.autocommit", "false");
         //properties.setProperty("hibernate.hbm2ddl.create_namespaces", "true");
         //properties.setProperty("hibernate.hbm2ddl.auto", "create");
-        properties.setProperty("hibernate.connection.url","jdbc:postgresql://localhost:5432/med_clinic");
+        properties.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/med_clinic"); //
         properties.setProperty("hibernate.connection.username", "admin");
         properties.setProperty("hibernate.connection.password", "admin");
         properties.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");

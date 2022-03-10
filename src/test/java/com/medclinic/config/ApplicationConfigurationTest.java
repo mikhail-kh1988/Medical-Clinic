@@ -80,7 +80,12 @@ public class ApplicationConfigurationTest {
     }
 
     @Bean
-    public WorkFlowService getWorkFlowService(){
+    public IWorkFlowBodyRepository getWorkFlowBodyRepository(){
+        return new WorkFlowBodyRepository();
+    }
+
+    @Bean
+    public IWorkFlowService getWorkFlowService(){
         return new WorkFlowService();
     }
 
@@ -90,7 +95,7 @@ public class ApplicationConfigurationTest {
     }
 
     @Bean
-    public DoctorService getDoctorService(){
+    public IDoctorService getDoctorService(){
         return new DoctorService();
     }
 
@@ -107,8 +112,13 @@ public class ApplicationConfigurationTest {
     }
 
     @Bean
-    public MedicalCardClientService getMedicalCardService(){
+    public IMedicalCardClientService getMedicalCardService(){
         return new MedicalCardClientService();
+    }
+
+    @Bean
+    public IMedicalCardClientBodyRepository getMedicalCardClientBodyRepository(){
+        return new MedicalCardClientBodyRepository();
     }
 
     @Bean

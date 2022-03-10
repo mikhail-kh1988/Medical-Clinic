@@ -34,9 +34,11 @@ public class WorkFlowBody implements Serializable {
     @Column(name = "receipt")
     private boolean receipt;
 
+    //Удалить
     @ManyToOne(cascade = CascadeType.ALL)
     private Doctor doctor;
 
+    //Удалить
     @ManyToOne(cascade = CascadeType.ALL)
     private Client client;
 }

@@ -1,6 +1,8 @@
 package com.medclinic.service.impl;
 
 import com.medclinic.entity.Bill;
+import com.medclinic.entity.Client;
+import com.medclinic.entity.Doctor;
 import com.medclinic.repository.IBillRepository;
 import com.medclinic.service.IBillService;
 import lombok.extern.slf4j.Slf4j;
@@ -52,5 +54,19 @@ public class BillService implements IBillService {
         bill.setPaid(true);
         bill.setPaidDate(LocalDate.now());
         billRepository.save(bill);
+    }
+
+    @Override
+    public Bill createNewBill(Client client, Doctor doctor, int sum) {
+        Bill bill = new Bill();
+
+        bill.setClient(client);
+        bill.setDoctor(doctor);
+        bill.setCreateDate(LocalDate.now());
+        bill.setSum(sum);
+
+        billRepository.save(bill);
+
+        return billRepository.save(bill);
     }
 }
