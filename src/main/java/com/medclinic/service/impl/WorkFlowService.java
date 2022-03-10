@@ -5,10 +5,7 @@ import com.medclinic.dto.DoctorWorkFlowDto;
 import com.medclinic.entity.*;
 import com.medclinic.repository.IWorkFlowBodyRepository;
 import com.medclinic.repository.IWorkFlowRepository;
-import com.medclinic.service.IClientService;
-import com.medclinic.service.IDoctorService;
-import com.medclinic.service.IMedicalSvcService;
-import com.medclinic.service.IWorkFlowService;
+import com.medclinic.service.*;
 import com.medclinic.utils.DateParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +36,13 @@ public class WorkFlowService implements IWorkFlowService {
     @Autowired
     private IWorkFlowBodyRepository workFlowBodyRepository;
 
+    @Autowired
+    private IBillService billService;
+
     @Transactional
     @Override
     public void deleteWorkFlow(long id) {
-        WorkFlow workFlow = (WorkFlow) workFlowRepository.findByID(id);
+        WorkFlow workFlow = workFlowRepository.findByID(id);
         workFlowRepository.delete(workFlow);
     }
 
@@ -131,6 +131,8 @@ public class WorkFlowService implements IWorkFlowService {
 
         workFlowBodyRepository.save(workFlowBody);
         workFlowRepository.save(workFlow);
+
+        billService.createNewBill(client, doctor, medicalService.getPrice());
 
         return workFlowBody.getReceiptOfDate();
     }

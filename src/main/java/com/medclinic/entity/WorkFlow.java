@@ -28,6 +28,7 @@ public class WorkFlow implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Doctor doctor;
 
+    // Переименовать
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "id", updatable = false)

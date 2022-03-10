@@ -14,7 +14,8 @@ services:
       - db
       - flyway
     networks:
-      default:
+      vpcbr:
+        ipv4_address: 10.0.0.2
 
   flyway:
     container_name: flyway
@@ -27,7 +28,8 @@ services:
     depends_on:
       - db
     networks:
-      default:
+      vpcbr:
+        ipv4_address: 10.0.0.3
 
   db:
     image: postgres:10-alpine
@@ -41,7 +43,13 @@ services:
       POSTGRES_DB: med_clinic
       PGDATA: /var/lib/postgresql/data/pgdata
     networks:
-      default:
+      vpcbr:
+        ipv4_address: 10.0.0.4
 
 networks:
-  default:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
+          gateway: 10.0.0.1
