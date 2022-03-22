@@ -86,6 +86,11 @@ public class WorkFlowService implements IWorkFlowService {
     }
 
     @Override
+    public WorkFlow getWorkFlowByCurrentDate(LocalDateTime currentDate, long doctor_id) {
+        return workFlowRepository.findWorkFlowByCurrentDate(currentDate, doctor_id);
+    }
+
+    @Override
     public List<WorkFlow> findByDoctorId(long id) {
         return workFlowRepository.findByDoctorId(id);
     }

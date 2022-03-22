@@ -1,5 +1,6 @@
 package com.medclinic.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,9 +20,11 @@ public class WorkFlow implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "start_date")
     private LocalDateTime startDate;
 
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
@@ -29,7 +32,7 @@ public class WorkFlow implements Serializable {
     private Doctor doctor;
 
     // Переименовать
-    @JsonIgnore
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "id", updatable = false)
     private Set<WorkFlowBody> bodySet;

@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -78,6 +79,11 @@ public class DoctorController {
     @GetMapping("/{doctorID}/getWF")
     public ResponseEntity<List<WorkFlow>> getWorkFlow(@PathVariable long doctorID) {
         return ResponseEntity.ok(doctorService.getListMyWorkFlow(doctorID));
+    }
+
+    @GetMapping("/{doctorId}/getCurrentWF")
+    public ResponseEntity<WorkFlow> getMyWorkFlow(@PathVariable long doctorId){
+        return ResponseEntity.ok(doctorService.getMyWorkFlow(LocalDateTime.now(), doctorId));
     }
 
     @GetMapping("/{wfId}/clientsRec")

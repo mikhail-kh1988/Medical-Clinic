@@ -35,7 +35,7 @@ public class ClientController {
 
     @PutMapping("/{wfID}/receipt")
     public ResponseEntity<String> receiptForDoctor(@RequestBody ClientWorkFlowDto dto, @PathVariable long wfID){
-        return ResponseEntity.ok(""+workFlowService.createWorkFlowBody(dto, wfID).toString());
+        return ResponseEntity.ok(workFlowService.createWorkFlowBody(dto, wfID).toString());
     }
 
     @GetMapping("/{login}")
