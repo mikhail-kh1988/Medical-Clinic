@@ -8,6 +8,7 @@ import com.medclinic.entity.WorkFlow;
 import com.medclinic.exception.NotUniqueUserRegistrationException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IDoctorService {
@@ -27,7 +28,7 @@ public interface IDoctorService {
     List<Doctor> findBySpecializationName(String specName);
     List<Doctor> findByWhereStudy(String whereStudy);
     List<Client> getListMyClients(long doctorID);
-    WorkFlow getMyWorkFlow(LocalDate currentDate, long doctorID);
+    WorkFlow getMyWorkFlow(LocalDateTime currentDate, long doctorID);
     List<WorkFlow> getListMyWorkFlow(long doctorID);
     MedicalCardClient getMedicalCard(long clientID);
     MedicalCardClient createMedicalCard(MedicalCardDto dto, long doctorID);

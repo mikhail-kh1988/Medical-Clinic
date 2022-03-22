@@ -40,7 +40,7 @@ public abstract class GenericDAOImpl<T extends Serializable> implements GenericD
 
     @Override
     public T save(T entity) {
-        entityManager.merge(entity);
+        entityManager.persist(entity);
         entityManager.flush();
         return entity;
     }
